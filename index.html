@@ -704,101 +704,101 @@ footer{background:var(--text);padding:3.5rem 2rem 2rem;color:rgba(255,255,255,.7
 
 /* ── PRODUCTS DATA ── */
 const P=[
-  {id:1,catNo:'SM2',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'2mg / vial  ·  Kit of 10 vials',desc:'The active compound in Ozempic® & Wegovy®. Research-grade, HPLC-verified ≥99% purity. Studies document significant effects on appetite regulation and metabolic ',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:2,catNo:'SM5',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Same compound, higher concentration per vial for extended research cycles. Each kit includes 10 vials. Third-party COA available on request.',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'BEST VALUE',color:'#16a34a'},
-  {id:3,catNo:'SM10',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'High-concentration research kit. Ideal for longer study protocols. HPLC-certified ≥99% purity, full COA downloadable by batch number.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'MOST POPULAR',color:'#16a34a'},
-  {id:4,catNo:'SM15',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'15mg / vial  ·  Kit of 10 vials',desc:'Extended supply kit for ongoing research programs. Same pharmaceutical-grade standard.',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:5,catNo:'SM20',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Large supply kit. Purity ≥99% HPLC verified. Discreet plain packaging, batch-traceable COA.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:6,catNo:'SM30',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'30mg / vial  ·  Kit of 10 vials',desc:'Bulk research kit for extended study protocols.',price:254.95,price3:229.95,price5:219.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:7,catNo:'TR5',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The active compound in Mounjaro® & Zepbound®. Dual-action GLP-1 + GIP agonist — clinical studies show superior weight management outcomes vs single-target GLP-1',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'NEW',color:'#16a34a'},
-  {id:8,catNo:'TR10',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Most researched tirzepatide concentration. Dual-target mechanism studied extensively in metabolic research. Full COA per batch.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'MOST POPULAR',color:'#16a34a'},
-  {id:9,catNo:'TR15',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'15mg / vial  ·  Kit of 10 vials',desc:'Higher dose research kit. Same dual-mechanism compound, purity ≥99% HPLC verified.',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:10,catNo:'TR20',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Extended supply for longer protocols.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:11,catNo:'TR30',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'30mg / vial  ·  Kit of 10 vials',desc:'Large kit, significant savings vs buying individual vials.',price:254.95,price3:229.95,price5:219.95,inStock:true,badge:'SAVE 15%',color:'#16a34a'},
-  {id:12,catNo:'TR40',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'40mg / vial  ·  Kit of 10 vials',desc:'High-volume research supply.',price:334.95,price3:304.95,price5:284.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:13,catNo:'TR60',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'60mg / vial  ·  Kit of 10 vials',desc:'Bulk research supply kit.',price:499.95,price3:449.95,price5:424.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:14,catNo:'RT5',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Next-generation triple-target agonist. Phase III clinical data documents up to 24% body weight reduction — the strongest published data of any injectable metabo',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'CUTTING EDGE',color:'#16a34a'},
-  {id:15,catNo:'RT10',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Triple-target mechanism: GLP-1 suppresses appetite, GIP improves insulin sensitivity, Glucagon increases energy expenditure.',price:124.95,price3:114.95,price5:109.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:16,catNo:'RT20',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Higher concentration research vials.',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:17,catNo:'CGL5',name:'Cagrilintide',cat:'GLP-1 / Weight Loss',sub:'Long-Acting Amylin Analogue',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Weekly amylin analogue with ~7-day half-life. Frequently studied in combination with Semaglutide (CagriSema protocol), with published research showing synergist',price:314.95,price3:284.95,price5:269.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:18,catNo:'CS5',name:'CagriSema Combo',cat:'GLP-1 / Weight Loss',sub:'Cagrilintide 2.5mg + Semaglutide 2.5mg — Pre-Combined',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Pre-combined dual-compound research kit. CagriSema protocol in a single vial — convenience of one reconstitution for researchers studying amylin + GLP-1 combina',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'COMBO',color:'#16a34a'},
-  {id:19,catNo:'CS10',name:'CagriSema Combo',cat:'GLP-1 / Weight Loss',sub:'Cagrilintide 5mg + Semaglutide 5mg — Pre-Combined',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Higher-dose pre-combined CagriSema kit. Streamlined for extended research protocols.',price:379.95,price3:344.95,price5:324.95,inStock:true,badge:'COMBO',color:'#16a34a'},
-  {id:20,catNo:'MDT5',name:'Mazdutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 / Glucagon Dual Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Chinese-developed dual-target GLP-1 + Glucagon receptor agonist (IBI362). Clinical data demonstrates strong metabolic and body composition effects. Research-gra',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:21,catNo:'2AD',name:'AOD9604',cat:'GLP-1 / Weight Loss',sub:'HGH Fragment 176-191 — Lipolytic Peptide',spec:'2mg / vial  ·  Kit of 10 vials',desc:'The fat-metabolizing fragment of Human Growth Hormone. Retains HGHs lipolytic activity without affecting blood glucose or IGF-1 levels. Originally developed at',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:22,catNo:'5AD',name:'AOD9604',cat:'GLP-1 / Weight Loss',sub:'HGH Fragment 176-191 — Lipolytic Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Standard research dose. Studied for selective adipose tissue metabolism effects.',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'BEST VALUE',color:'#16a34a'},
-  {id:23,catNo:'LC600',name:'L-Carnitine 600mg',cat:'GLP-1 / Weight Loss',sub:'Mitochondrial Fat Transport Cofactor',spec:'600mg / vial  ·  Kit of 10 vials',desc:'Essential cofactor transporting long-chain fatty acids into mitochondria for beta-oxidation. Injectable grade. Widely studied for metabolic and exercise perform',price:124.95,price3:114.95,price5:109.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:24,catNo:'LC1200',name:'L-Carnitine 1200mg',cat:'GLP-1 / Weight Loss',sub:'Mitochondrial Fat Transport Cofactor — High Dose',spec:'1200mg / 10ml vial  ·  Kit of 10 vials',desc:'High-concentration injectable L-Carnitine. Clinical dose range studied in cardiovascular and metabolic research.',price:139.95,price3:129.95,price5:119.95,inStock:true,badge:'',color:'#16a34a'},
-  {id:25,catNo:'H10',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — 191 Amino Acids',spec:'10 IU / vial  ·  Kit of 10 vials',desc:'Pharmaceutical-grade recombinant HGH. Identical sequence to endogenous GH. Used in research studying growth, metabolism, body composition, and cellular repair. ',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:26,catNo:'H15',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — High Potency',spec:'15 IU / vial  ·  Kit of 10 vials',desc:'Higher potency research kit. Full COA, cold-chain shipped.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:27,catNo:'H24',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — Research Grade',spec:'24 IU / vial  ·  Kit of 10 vials',desc:'Extended supply research kit.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'BEST VALUE',color:'#2563eb'},
-  {id:28,catNo:'H36',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — Bulk Kit',spec:'36 IU / vial  ·  Kit of 10 vials',desc:'High-volume research kit.',price:499.95,price3:449.95,price5:424.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:29,catNo:'IP5',name:'Ipamorelin',cat:'Growth Hormone / GHRP',sub:'Selective GHSR Agonist — Cleanest GHRP',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most selective GHRP available. Unlike GHRP-2 or GHRP-6, Ipamorelin produces a clean GH pulse with negligible effects on cortisol or prolactin. Ideal for GH ',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'TOP SELLER',color:'#2563eb'},
-  {id:30,catNo:'IP10',name:'Ipamorelin',cat:'Growth Hormone / GHRP',sub:'Selective GHSR Agonist — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Higher concentration supply for longer research cycles. Combine with CJC-1295 for the gold-standard GH optimization protocol.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:31,catNo:'CND5',name:'CJC-1295 without DAC',cat:'Growth Hormone / GHRP',sub:'Modified GHRH(1-29) — Physiological GH Pulsing',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Modified GHRH analogue with ~30-min half-life, mimicking physiological GH pulse release. The gold-standard pairing with Ipamorelin for GH research. Preserves na',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'TOP SELLER',color:'#2563eb'},
-  {id:32,catNo:'CND10',name:'CJC-1295 without DAC',cat:'Growth Hormone / GHRP',sub:'Modified GHRH(1-29) — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. Pair 1:1 with Ipamorelin for the most documented GH optimization protocol.',price:314.95,price3:284.95,price5:269.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:33,catNo:'CP10',name:'CJC-1295 + Ipamorelin Pre-Mix',cat:'Growth Hormone / GHRP',sub:'5mg CJC w/o DAC + 5mg Ipamorelin — Ready to Use',spec:'10mg / vial  ·  Kit of 10 vials',desc:'The gold-standard GH protocol pre-combined in one vial. One reconstitution, one injection — maximum convenience for researchers. Exact 1:1 ratio, pharmaceutical',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'BEST COMBO',color:'#2563eb'},
-  {id:34,catNo:'CP20',name:'CJC-1295 + Ipamorelin Pre-Mix',cat:'Growth Hormone / GHRP',sub:'10mg CJC w/o DAC + 10mg Ipamorelin — High Dose',spec:'20mg / vial  ·  Kit of 10 vials',desc:'High-dose pre-combined GH research kit. Extended protocol supply.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'COMBO',color:'#2563eb'},
-  {id:35,catNo:'CD5',name:'CJC-1295 with DAC',cat:'Growth Hormone / GHRP',sub:'Long-Acting GHRH Analogue — Weekly Dosing',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Drug Affinity Complex (DAC) modification extends half-life to 6–8 days. Once-weekly injection protocol for sustained GH baseline elevation research.',price:469.95,price3:424.95,price5:399.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:36,catNo:'G25',name:'GHRP-2',cat:'Growth Hormone / GHRP',sub:'GH Releasing Peptide — High Potency',spec:'5mg / vial  ·  Kit of 10 vials',desc:'First-generation GH secretagogue. Stronger GH pulse than Ipamorelin with mild cortisol elevation. Cost-effective option for GH pulse research.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:37,catNo:'G65',name:'GHRP-6',cat:'Growth Hormone / GHRP',sub:'GH Releasing Peptide — Appetite Stimulating',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Classic GH secretagogue with notable appetite-stimulating effect via Ghrelin receptor activation. Frequently studied for appetite regulation and GH secretion re',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:38,catNo:'HX5',name:'Hexarelin',cat:'Growth Hormone / GHRP',sub:'Most Potent GHRP — Cardiac Research Applications',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most potent GHRP analog. Studied not only for GH release but also for direct cardiac protective effects via GHS-R1b receptors in the heart.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:39,catNo:'TSM5',name:'Tesamorelin',cat:'Growth Hormone / GHRP',sub:'FDA-Studied GHRH Analogue — Visceral Fat Research',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The only GHRH analogue with FDA approval history (Egrifta® for HIV-associated lipodystrophy). Stimulates endogenous GH pulses via pituitary GHRH receptors. Rese',price:264.95,price3:239.95,price5:229.95,inStock:true,badge:'FDA STUDIED',color:'#2563eb'},
-  {id:40,catNo:'SMO5',name:'Sermorelin',cat:'Growth Hormone / GHRP',sub:'GHRH(1-29) — The Original GH Optimization Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The original GHRH analogue. 29 amino acids, short 12-min half-life preserves physiological GH rhythm. Historically used in anti-aging clinics for decades.',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:41,catNo:'IG01',name:'IGF-1 LR3',cat:'Growth Hormone / GHRP',sub:'Long R3 IGF-1 — Extended Half-Life Growth Factor',spec:'0.1mg / vial  ·  Kit of 10 vials',desc:'Modified IGF-1 with ~20–30 hour half-life vs 10–20 min for native IGF-1. Activates PI3K/AKT and MAPK pathways promoting protein synthesis and satellite cell act',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:42,catNo:'IG1',name:'IGF-1 LR3',cat:'Growth Hormone / GHRP',sub:'Long R3 IGF-1 — 1mg High Concentration',spec:'1mg / vial  ·  Kit of 10 vials',desc:'High-concentration IGF-1 LR3 for research requiring precise dosing. Full COA with mass spectrometry confirmation available.',price:519.95,price3:469.95,price5:444.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:43,catNo:'CP10_GHK',name:'IGF-DES',cat:'Growth Hormone / GHRP',sub:'des(1-3) IGF-1 — Ultra-Potent Truncated IGF-1',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Naturally occurring truncated IGF-1 variant. ~5–10x higher receptor affinity than standard IGF-1 due to minimal IGFBP binding. Studied for local tissue effects.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:44,catNo:'FM2',name:'MGF',cat:'Growth Hormone / GHRP',sub:'Mechano Growth Factor — Satellite Cell Activator',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Splice variant of IGF-1 expressed under mechanical stress. The E-peptide domain uniquely activates muscle satellite cell proliferation — complementary to IGF-1 ',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:45,catNo:'FMP2',name:'PEG MGF',cat:'Growth Hormone / GHRP',sub:'PEGylated MGF — Extended Half-Life (Days)',spec:'2mg / vial  ·  Kit of 10 vials',desc:'PEGylation extends MGF half-life from minutes to several days. Enables less frequent dosing while maintaining satellite cell activation research protocols.',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:46,catNo:'GND2',name:'Gonadorelin',cat:'Growth Hormone / GHRP',sub:'Native GnRH — HPG Axis Research',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Synthetic native GnRH (10 amino acids). Pulsatile administration activates LH/FSH release. Used in TRT-adjunct research to maintain testicular function.',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:47,catNo:'G5K',name:'HCG',cat:'Growth Hormone / GHRP',sub:'Human Chorionic Gonadotropin — 5,000 IU',spec:'5,000 IU / vial  ·  Kit of 10 vials',desc:'Glycoprotein hormone structurally similar to LH. Stimulates testicular testosterone production. Studied for TRT adjunct, PCT, and fertility applications.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:48,catNo:'G10k',name:'HCG',cat:'Growth Hormone / GHRP',sub:'Human Chorionic Gonadotropin — 10,000 IU',spec:'10,000 IU / vial  ·  Kit of 10 vials',desc:'High-potency HCG. Standard fertility research concentration.',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',color:'#2563eb'},
-  {id:49,catNo:'BC5',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — 15 Amino Acids',spec:'5mg / vial  ·  Kit of 10 vials',desc:'One of the most researched repair peptides — over 70 peer-reviewed publications. Studied for vascular remodeling, tendon healing, anti-inflammatory pathways, an',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'TOP SELLER',color:'#059669'},
-  {id:50,catNo:'BC10',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. VEGF upregulation, collagen synthesis promotion, and FAK-paxillin pathway activation are primary mechanisms studied.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'BEST VALUE',color:'#059669'},
-  {id:51,catNo:'BC20',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — Bulk Kit',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Large supply for extended research protocols.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',color:'#059669'},
-  {id:52,catNo:'BT5',name:'TB-500 (Thymosin Beta-4)',cat:'Repair & Recovery',sub:'43 Amino Acid — Systemic Repair Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Actin-binding peptide present in virtually all mammalian cells. Studies document roles in systemic tissue repair, angiogenesis, anti-inflammation, and cardiac r',price:209.95,price3:189.95,price5:179.95,inStock:true,badge:'TOP SELLER',color:'#059669'},
-  {id:53,catNo:'BT10',name:'TB-500 (Thymosin Beta-4)',cat:'Repair & Recovery',sub:'43 Amino Acid — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. The BPC-157 + TB-500 combination is the most documented repair peptide protocol in sports medicine literature.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'BEST VALUE',color:'#059669'},
-  {id:54,catNo:'BB10',name:'BPC-157 + TB-500 Stack',cat:'Repair & Recovery',sub:'5mg BPC-157 + 5mg TB-500 — Pre-Combined Repair Kit',spec:'10mg / vial  ·  Kit of 10 vials',desc:'The most popular combination in recovery research — pre-mixed in one vial. BPC-157 targets localized repair; TB-500 works systemically. One reconstitution, comp',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'BEST COMBO',color:'#059669'},
-  {id:55,catNo:'BB20',name:'BPC-157 + TB-500 Stack',cat:'Repair & Recovery',sub:'10mg BPC-157 + 10mg TB-500 — High Dose Pre-Mix',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Double-strength pre-combined repair kit. Full 10-week research cycle in one order.',price:464.95,price3:419.95,price5:399.95,inStock:true,badge:'COMBO',color:'#059669'},
-  {id:56,catNo:'BBG70',name:'Glow Stack — Triple Repair Complex',cat:'Repair & Recovery',sub:'BPC-157 10mg + GHK-Cu 50mg + TB-500 10mg — Pre-Combined',spec:'70mg / vial  ·  Kit of 10 vials',desc:'Our signature triple-peptide repair complex. BPC-157 for localized repair, TB-500 for systemic regeneration, GHK-Cu for collagen/elastin synthesis and skin rene',price:489.95,price3:444.95,price5:419.95,inStock:true,badge:'SIGNATURE',color:'#059669'},
-  {id:57,catNo:'Klow80',name:'Klow80 — Ultimate Repair Complex',cat:'Repair & Recovery',sub:'BPC-157 + GHK-Cu + TB-500 + KPV — Quad Pre-Mix',spec:'80mg / vial  ·  Kit of 10 vials',desc:'Adds KPV (anti-inflammatory α-MSH tripeptide) to the Glow Stack. Comprehensive four-peptide repair protocol in a single vial. For researchers studying multi-pat',price:514.95,price3:464.95,price5:439.95,inStock:true,badge:'PREMIUM',color:'#059669'},
-  {id:58,catNo:'KPV5',name:'KPV',cat:'Repair & Recovery',sub:'α-MSH C-Terminal Tripeptide — Anti-Inflammatory',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Lys-Pro-Val: the bioactive C-terminal fragment of α-MSH. Inhibits NF-κB pathway, reduces IL-6 and TNF-α. Studied for IBD, Crohns disease, and skin inflammation',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'',color:'#059669'},
-  {id:59,catNo:'KPV10',name:'KPV',cat:'Repair & Recovery',sub:'α-MSH C-Terminal Tripeptide — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended supply for ongoing inflammation research.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',color:'#059669'},
-  {id:60,catNo:'375',name:'LL-37 (Cathelicidin)',cat:'Repair & Recovery',sub:'Human Antimicrobial Peptide — Innate Immunity',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The only human cathelicidin. Disrupts bacterial membranes, neutralizes viruses, recruits immune cells, and promotes wound epithelialization. Studied in antimicr',price:249.95,price3:224.95,price5:214.95,inStock:true,badge:'',color:'#059669'},
-  {id:61,catNo:'AR50',name:'AICAR',cat:'Repair & Recovery',sub:'AMPK Activator — Metabolic & Endurance Research',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Activates AMPK (the metabolic master switch) by accumulating as ZMP intracellularly. Studied for mitochondrial biogenesis, fatty acid oxidation, and exercise ad',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#059669'},
-  {id:62,catNo:'ET10',name:'Epithalon (Epitalon)',cat:'Anti-Aging / Longevity',sub:'Telomerase-Activating Tetrapeptide — Longevity Research',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Four-amino acid peptide (Ala-Glu-Asp-Gly) derived from pineal gland research by Prof. Khavinson. Multiple Russian clinical studies document telomerase activatio',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'LONGEVITY #1',color:'#7c3aed'},
-  {id:63,catNo:'ET50',name:'Epithalon (Epitalon)',cat:'Anti-Aging / Longevity',sub:'Telomerase-Activating Tetrapeptide — Bulk Supply',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Extended supply for full Khavinson Protocol (10-day cycles). Significant savings vs smaller kits.',price:364.95,price3:329.95,price5:314.95,inStock:true,badge:'BEST VALUE',color:'#7c3aed'},
-  {id:64,catNo:'MS10',name:'MOTS-c',cat:'Anti-Aging / Longevity',sub:'Mitochondria-Derived Peptide — Exercise Mimetic',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Encoded by the mitochondrial genome — a landmark discovery by USC researchers. Activates AMPK, upregulates oxidative metabolism genes, improves insulin sensitiv',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'RESEARCH STAR',color:'#7c3aed'},
-  {id:65,catNo:'MS20',name:'MOTS-c',cat:'Anti-Aging / Longevity',sub:'Mitochondria-Derived Peptide — Extended Supply',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Extended protocol supply. Combine with Epithalon for a comprehensive longevity research stack.',price:324.95,price3:294.95,price5:279.95,inStock:true,badge:'',color:'#7c3aed'},
-  {id:66,catNo:'2S10',name:'SS-31 (Elamipretide)',cat:'Anti-Aging / Longevity',sub:'Mitochondrial Inner Membrane Protectant',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Selectively concentrates on the mitochondrial inner membrane, binding cardiolipin to stabilize the electron transport chain. Reduces ROS production. Advanced in',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'CLINICAL STAGE',color:'#7c3aed'},
-  {id:67,catNo:'2S50',name:'SS-31 (Elamipretide)',cat:'Anti-Aging / Longevity',sub:'Mitochondrial Protectant — Bulk Research Kit',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Extended supply for longer mitochondrial health research protocols.',price:734.95,price3:664.95,price5:624.95,inStock:true,badge:'',color:'#7c3aed'},
-  {id:68,catNo:'NJ500',name:'NAD+',cat:'Anti-Aging / Longevity',sub:'Nicotinamide Adenine Dinucleotide — IV-Grade',spec:'500mg / vial  ·  Kit of 10 vials',desc:'The cellular energy and DNA repair master coenzyme. NAD+ declines ~50% from age 20 to 60. IV-grade purity. Activates Sirtuins (longevity proteins) and PARP (DNA',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'LONGEVITY STAPLE',color:'#7c3aed'},
-  {id:69,catNo:'NJ1000',name:'NAD+',cat:'Anti-Aging / Longevity',sub:'Nicotinamide Adenine Dinucleotide — High Dose',spec:'1000mg / vial  ·  Kit of 10 vials',desc:'High-dose NAD+ for intensive protocols. Clinical longevity programs typically use 500–1000mg sessions.',price:149.95,price3:134.95,price5:129.95,inStock:true,badge:'',color:'#7c3aed'},
-  {id:70,catNo:'TY10',name:'Thymalin',cat:'Anti-Aging / Longevity',sub:'Thymus Peptide Complex — Immune Rejuvenation',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Thymus-derived peptide complex. Russian clinical data spanning 30+ years documents immune function restoration in aging populations. Studied for T-cell rejuvena',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',color:'#7c3aed'},
-  {id:71,catNo:'PIN10',name:'Pinealon',cat:'Anti-Aging / Longevity',sub:'Pineal Tripeptide — Neuroprotective & Cognitive',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Glu-Asp-Arg tripeptide from Khavinsons pineal gland research. Studied for neuroprotective, epigenetic regulatory, and neurotransmitter synthesis effects. Compl',price:219.95,price3:199.95,price5:189.95,inStock:true,badge:'',color:'#7c3aed'},
-  {id:72,catNo:'RA10',name:'ARA-290 (Cibinetide)',cat:'Anti-Aging / Longevity',sub:'EPO-Derived Neuroprotective Peptide',spec:'10mg / vial  ·  Kit of 10 vials',desc:'11-amino acid EPO derivative that selectively binds tissue-protective EPO receptors (βCR complex) without erythropoietic effects. In Phase II clinical trials fo',price:209.95,price3:189.95,price5:179.95,inStock:true,badge:'CLINICAL STAGE',color:'#7c3aed'},
-  {id:73,catNo:'F410',name:'FOXO4-DRI',cat:'Anti-Aging / Longevity',sub:'Senolytic Peptide — Targeted Senescent Cell Clearance',spec:'10mg / vial  ·  Kit of 10 vials',desc:'D-retro-inverso peptide disrupting FOXO4-p53 interaction in senescent cells, triggering selective apoptosis. Normal cells unaffected. The most sophisticated pep',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'FRONTIER',color:'#7c3aed'},
-  {id:74,catNo:'XA5',name:'Semax',cat:'Neuro & Cognitive',sub:'ACTH(4-7) Analogue — Cognitive Enhancement',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Russian-developed ACTH analogue (legal prescription drug in Russia). Upregulates BDNF and NGF, modulates dopamine and serotonin systems. Extensively studied for',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'NOOTROPIC #1',color:'#0891b2'},
-  {id:75,catNo:'XA10',name:'Semax',cat:'Neuro & Cognitive',sub:'ACTH(4-7) Analogue — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended nasal spray / injection supply. Standard 10-day Russian research protocol covered.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#0891b2'},
-  {id:76,catNo:'SK5',name:'Selank',cat:'Neuro & Cognitive',sub:'Tuftsin Analogue — Anxiolytic & Cognitive',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Synthetic Tuftsin analogue. Russian prescription drug for generalized anxiety disorder. GABA-A modulation without addiction or tolerance. Studied for anxiety, c',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'NOOTROPIC #2',color:'#0891b2'},
-  {id:77,catNo:'SK10',name:'Selank',cat:'Neuro & Cognitive',sub:'Tuftsin Analogue — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. Non-habit-forming alternative to benzodiazepines in anxiety research.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#0891b2'},
-  {id:78,catNo:'DS5',name:'DSIP',cat:'Neuro & Cognitive',sub:'Delta Sleep-Inducing Peptide — Sleep Architecture',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Nine-amino acid neuropeptide inducing slow-wave (delta) sleep. Studied for insomnia research, HPA axis regulation, pain modulation, and opiate withdrawal sympto',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',color:'#0891b2'},
-  {id:79,catNo:'VIP5',name:'VIP',cat:'Neuro & Cognitive',sub:'Vasoactive Intestinal Peptide — Neuro-Immune Modulator',spec:'5mg / vial  ·  Kit of 10 vials',desc:'28-amino acid neuropeptide with potent vasodilation and immunomodulatory effects. Studied in MCAS, post-Lyme syndrome (Shoemaker protocol), pulmonary arterial h',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#0891b2'},
-  {id:80,catNo:'CBL60',name:'Cerebrolysin',cat:'Neuro & Cognitive',sub:'Porcine Brain-Derived Neuropeptide Complex',spec:'60mg / 6 vials',desc:'Low-molecular-weight neuropeptide mixture crossing the blood-brain barrier. Mimics BDNF, NGF, and CNTF. Approved in China, Russia, and Austria. Studied for Alzh',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',color:'#0891b2'},
-  {id:81,catNo:'TA5',name:'Thymosin Alpha-1',cat:'Neuro & Cognitive',sub:'28 Amino Acid Immune Modulator — Zadaxin®',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most clinically validated immune-modulating peptide. Approved in China and Italy (Zadaxin®) for chronic hepatitis B and cancer immunotherapy support. Extens',price:249.95,price3:224.95,price5:214.95,inStock:true,badge:'CLINICALLY APPROVED',color:'#0891b2'},
-  {id:82,catNo:'TA10',name:'Thymosin Alpha-1',cat:'Neuro & Cognitive',sub:'Zadaxin® Equivalent — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research/clinic supply. Standard Hepatitis B protocol: 1.6mg twice weekly × 26 weeks.',price:389.95,price3:354.95,price5:334.95,inStock:true,badge:'',color:'#0891b2'},
-  {id:83,catNo:'P41',name:'PT-141 (Bremelanotide)',cat:'Sexual Health',sub:'FDA-Approved Melanocortin Agonist — Sexual Function',spec:'10mg / vial  ·  Kit of 10 vials',desc:'FDA-approved as Vyleesi® for female HSDD (hypoactive sexual desire disorder). Activates MC3R/MC4R in the CNS — the first sexual dysfunction drug acting centrall',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'FDA APPROVED',color:'#db2777'},
-  {id:84,catNo:'KS5',name:'Kisspeptin-10',cat:'Sexual Health',sub:'GPR54 Agonist — HPG Axis & Libido Research',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The minimal bioactive Kisspeptin fragment. Triggers GnRH pulse release, stimulating LH/FSH. Studied for female hypogonadism, male fertility, and libido research',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'',color:'#db2777'},
-  {id:85,catNo:'OT5',name:'Oxytocin',cat:'Sexual Health',sub:'The Love Hormone — Social Bonding & Sexual Function',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The neuropeptide of trust, bonding, and intimacy. Nasal spray studies document effects on social anxiety, trust, relationship quality, and orgasm intensity. Sta',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#db2777'},
-  {id:86,catNo:'MT1',name:'Melanotan I',cat:'Sexual Health',sub:'α-MSH Analogue — Skin Pigmentation Research',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Selective MC1R agonist. Studied for skin tanning response without UV damage, and potential melanoma protection applications. Higher MC1R selectivity than MT-II ',price:129.95,price3:119.95,price5:114.95,inStock:true,badge:'',color:'#db2777'},
-  {id:87,catNo:'CU50',name:'GHK-Cu (Copper Peptide)',cat:'Beauty & Aesthetic',sub:'Anti-Aging Tripeptide — Collagen & Skin Regeneration',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Gly-His-Lys copper complex naturally occurring in blood and saliva. Stimulates collagen and elastin synthesis via TGF-β and VEGF pathways. Antioxidant, wound he',price:64.95,price3:59.95,price5:59.95,inStock:true,badge:'BEAUTY STAPLE',color:'#d97706'},
-  {id:88,catNo:'CU100',name:'GHK-Cu (Copper Peptide)',cat:'Beauty & Aesthetic',sub:'Anti-Aging Tripeptide — High Concentration',spec:'100mg / vial  ·  Kit of 10 vials',desc:'High-concentration GHK-Cu for research or cosmetic formulation development.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#d97706'},
-  {id:89,catNo:'GTT600',name:'Glutathione',cat:'Beauty & Aesthetic',sub:'Master Antioxidant — IV Grade 600mg',spec:'600mg / vial  ·  Kit of 10 vials',desc:'The bodys most abundant endogenous antioxidant. IV administration studied for liver protection, immune enhancement, skin brightening (tyrosinase inhibition), a',price:64.95,price3:59.95,price5:59.95,inStock:true,badge:'WELLNESS STAPLE',color:'#d97706'},
-  {id:90,catNo:'GTT1500',name:'Glutathione',cat:'Beauty & Aesthetic',sub:'Master Antioxidant — High Dose 1500mg',spec:'1500mg / vial  ·  Kit of 10 vials',desc:'High-dose glutathione for intensive IV protocols.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#d97706'},
-  {id:91,catNo:'NP810',name:'Snap-8',cat:'Beauty & Aesthetic',sub:'Acetyl Octapeptide — Topical Botox Alternative',spec:'10mg / vial  ·  Kit of 10 vials',desc:'8-amino acid peptide modulating SNARE complex (SNAP-25 competitor), reducing acetylcholine vesicle fusion. Clinical data shows 63% reduction in wrinkle depth at',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'COSMETIC GRADE',color:'#d97706'},
-  {id:92,catNo:'LB10',name:'Lemon Bottle',cat:'Beauty & Aesthetic',sub:'Injectable Fat-Dissolving Solution',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Korean-developed phosphatidylcholine/deoxycholic acid injectable solution for localized fat dissolution. Used in aesthetic clinics for submental fat (double chi',price:139.95,price3:129.95,price5:119.95,inStock:true,badge:'CLINIC USE',color:'#d97706'},
-  {id:93,catNo:'WA3',name:'Bacteriostatic Water (BAC Water)',cat:'Accessories',sub:'Peptide Reconstitution Solvent — 3ml',spec:'3ml / vial  ·  Kit of 10 vials',desc:'0.9% benzyl alcohol sterile water for multi-dose vial reconstitution. Inhibits bacterial growth for up to 4 weeks after opening. Required for reconstituting all',price:15.5,price3:13.95,price5:13.17,inStock:true,badge:'ESSENTIAL',color:'#64748b'},
-  {id:94,catNo:'WA10',name:'Bacteriostatic Water (BAC Water)',cat:'Accessories',sub:'Peptide Reconstitution Solvent — 10ml',spec:'10ml / vial  ·  Kit of 10 vials',desc:'Large volume BAC water for protocols requiring higher dilution volumes.',price:20.0,price3:18.0,price5:17.0,inStock:true,badge:'ESSENTIAL',color:'#64748b'},
-  {id:95,catNo:'AA10',name:'Acetic Acid Water',cat:'Accessories',sub:'Acidic Reconstitution Solvent — For IGF Peptides',spec:'10ml / vial  ·  Kit of 10 vials',desc:'0.6% acetic acid sterile water. Required for reconstituting IGF-1 DES and other acid-soluble peptides that aggregate in neutral pH solutions.',price:26.9,price3:24.21,price5:22.86,inStock:true,badge:'IGF REQUIRED',color:'#64748b'},
+  {id:1,catNo:'SM2',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'2mg / vial  ·  Kit of 10 vials',desc:'The active compound in Ozempic® & Wegovy®. Research-grade, HPLC-verified ≥99% purity. Studies document significant effects on appetite regulation and metabolic ',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:2,catNo:'SM5',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Same compound, higher concentration per vial for extended research cycles. Each kit includes 10 vials. Third-party COA available on request.',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'BEST VALUE',color:'#16a34a',imgUrl:''},
+  {id:3,catNo:'SM10',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'High-concentration research kit. Ideal for longer study protocols. HPLC-certified ≥99% purity, full COA downloadable by batch number.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'MOST POPULAR',color:'#16a34a',imgUrl:''},
+  {id:4,catNo:'SM15',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'15mg / vial  ·  Kit of 10 vials',desc:'Extended supply kit for ongoing research programs. Same pharmaceutical-grade standard.',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:5,catNo:'SM20',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Large supply kit. Purity ≥99% HPLC verified. Discreet plain packaging, batch-traceable COA.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:6,catNo:'SM30',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'30mg / vial  ·  Kit of 10 vials',desc:'Bulk research kit for extended study protocols.',price:254.95,price3:229.95,price5:219.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:7,catNo:'TR5',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The active compound in Mounjaro® & Zepbound®. Dual-action GLP-1 + GIP agonist — clinical studies show superior weight management outcomes vs single-target GLP-1',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'NEW',color:'#16a34a',imgUrl:''},
+  {id:8,catNo:'TR10',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Most researched tirzepatide concentration. Dual-target mechanism studied extensively in metabolic research. Full COA per batch.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'MOST POPULAR',color:'#16a34a',imgUrl:''},
+  {id:9,catNo:'TR15',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'15mg / vial  ·  Kit of 10 vials',desc:'Higher dose research kit. Same dual-mechanism compound, purity ≥99% HPLC verified.',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:10,catNo:'TR20',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Extended supply for longer protocols.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:11,catNo:'TR30',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'30mg / vial  ·  Kit of 10 vials',desc:'Large kit, significant savings vs buying individual vials.',price:254.95,price3:229.95,price5:219.95,inStock:true,badge:'SAVE 15%',color:'#16a34a',imgUrl:''},
+  {id:12,catNo:'TR40',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'40mg / vial  ·  Kit of 10 vials',desc:'High-volume research supply.',price:334.95,price3:304.95,price5:284.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:13,catNo:'TR60',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'60mg / vial  ·  Kit of 10 vials',desc:'Bulk research supply kit.',price:499.95,price3:449.95,price5:424.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:14,catNo:'RT5',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Next-generation triple-target agonist. Phase III clinical data documents up to 24% body weight reduction — the strongest published data of any injectable metabo',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'CUTTING EDGE',color:'#16a34a',imgUrl:''},
+  {id:15,catNo:'RT10',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Triple-target mechanism: GLP-1 suppresses appetite, GIP improves insulin sensitivity, Glucagon increases energy expenditure.',price:124.95,price3:114.95,price5:109.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:16,catNo:'RT20',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Higher concentration research vials.',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:17,catNo:'CGL5',name:'Cagrilintide',cat:'GLP-1 / Weight Loss',sub:'Long-Acting Amylin Analogue',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Weekly amylin analogue with ~7-day half-life. Frequently studied in combination with Semaglutide (CagriSema protocol), with published research showing synergist',price:314.95,price3:284.95,price5:269.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:18,catNo:'CS5',name:'CagriSema Combo',cat:'GLP-1 / Weight Loss',sub:'Cagrilintide 2.5mg + Semaglutide 2.5mg — Pre-Combined',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Pre-combined dual-compound research kit. CagriSema protocol in a single vial — convenience of one reconstitution for researchers studying amylin + GLP-1 combina',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'COMBO',color:'#16a34a',imgUrl:''},
+  {id:19,catNo:'CS10',name:'CagriSema Combo',cat:'GLP-1 / Weight Loss',sub:'Cagrilintide 5mg + Semaglutide 5mg — Pre-Combined',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Higher-dose pre-combined CagriSema kit. Streamlined for extended research protocols.',price:379.95,price3:344.95,price5:324.95,inStock:true,badge:'COMBO',color:'#16a34a',imgUrl:''},
+  {id:20,catNo:'MDT5',name:'Mazdutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 / Glucagon Dual Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Chinese-developed dual-target GLP-1 + Glucagon receptor agonist (IBI362). Clinical data demonstrates strong metabolic and body composition effects. Research-gra',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:21,catNo:'2AD',name:'AOD9604',cat:'GLP-1 / Weight Loss',sub:'HGH Fragment 176-191 — Lipolytic Peptide',spec:'2mg / vial  ·  Kit of 10 vials',desc:'The fat-metabolizing fragment of Human Growth Hormone. Retains HGHs lipolytic activity without affecting blood glucose or IGF-1 levels. Originally developed at',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:22,catNo:'5AD',name:'AOD9604',cat:'GLP-1 / Weight Loss',sub:'HGH Fragment 176-191 — Lipolytic Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Standard research dose. Studied for selective adipose tissue metabolism effects.',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'BEST VALUE',color:'#16a34a',imgUrl:''},
+  {id:23,catNo:'LC600',name:'L-Carnitine 600mg',cat:'GLP-1 / Weight Loss',sub:'Mitochondrial Fat Transport Cofactor',spec:'600mg / vial  ·  Kit of 10 vials',desc:'Essential cofactor transporting long-chain fatty acids into mitochondria for beta-oxidation. Injectable grade. Widely studied for metabolic and exercise perform',price:124.95,price3:114.95,price5:109.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:24,catNo:'LC1200',name:'L-Carnitine 1200mg',cat:'GLP-1 / Weight Loss',sub:'Mitochondrial Fat Transport Cofactor — High Dose',spec:'1200mg / 10ml vial  ·  Kit of 10 vials',desc:'High-concentration injectable L-Carnitine. Clinical dose range studied in cardiovascular and metabolic research.',price:139.95,price3:129.95,price5:119.95,inStock:true,badge:'',color:'#16a34a',imgUrl:''},
+  {id:25,catNo:'H10',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — 191 Amino Acids',spec:'10 IU / vial  ·  Kit of 10 vials',desc:'Pharmaceutical-grade recombinant HGH. Identical sequence to endogenous GH. Used in research studying growth, metabolism, body composition, and cellular repair. ',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:26,catNo:'H15',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — High Potency',spec:'15 IU / vial  ·  Kit of 10 vials',desc:'Higher potency research kit. Full COA, cold-chain shipped.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:27,catNo:'H24',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — Research Grade',spec:'24 IU / vial  ·  Kit of 10 vials',desc:'Extended supply research kit.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'BEST VALUE',color:'#2563eb',imgUrl:''},
+  {id:28,catNo:'H36',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — Bulk Kit',spec:'36 IU / vial  ·  Kit of 10 vials',desc:'High-volume research kit.',price:499.95,price3:449.95,price5:424.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:29,catNo:'IP5',name:'Ipamorelin',cat:'Growth Hormone / GHRP',sub:'Selective GHSR Agonist — Cleanest GHRP',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most selective GHRP available. Unlike GHRP-2 or GHRP-6, Ipamorelin produces a clean GH pulse with negligible effects on cortisol or prolactin. Ideal for GH ',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'TOP SELLER',color:'#2563eb',imgUrl:''},
+  {id:30,catNo:'IP10',name:'Ipamorelin',cat:'Growth Hormone / GHRP',sub:'Selective GHSR Agonist — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Higher concentration supply for longer research cycles. Combine with CJC-1295 for the gold-standard GH optimization protocol.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:31,catNo:'CND5',name:'CJC-1295 without DAC',cat:'Growth Hormone / GHRP',sub:'Modified GHRH(1-29) — Physiological GH Pulsing',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Modified GHRH analogue with ~30-min half-life, mimicking physiological GH pulse release. The gold-standard pairing with Ipamorelin for GH research. Preserves na',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'TOP SELLER',color:'#2563eb',imgUrl:''},
+  {id:32,catNo:'CND10',name:'CJC-1295 without DAC',cat:'Growth Hormone / GHRP',sub:'Modified GHRH(1-29) — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. Pair 1:1 with Ipamorelin for the most documented GH optimization protocol.',price:314.95,price3:284.95,price5:269.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:33,catNo:'CP10',name:'CJC-1295 + Ipamorelin Pre-Mix',cat:'Growth Hormone / GHRP',sub:'5mg CJC w/o DAC + 5mg Ipamorelin — Ready to Use',spec:'10mg / vial  ·  Kit of 10 vials',desc:'The gold-standard GH protocol pre-combined in one vial. One reconstitution, one injection — maximum convenience for researchers. Exact 1:1 ratio, pharmaceutical',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'BEST COMBO',color:'#2563eb',imgUrl:''},
+  {id:34,catNo:'CP20',name:'CJC-1295 + Ipamorelin Pre-Mix',cat:'Growth Hormone / GHRP',sub:'10mg CJC w/o DAC + 10mg Ipamorelin — High Dose',spec:'20mg / vial  ·  Kit of 10 vials',desc:'High-dose pre-combined GH research kit. Extended protocol supply.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'COMBO',color:'#2563eb',imgUrl:''},
+  {id:35,catNo:'CD5',name:'CJC-1295 with DAC',cat:'Growth Hormone / GHRP',sub:'Long-Acting GHRH Analogue — Weekly Dosing',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Drug Affinity Complex (DAC) modification extends half-life to 6–8 days. Once-weekly injection protocol for sustained GH baseline elevation research.',price:469.95,price3:424.95,price5:399.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:36,catNo:'G25',name:'GHRP-2',cat:'Growth Hormone / GHRP',sub:'GH Releasing Peptide — High Potency',spec:'5mg / vial  ·  Kit of 10 vials',desc:'First-generation GH secretagogue. Stronger GH pulse than Ipamorelin with mild cortisol elevation. Cost-effective option for GH pulse research.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:37,catNo:'G65',name:'GHRP-6',cat:'Growth Hormone / GHRP',sub:'GH Releasing Peptide — Appetite Stimulating',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Classic GH secretagogue with notable appetite-stimulating effect via Ghrelin receptor activation. Frequently studied for appetite regulation and GH secretion re',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:38,catNo:'HX5',name:'Hexarelin',cat:'Growth Hormone / GHRP',sub:'Most Potent GHRP — Cardiac Research Applications',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most potent GHRP analog. Studied not only for GH release but also for direct cardiac protective effects via GHS-R1b receptors in the heart.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:39,catNo:'TSM5',name:'Tesamorelin',cat:'Growth Hormone / GHRP',sub:'FDA-Studied GHRH Analogue — Visceral Fat Research',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The only GHRH analogue with FDA approval history (Egrifta® for HIV-associated lipodystrophy). Stimulates endogenous GH pulses via pituitary GHRH receptors. Rese',price:264.95,price3:239.95,price5:229.95,inStock:true,badge:'FDA STUDIED',color:'#2563eb',imgUrl:''},
+  {id:40,catNo:'SMO5',name:'Sermorelin',cat:'Growth Hormone / GHRP',sub:'GHRH(1-29) — The Original GH Optimization Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The original GHRH analogue. 29 amino acids, short 12-min half-life preserves physiological GH rhythm. Historically used in anti-aging clinics for decades.',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:41,catNo:'IG01',name:'IGF-1 LR3',cat:'Growth Hormone / GHRP',sub:'Long R3 IGF-1 — Extended Half-Life Growth Factor',spec:'0.1mg / vial  ·  Kit of 10 vials',desc:'Modified IGF-1 with ~20–30 hour half-life vs 10–20 min for native IGF-1. Activates PI3K/AKT and MAPK pathways promoting protein synthesis and satellite cell act',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:42,catNo:'IG1',name:'IGF-1 LR3',cat:'Growth Hormone / GHRP',sub:'Long R3 IGF-1 — 1mg High Concentration',spec:'1mg / vial  ·  Kit of 10 vials',desc:'High-concentration IGF-1 LR3 for research requiring precise dosing. Full COA with mass spectrometry confirmation available.',price:519.95,price3:469.95,price5:444.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:43,catNo:'CP10_GHK',name:'IGF-DES',cat:'Growth Hormone / GHRP',sub:'des(1-3) IGF-1 — Ultra-Potent Truncated IGF-1',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Naturally occurring truncated IGF-1 variant. ~5–10x higher receptor affinity than standard IGF-1 due to minimal IGFBP binding. Studied for local tissue effects.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:44,catNo:'FM2',name:'MGF',cat:'Growth Hormone / GHRP',sub:'Mechano Growth Factor — Satellite Cell Activator',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Splice variant of IGF-1 expressed under mechanical stress. The E-peptide domain uniquely activates muscle satellite cell proliferation — complementary to IGF-1 ',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:45,catNo:'FMP2',name:'PEG MGF',cat:'Growth Hormone / GHRP',sub:'PEGylated MGF — Extended Half-Life (Days)',spec:'2mg / vial  ·  Kit of 10 vials',desc:'PEGylation extends MGF half-life from minutes to several days. Enables less frequent dosing while maintaining satellite cell activation research protocols.',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:46,catNo:'GND2',name:'Gonadorelin',cat:'Growth Hormone / GHRP',sub:'Native GnRH — HPG Axis Research',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Synthetic native GnRH (10 amino acids). Pulsatile administration activates LH/FSH release. Used in TRT-adjunct research to maintain testicular function.',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:47,catNo:'G5K',name:'HCG',cat:'Growth Hormone / GHRP',sub:'Human Chorionic Gonadotropin — 5,000 IU',spec:'5,000 IU / vial  ·  Kit of 10 vials',desc:'Glycoprotein hormone structurally similar to LH. Stimulates testicular testosterone production. Studied for TRT adjunct, PCT, and fertility applications.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:48,catNo:'G10k',name:'HCG',cat:'Growth Hormone / GHRP',sub:'Human Chorionic Gonadotropin — 10,000 IU',spec:'10,000 IU / vial  ·  Kit of 10 vials',desc:'High-potency HCG. Standard fertility research concentration.',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',color:'#2563eb',imgUrl:''},
+  {id:49,catNo:'BC5',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — 15 Amino Acids',spec:'5mg / vial  ·  Kit of 10 vials',desc:'One of the most researched repair peptides — over 70 peer-reviewed publications. Studied for vascular remodeling, tendon healing, anti-inflammatory pathways, an',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'TOP SELLER',color:'#059669',imgUrl:''},
+  {id:50,catNo:'BC10',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. VEGF upregulation, collagen synthesis promotion, and FAK-paxillin pathway activation are primary mechanisms studied.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'BEST VALUE',color:'#059669',imgUrl:''},
+  {id:51,catNo:'BC20',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — Bulk Kit',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Large supply for extended research protocols.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',color:'#059669',imgUrl:''},
+  {id:52,catNo:'BT5',name:'TB-500 (Thymosin Beta-4)',cat:'Repair & Recovery',sub:'43 Amino Acid — Systemic Repair Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Actin-binding peptide present in virtually all mammalian cells. Studies document roles in systemic tissue repair, angiogenesis, anti-inflammation, and cardiac r',price:209.95,price3:189.95,price5:179.95,inStock:true,badge:'TOP SELLER',color:'#059669',imgUrl:''},
+  {id:53,catNo:'BT10',name:'TB-500 (Thymosin Beta-4)',cat:'Repair & Recovery',sub:'43 Amino Acid — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. The BPC-157 + TB-500 combination is the most documented repair peptide protocol in sports medicine literature.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'BEST VALUE',color:'#059669',imgUrl:''},
+  {id:54,catNo:'BB10',name:'BPC-157 + TB-500 Stack',cat:'Repair & Recovery',sub:'5mg BPC-157 + 5mg TB-500 — Pre-Combined Repair Kit',spec:'10mg / vial  ·  Kit of 10 vials',desc:'The most popular combination in recovery research — pre-mixed in one vial. BPC-157 targets localized repair; TB-500 works systemically. One reconstitution, comp',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'BEST COMBO',color:'#059669',imgUrl:''},
+  {id:55,catNo:'BB20',name:'BPC-157 + TB-500 Stack',cat:'Repair & Recovery',sub:'10mg BPC-157 + 10mg TB-500 — High Dose Pre-Mix',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Double-strength pre-combined repair kit. Full 10-week research cycle in one order.',price:464.95,price3:419.95,price5:399.95,inStock:true,badge:'COMBO',color:'#059669',imgUrl:''},
+  {id:56,catNo:'BBG70',name:'Glow Stack — Triple Repair Complex',cat:'Repair & Recovery',sub:'BPC-157 10mg + GHK-Cu 50mg + TB-500 10mg — Pre-Combined',spec:'70mg / vial  ·  Kit of 10 vials',desc:'Our signature triple-peptide repair complex. BPC-157 for localized repair, TB-500 for systemic regeneration, GHK-Cu for collagen/elastin synthesis and skin rene',price:489.95,price3:444.95,price5:419.95,inStock:true,badge:'SIGNATURE',color:'#059669',imgUrl:''},
+  {id:57,catNo:'Klow80',name:'Klow80 — Ultimate Repair Complex',cat:'Repair & Recovery',sub:'BPC-157 + GHK-Cu + TB-500 + KPV — Quad Pre-Mix',spec:'80mg / vial  ·  Kit of 10 vials',desc:'Adds KPV (anti-inflammatory α-MSH tripeptide) to the Glow Stack. Comprehensive four-peptide repair protocol in a single vial. For researchers studying multi-pat',price:514.95,price3:464.95,price5:439.95,inStock:true,badge:'PREMIUM',color:'#059669',imgUrl:''},
+  {id:58,catNo:'KPV5',name:'KPV',cat:'Repair & Recovery',sub:'α-MSH C-Terminal Tripeptide — Anti-Inflammatory',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Lys-Pro-Val: the bioactive C-terminal fragment of α-MSH. Inhibits NF-κB pathway, reduces IL-6 and TNF-α. Studied for IBD, Crohns disease, and skin inflammation',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'',color:'#059669',imgUrl:''},
+  {id:59,catNo:'KPV10',name:'KPV',cat:'Repair & Recovery',sub:'α-MSH C-Terminal Tripeptide — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended supply for ongoing inflammation research.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',color:'#059669',imgUrl:''},
+  {id:60,catNo:'375',name:'LL-37 (Cathelicidin)',cat:'Repair & Recovery',sub:'Human Antimicrobial Peptide — Innate Immunity',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The only human cathelicidin. Disrupts bacterial membranes, neutralizes viruses, recruits immune cells, and promotes wound epithelialization. Studied in antimicr',price:249.95,price3:224.95,price5:214.95,inStock:true,badge:'',color:'#059669',imgUrl:''},
+  {id:61,catNo:'AR50',name:'AICAR',cat:'Repair & Recovery',sub:'AMPK Activator — Metabolic & Endurance Research',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Activates AMPK (the metabolic master switch) by accumulating as ZMP intracellularly. Studied for mitochondrial biogenesis, fatty acid oxidation, and exercise ad',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#059669',imgUrl:''},
+  {id:62,catNo:'ET10',name:'Epithalon (Epitalon)',cat:'Anti-Aging / Longevity',sub:'Telomerase-Activating Tetrapeptide — Longevity Research',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Four-amino acid peptide (Ala-Glu-Asp-Gly) derived from pineal gland research by Prof. Khavinson. Multiple Russian clinical studies document telomerase activatio',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'LONGEVITY #1',color:'#7c3aed',imgUrl:''},
+  {id:63,catNo:'ET50',name:'Epithalon (Epitalon)',cat:'Anti-Aging / Longevity',sub:'Telomerase-Activating Tetrapeptide — Bulk Supply',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Extended supply for full Khavinson Protocol (10-day cycles). Significant savings vs smaller kits.',price:364.95,price3:329.95,price5:314.95,inStock:true,badge:'BEST VALUE',color:'#7c3aed',imgUrl:''},
+  {id:64,catNo:'MS10',name:'MOTS-c',cat:'Anti-Aging / Longevity',sub:'Mitochondria-Derived Peptide — Exercise Mimetic',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Encoded by the mitochondrial genome — a landmark discovery by USC researchers. Activates AMPK, upregulates oxidative metabolism genes, improves insulin sensitiv',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'RESEARCH STAR',color:'#7c3aed',imgUrl:''},
+  {id:65,catNo:'MS20',name:'MOTS-c',cat:'Anti-Aging / Longevity',sub:'Mitochondria-Derived Peptide — Extended Supply',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Extended protocol supply. Combine with Epithalon for a comprehensive longevity research stack.',price:324.95,price3:294.95,price5:279.95,inStock:true,badge:'',color:'#7c3aed',imgUrl:''},
+  {id:66,catNo:'2S10',name:'SS-31 (Elamipretide)',cat:'Anti-Aging / Longevity',sub:'Mitochondrial Inner Membrane Protectant',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Selectively concentrates on the mitochondrial inner membrane, binding cardiolipin to stabilize the electron transport chain. Reduces ROS production. Advanced in',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'CLINICAL STAGE',color:'#7c3aed',imgUrl:''},
+  {id:67,catNo:'2S50',name:'SS-31 (Elamipretide)',cat:'Anti-Aging / Longevity',sub:'Mitochondrial Protectant — Bulk Research Kit',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Extended supply for longer mitochondrial health research protocols.',price:734.95,price3:664.95,price5:624.95,inStock:true,badge:'',color:'#7c3aed',imgUrl:''},
+  {id:68,catNo:'NJ500',name:'NAD+',cat:'Anti-Aging / Longevity',sub:'Nicotinamide Adenine Dinucleotide — IV-Grade',spec:'500mg / vial  ·  Kit of 10 vials',desc:'The cellular energy and DNA repair master coenzyme. NAD+ declines ~50% from age 20 to 60. IV-grade purity. Activates Sirtuins (longevity proteins) and PARP (DNA',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'LONGEVITY STAPLE',color:'#7c3aed',imgUrl:''},
+  {id:69,catNo:'NJ1000',name:'NAD+',cat:'Anti-Aging / Longevity',sub:'Nicotinamide Adenine Dinucleotide — High Dose',spec:'1000mg / vial  ·  Kit of 10 vials',desc:'High-dose NAD+ for intensive protocols. Clinical longevity programs typically use 500–1000mg sessions.',price:149.95,price3:134.95,price5:129.95,inStock:true,badge:'',color:'#7c3aed',imgUrl:''},
+  {id:70,catNo:'TY10',name:'Thymalin',cat:'Anti-Aging / Longevity',sub:'Thymus Peptide Complex — Immune Rejuvenation',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Thymus-derived peptide complex. Russian clinical data spanning 30+ years documents immune function restoration in aging populations. Studied for T-cell rejuvena',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',color:'#7c3aed',imgUrl:''},
+  {id:71,catNo:'PIN10',name:'Pinealon',cat:'Anti-Aging / Longevity',sub:'Pineal Tripeptide — Neuroprotective & Cognitive',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Glu-Asp-Arg tripeptide from Khavinsons pineal gland research. Studied for neuroprotective, epigenetic regulatory, and neurotransmitter synthesis effects. Compl',price:219.95,price3:199.95,price5:189.95,inStock:true,badge:'',color:'#7c3aed',imgUrl:''},
+  {id:72,catNo:'RA10',name:'ARA-290 (Cibinetide)',cat:'Anti-Aging / Longevity',sub:'EPO-Derived Neuroprotective Peptide',spec:'10mg / vial  ·  Kit of 10 vials',desc:'11-amino acid EPO derivative that selectively binds tissue-protective EPO receptors (βCR complex) without erythropoietic effects. In Phase II clinical trials fo',price:209.95,price3:189.95,price5:179.95,inStock:true,badge:'CLINICAL STAGE',color:'#7c3aed',imgUrl:''},
+  {id:73,catNo:'F410',name:'FOXO4-DRI',cat:'Anti-Aging / Longevity',sub:'Senolytic Peptide — Targeted Senescent Cell Clearance',spec:'10mg / vial  ·  Kit of 10 vials',desc:'D-retro-inverso peptide disrupting FOXO4-p53 interaction in senescent cells, triggering selective apoptosis. Normal cells unaffected. The most sophisticated pep',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'FRONTIER',color:'#7c3aed',imgUrl:''},
+  {id:74,catNo:'XA5',name:'Semax',cat:'Neuro & Cognitive',sub:'ACTH(4-7) Analogue — Cognitive Enhancement',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Russian-developed ACTH analogue (legal prescription drug in Russia). Upregulates BDNF and NGF, modulates dopamine and serotonin systems. Extensively studied for',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'NOOTROPIC #1',color:'#0891b2',imgUrl:''},
+  {id:75,catNo:'XA10',name:'Semax',cat:'Neuro & Cognitive',sub:'ACTH(4-7) Analogue — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended nasal spray / injection supply. Standard 10-day Russian research protocol covered.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#0891b2',imgUrl:''},
+  {id:76,catNo:'SK5',name:'Selank',cat:'Neuro & Cognitive',sub:'Tuftsin Analogue — Anxiolytic & Cognitive',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Synthetic Tuftsin analogue. Russian prescription drug for generalized anxiety disorder. GABA-A modulation without addiction or tolerance. Studied for anxiety, c',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'NOOTROPIC #2',color:'#0891b2',imgUrl:''},
+  {id:77,catNo:'SK10',name:'Selank',cat:'Neuro & Cognitive',sub:'Tuftsin Analogue — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. Non-habit-forming alternative to benzodiazepines in anxiety research.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',color:'#0891b2',imgUrl:''},
+  {id:78,catNo:'DS5',name:'DSIP',cat:'Neuro & Cognitive',sub:'Delta Sleep-Inducing Peptide — Sleep Architecture',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Nine-amino acid neuropeptide inducing slow-wave (delta) sleep. Studied for insomnia research, HPA axis regulation, pain modulation, and opiate withdrawal sympto',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',color:'#0891b2',imgUrl:''},
+  {id:79,catNo:'VIP5',name:'VIP',cat:'Neuro & Cognitive',sub:'Vasoactive Intestinal Peptide — Neuro-Immune Modulator',spec:'5mg / vial  ·  Kit of 10 vials',desc:'28-amino acid neuropeptide with potent vasodilation and immunomodulatory effects. Studied in MCAS, post-Lyme syndrome (Shoemaker protocol), pulmonary arterial h',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',color:'#0891b2',imgUrl:''},
+  {id:80,catNo:'CBL60',name:'Cerebrolysin',cat:'Neuro & Cognitive',sub:'Porcine Brain-Derived Neuropeptide Complex',spec:'60mg / 6 vials',desc:'Low-molecular-weight neuropeptide mixture crossing the blood-brain barrier. Mimics BDNF, NGF, and CNTF. Approved in China, Russia, and Austria. Studied for Alzh',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',color:'#0891b2',imgUrl:''},
+  {id:81,catNo:'TA5',name:'Thymosin Alpha-1',cat:'Neuro & Cognitive',sub:'28 Amino Acid Immune Modulator — Zadaxin®',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most clinically validated immune-modulating peptide. Approved in China and Italy (Zadaxin®) for chronic hepatitis B and cancer immunotherapy support. Extens',price:249.95,price3:224.95,price5:214.95,inStock:true,badge:'CLINICALLY APPROVED',color:'#0891b2',imgUrl:''},
+  {id:82,catNo:'TA10',name:'Thymosin Alpha-1',cat:'Neuro & Cognitive',sub:'Zadaxin® Equivalent — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research/clinic supply. Standard Hepatitis B protocol: 1.6mg twice weekly × 26 weeks.',price:389.95,price3:354.95,price5:334.95,inStock:true,badge:'',color:'#0891b2',imgUrl:''},
+  {id:83,catNo:'P41',name:'PT-141 (Bremelanotide)',cat:'Sexual Health',sub:'FDA-Approved Melanocortin Agonist — Sexual Function',spec:'10mg / vial  ·  Kit of 10 vials',desc:'FDA-approved as Vyleesi® for female HSDD (hypoactive sexual desire disorder). Activates MC3R/MC4R in the CNS — the first sexual dysfunction drug acting centrall',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'FDA APPROVED',color:'#db2777',imgUrl:''},
+  {id:84,catNo:'KS5',name:'Kisspeptin-10',cat:'Sexual Health',sub:'GPR54 Agonist — HPG Axis & Libido Research',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The minimal bioactive Kisspeptin fragment. Triggers GnRH pulse release, stimulating LH/FSH. Studied for female hypogonadism, male fertility, and libido research',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'',color:'#db2777',imgUrl:''},
+  {id:85,catNo:'OT5',name:'Oxytocin',cat:'Sexual Health',sub:'The Love Hormone — Social Bonding & Sexual Function',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The neuropeptide of trust, bonding, and intimacy. Nasal spray studies document effects on social anxiety, trust, relationship quality, and orgasm intensity. Sta',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',color:'#db2777',imgUrl:''},
+  {id:86,catNo:'MT1',name:'Melanotan I',cat:'Sexual Health',sub:'α-MSH Analogue — Skin Pigmentation Research',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Selective MC1R agonist. Studied for skin tanning response without UV damage, and potential melanoma protection applications. Higher MC1R selectivity than MT-II ',price:129.95,price3:119.95,price5:114.95,inStock:true,badge:'',color:'#db2777',imgUrl:''},
+  {id:87,catNo:'CU50',name:'GHK-Cu (Copper Peptide)',cat:'Beauty & Aesthetic',sub:'Anti-Aging Tripeptide — Collagen & Skin Regeneration',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Gly-His-Lys copper complex naturally occurring in blood and saliva. Stimulates collagen and elastin synthesis via TGF-β and VEGF pathways. Antioxidant, wound he',price:64.95,price3:59.95,price5:59.95,inStock:true,badge:'BEAUTY STAPLE',color:'#d97706',imgUrl:''},
+  {id:88,catNo:'CU100',name:'GHK-Cu (Copper Peptide)',cat:'Beauty & Aesthetic',sub:'Anti-Aging Tripeptide — High Concentration',spec:'100mg / vial  ·  Kit of 10 vials',desc:'High-concentration GHK-Cu for research or cosmetic formulation development.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#d97706',imgUrl:''},
+  {id:89,catNo:'GTT600',name:'Glutathione',cat:'Beauty & Aesthetic',sub:'Master Antioxidant — IV Grade 600mg',spec:'600mg / vial  ·  Kit of 10 vials',desc:'The bodys most abundant endogenous antioxidant. IV administration studied for liver protection, immune enhancement, skin brightening (tyrosinase inhibition), a',price:64.95,price3:59.95,price5:59.95,inStock:true,badge:'WELLNESS STAPLE',color:'#d97706',imgUrl:''},
+  {id:90,catNo:'GTT1500',name:'Glutathione',cat:'Beauty & Aesthetic',sub:'Master Antioxidant — High Dose 1500mg',spec:'1500mg / vial  ·  Kit of 10 vials',desc:'High-dose glutathione for intensive IV protocols.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',color:'#d97706',imgUrl:''},
+  {id:91,catNo:'NP810',name:'Snap-8',cat:'Beauty & Aesthetic',sub:'Acetyl Octapeptide — Topical Botox Alternative',spec:'10mg / vial  ·  Kit of 10 vials',desc:'8-amino acid peptide modulating SNARE complex (SNAP-25 competitor), reducing acetylcholine vesicle fusion. Clinical data shows 63% reduction in wrinkle depth at',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'COSMETIC GRADE',color:'#d97706',imgUrl:''},
+  {id:92,catNo:'LB10',name:'Lemon Bottle',cat:'Beauty & Aesthetic',sub:'Injectable Fat-Dissolving Solution',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Korean-developed phosphatidylcholine/deoxycholic acid injectable solution for localized fat dissolution. Used in aesthetic clinics for submental fat (double chi',price:139.95,price3:129.95,price5:119.95,inStock:true,badge:'CLINIC USE',color:'#d97706',imgUrl:''},
+  {id:93,catNo:'WA3',name:'Bacteriostatic Water (BAC Water)',cat:'Accessories',sub:'Peptide Reconstitution Solvent — 3ml',spec:'3ml / vial  ·  Kit of 10 vials',desc:'0.9% benzyl alcohol sterile water for multi-dose vial reconstitution. Inhibits bacterial growth for up to 4 weeks after opening. Required for reconstituting all',price:15.5,price3:13.95,price5:13.17,inStock:true,badge:'ESSENTIAL',color:'#64748b',imgUrl:''},
+  {id:94,catNo:'WA10',name:'Bacteriostatic Water (BAC Water)',cat:'Accessories',sub:'Peptide Reconstitution Solvent — 10ml',spec:'10ml / vial  ·  Kit of 10 vials',desc:'Large volume BAC water for protocols requiring higher dilution volumes.',price:20.0,price3:18.0,price5:17.0,inStock:true,badge:'ESSENTIAL',color:'#64748b',imgUrl:''},
+  {id:95,catNo:'AA10',name:'Acetic Acid Water',cat:'Accessories',sub:'Acidic Reconstitution Solvent — For IGF Peptides',spec:'10ml / vial  ·  Kit of 10 vials',desc:'0.6% acetic acid sterile water. Required for reconstituting IGF-1 DES and other acid-soluble peptides that aggregate in neutral pH solutions.',price:26.9,price3:24.21,price5:22.86,inStock:true,badge:'IGF REQUIRED',color:'#64748b',imgUrl:''},
 ];
 
 /* ── CATEGORIES ── */
@@ -1259,18 +1259,23 @@ function renderProducts(){
       <div class="prod-img">
         ${p.badge?`<div class="prod-tag" style="background:${p.color}">${p.badge}</div>`:''}
         <div class="prod-purity">99%+</div>
-        <div class="prod-img-placeholder">
-          <svg class="prod-vial-svg" viewBox="0 0 56 120" fill="none">
-            <rect x="18" y="0" width="20" height="12" rx="3" fill="${p.color}" opacity=".9"/>
-            <rect x="14" y="10" width="28" height="6" rx="2" fill="${p.color}" opacity=".7"/>
-            <rect x="12" y="16" width="32" height="88" rx="4" fill="white" stroke="${p.color}" stroke-width="1.5" opacity=".9"/>
-            <rect x="12" y="55" width="32" height="49" rx="0 0 4 4" fill="${p.color}" opacity=".2"/>
-            <rect x="12" y="51" width="32" height="6" fill="${p.color}" opacity=".4"/>
-            <ellipse cx="28" cy="104" rx="16" ry="3" fill="${p.color}" opacity=".15"/>
-            <rect x="16" y="18" width="5" height="70" rx="2.5" fill="white" opacity=".4"/>
-            <text x="28" y="38" text-anchor="middle" font-family="monospace" font-size="5" fill="${p.color}" font-weight="700">NEXLAB</text>
-            <text x="28" y="47" text-anchor="middle" font-family="monospace" font-size="4.5" fill="#374151">${p.catNo}</text>
-          </svg>
+        <div class="prod-img-placeholder" style="width:100%;height:100%;position:relative;">
+          ${p.imgUrl
+            ? `<img src="${p.imgUrl}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+            : ''}
+          <div style="display:${p.imgUrl?'none':'flex'};flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;position:absolute;inset:0;">
+            <svg class="prod-vial-svg" viewBox="0 0 56 120" fill="none">
+              <rect x="18" y="0" width="20" height="12" rx="3" fill="${p.color}" opacity=".9"/>
+              <rect x="14" y="10" width="28" height="6" rx="2" fill="${p.color}" opacity=".7"/>
+              <rect x="12" y="16" width="32" height="88" rx="4" fill="white" stroke="${p.color}" stroke-width="1.5" opacity=".9"/>
+              <rect x="12" y="55" width="32" height="49" rx="0 0 4 4" fill="${p.color}" opacity=".2"/>
+              <rect x="12" y="51" width="32" height="6" fill="${p.color}" opacity=".4"/>
+              <ellipse cx="28" cy="104" rx="16" ry="3" fill="${p.color}" opacity=".15"/>
+              <rect x="16" y="18" width="5" height="70" rx="2.5" fill="white" opacity=".4"/>
+              <text x="28" y="38" text-anchor="middle" font-family="monospace" font-size="5" fill="${p.color}" font-weight="700">NEXLAB</text>
+              <text x="28" y="47" text-anchor="middle" font-family="monospace" font-size="4.5" fill="#374151">${p.catNo}</text>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="prod-info">
@@ -1344,20 +1349,25 @@ g('cartX').addEventListener('click',()=>{ g('cartDrawer').classList.remove('open
 g('cartBg').addEventListener('click',()=>{ g('cartDrawer').classList.remove('open'); g('cartBg').style.display='none'; });
 
 /* ── MODAL ── */
+function fallbackVial(p){
+  return `<svg viewBox="0 0 120 200" style="width:100px;" fill="none">
+    <rect x="40" y="0" width="40" height="20" rx="5" fill="${p.color}" opacity=".9"/>
+    <rect x="34" y="18" width="52" height="10" rx="3" fill="${p.color}" opacity=".7"/>
+    <rect x="28" y="28" width="64" height="150" rx="8" fill="white" stroke="${p.color}" stroke-width="2"/>
+    <rect x="28" y="95" width="64" height="83" rx="0 0 8 8" fill="${p.color}" opacity=".15"/>
+    <rect x="28" y="90" width="64" height="8" fill="${p.color}" opacity=".3"/>
+    <rect x="32" y="30" width="10" height="130" rx="5" fill="white" opacity=".35"/>
+    <text x="60" y="65" text-anchor="middle" font-family="monospace" font-size="9" fill="${p.color}" font-weight="700">NEXLAB</text>
+    <text x="60" y="78" text-anchor="middle" font-family="monospace" font-size="8" fill="#374151">${p.catNo}</text>
+    <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">99%+</text>
+  </svg>`;
+}
+
 function openModal(p){
   const t=T[lang]||T.en;
-  g('modalImg').innerHTML=`
-    <svg viewBox="0 0 120 200" style="width:100px;" fill="none">
-      <rect x="40" y="0" width="40" height="20" rx="5" fill="${p.color}" opacity=".9"/>
-      <rect x="34" y="18" width="52" height="10" rx="3" fill="${p.color}" opacity=".7"/>
-      <rect x="28" y="28" width="64" height="150" rx="8" fill="white" stroke="${p.color}" stroke-width="2"/>
-      <rect x="28" y="95" width="64" height="83" rx="0 0 8 8" fill="${p.color}" opacity=".15"/>
-      <rect x="28" y="90" width="64" height="8" fill="${p.color}" opacity=".3"/>
-      <rect x="32" y="30" width="10" height="130" rx="5" fill="white" opacity=".35"/>
-      <text x="60" y="65" text-anchor="middle" font-family="monospace" font-size="9" fill="${p.color}" font-weight="700">NEXLAB</text>
-      <text x="60" y="78" text-anchor="middle" font-family="monospace" font-size="8" fill="#374151">${p.catNo}</text>
-      <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">99%+</text>
-    </svg>`;
+  g('modalImg').innerHTML = p.imgUrl
+    ? `<img src="${p.imgUrl}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px 0 0 12px;" onerror="this.outerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;\'>' + fallbackVial(p) + '</div>'">`
+    : `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;">${fallbackVial(p)}</div>`;
   g('modalInfo').innerHTML=`
     <div class="modal-cat">${p.cat} · ${p.catNo}</div>
     <div class="modal-name">${p.name}</div>
@@ -1420,3 +1430,461 @@ applyLang('en');
 </script>
 </body>
 </html>
+
+<!-- ═══════════════════════════════════════════════════
+     NEXLAB ADMIN PANEL — Product Management Backend
+     Access: click logo 5 times fast → enter password
+═══════════════════════════════════════════════════ -->
+<style>
+/* ── ADMIN ENTRY ── */
+.admin-login-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.admin-login-bg.open{display:flex;}
+.admin-login-box{background:#fff;border-radius:12px;padding:2.5rem;width:360px;box-shadow:0 20px 40px rgba(0,0,0,.2);}
+.admin-login-logo{font-size:1.1rem;font-weight:700;color:#111;margin-bottom:.3rem;}
+.admin-login-logo span{color:#059669;}
+.admin-login-sub{font-size:.75rem;color:#6b7280;margin-bottom:1.5rem;}
+.admin-pw-input{width:100%;padding:.7rem .9rem;border:1px solid #e5e7eb;border-radius:8px;font-size:.9rem;outline:none;transition:border .15s;margin-bottom:1rem;}
+.admin-pw-input:focus{border-color:#059669;}
+.admin-login-btn{width:100%;padding:.78rem;background:#059669;color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;}
+.admin-login-btn:hover{background:#047857;}
+.admin-login-err{font-size:.72rem;color:#dc2626;margin-top:.4rem;display:none;}
+
+/* ── ADMIN PANEL ── */
+.admin-panel{position:fixed;inset:0;background:#f8f9fa;z-index:8999;display:none;flex-direction:column;overflow:hidden;}
+.admin-panel.open{display:flex;}
+.admin-topbar{height:56px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;flex-shrink:0;}
+.admin-topbar-logo{font-size:.95rem;font-weight:700;color:#111;}
+.admin-topbar-logo span{color:#059669;}
+.admin-topbar-title{font-size:.82rem;color:#6b7280;margin-left:.3rem;}
+.admin-topbar-right{margin-left:auto;display:flex;gap:.6rem;align-items:center;}
+.admin-save-all{padding:.4rem 1.1rem;background:#059669;color:#fff;border:none;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;}
+.admin-save-all:hover{background:#047857;}
+.admin-close-btn{padding:.4rem 1rem;background:#fff;border:1px solid #e5e7eb;border-radius:6px;font-size:.78rem;cursor:pointer;color:#374151;}
+.admin-close-btn:hover{border-color:#d1d5db;}
+.admin-saved-msg{font-size:.72rem;color:#059669;display:none;}
+
+/* Admin body layout */
+.admin-body{display:flex;flex:1;overflow:hidden;}
+.admin-sidebar{width:220px;background:#fff;border-right:1px solid #e5e7eb;overflow-y:auto;flex-shrink:0;}
+.admin-sidebar-hd{padding:.9rem 1rem;font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#9ca3af;border-bottom:1px solid #f3f4f6;}
+.admin-cat-btn{display:block;width:100%;text-align:left;padding:.65rem 1rem;font-size:.78rem;color:#374151;background:none;border:none;cursor:pointer;border-left:3px solid transparent;transition:all .12s;}
+.admin-cat-btn:hover{background:#f9fafb;}
+.admin-cat-btn.on{background:#ecfdf5;border-left-color:#059669;color:#065f46;font-weight:500;}
+.admin-cat-count{float:right;font-size:.62rem;color:#9ca3af;background:#f3f4f6;border-radius:20px;padding:.1rem .5rem;}
+
+/* Product list */
+.admin-main{flex:1;overflow-y:auto;padding:1.2rem 1.5rem;}
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+.admin-prod-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;transition:box-shadow .15s;}
+.admin-prod-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08);}
+
+/* Image upload area */
+.admin-img-area{width:100%;aspect-ratio:1/1;background:#f3f4f6;position:relative;overflow:hidden;cursor:pointer;}
+.admin-img-area img{width:100%;height:100%;object-fit:cover;display:block;}
+.admin-img-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;transition:background .2s;opacity:0;}
+.admin-img-area:hover .admin-img-overlay{background:rgba(0,0,0,.45);opacity:1;}
+.admin-img-overlay-txt{color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.05em;}
+.admin-img-overlay-icon{font-size:1.6rem;}
+.admin-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#9ca3af;}
+.admin-img-placeholder-icon{font-size:2rem;opacity:.5;}
+.admin-img-placeholder-txt{font-size:.7rem;}
+.admin-img-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+
+/* Product info in admin */
+.admin-prod-info{padding:.9rem;}
+.admin-prod-catno{font-family:'Space Mono',monospace;font-size:.52rem;color:#9ca3af;margin-bottom:.2rem;}
+.admin-prod-name{font-size:.88rem;font-weight:600;color:#111;margin-bottom:.6rem;line-height:1.2;}
+.admin-field-row{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.6rem;}
+.admin-field-label{font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af;}
+.admin-field-input{padding:.4rem .6rem;border:1px solid #e5e7eb;border-radius:6px;font-size:.78rem;color:#374151;outline:none;transition:border .12s;width:100%;}
+.admin-field-input:focus{border-color:#059669;}
+.admin-field-textarea{padding:.4rem .6rem;border:1px solid #e5e7eb;border-radius:6px;font-size:.75rem;color:#374151;outline:none;transition:border .12s;width:100%;resize:none;height:72px;line-height:1.5;}
+.admin-field-textarea:focus{border-color:#059669;}
+.admin-price-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;margin-bottom:.6rem;}
+.admin-price-cell{display:flex;flex-direction:column;gap:.2rem;}
+.admin-price-lbl{font-size:.55rem;color:#9ca3af;font-weight:500;letter-spacing:.05em;text-transform:uppercase;}
+.admin-price-input{padding:.38rem .5rem;border:1px solid #e5e7eb;border-radius:6px;font-size:.78rem;color:#374151;outline:none;width:100%;}
+.admin-price-input:focus{border-color:#059669;}
+.admin-instock-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;}
+.admin-toggle{position:relative;width:36px;height:20px;flex-shrink:0;}
+.admin-toggle input{opacity:0;width:0;height:0;position:absolute;}
+.admin-toggle-slider{position:absolute;inset:0;background:#d1d5db;border-radius:10px;cursor:pointer;transition:background .2s;}
+.admin-toggle input:checked + .admin-toggle-slider{background:#059669;}
+.admin-toggle-slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s;}
+.admin-toggle input:checked + .admin-toggle-slider::before{transform:translateX(16px);}
+.admin-instock-lbl{font-size:.75rem;color:#374151;}
+.admin-card-save{width:100%;padding:.5rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;color:#065f46;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .15s;margin-top:.2rem;}
+.admin-card-save:hover{background:#dcfce7;}
+.admin-card-saved{background:#059669;color:#fff;border-color:#059669;}
+
+/* Admin search */
+.admin-search-bar{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;}
+.admin-search-input{flex:1;padding:.5rem .85rem;border:1px solid #e5e7eb;border-radius:8px;font-size:.82rem;outline:none;}
+.admin-search-input:focus{border-color:#059669;}
+.admin-count-badge{font-size:.72rem;color:#6b7280;}
+
+/* Unsaved indicator */
+.admin-unsaved-dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;display:none;flex-shrink:0;}
+.admin-unsaved-dot.show{display:inline-block;}
+</style>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-login-bg" id="adminLoginBg">
+  <div class="admin-login-box">
+    <div class="admin-login-logo">Nex<span>Lab</span> Admin</div>
+    <div class="admin-login-sub">Product Management — Enter password to continue</div>
+    <input class="admin-pw-input" type="password" id="adminPwInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkAdminPw()"/>
+    <button class="admin-login-btn" onclick="checkAdminPw()">Enter Admin Panel</button>
+    <div class="admin-login-err" id="adminPwErr">Incorrect password. Try again.</div>
+    <div style="margin-top:1rem;font-size:.65rem;color:#d1d5db;text-align:center;">Default password: <strong>nexlab2025</strong></div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-topbar">
+    <div>
+      <span class="admin-topbar-logo">Nex<span>Lab</span></span>
+      <span class="admin-topbar-title">/ Product Manager</span>
+    </div>
+    <div class="admin-topbar-right">
+      <div class="admin-unsaved-dot" id="unsavedDot" title="Unsaved changes"></div>
+      <span class="admin-saved-msg" id="adminSavedMsg">✓ All changes saved</span>
+      <button class="admin-save-all" onclick="saveAllProducts()">💾 Save All Changes</button>
+      <button class="admin-close-btn" onclick="closeAdmin()">← Back to Store</button>
+    </div>
+  </div>
+  <div class="admin-body">
+    <!-- Sidebar: category filter -->
+    <div class="admin-sidebar">
+      <div class="admin-sidebar-hd">Categories</div>
+      <button class="admin-cat-btn on" onclick="adminFilterCat('All',this)">All Products <span class="admin-cat-count" id="cnt-All">95</span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('GLP-1 / Weight Loss',this)">GLP-1 / Weight Loss <span class="admin-cat-count" id="cnt-glp1"></span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('Growth Hormone / GHRP',this)">Growth Hormone <span class="admin-cat-count" id="cnt-gh"></span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('Repair & Recovery',this)">Repair & Recovery <span class="admin-cat-count" id="cnt-rr"></span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('Anti-Aging / Longevity',this)">Anti-Aging <span class="admin-cat-count" id="cnt-aa"></span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('Neuro & Cognitive',this)">Neuro & Cognitive <span class="admin-cat-count" id="cnt-nc"></span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('Sexual Health',this)">Sexual Health <span class="admin-cat-count" id="cnt-sh"></span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('Beauty & Aesthetic',this)">Beauty & Aesthetic <span class="admin-cat-count" id="cnt-ba"></span></button>
+      <button class="admin-cat-btn" onclick="adminFilterCat('Accessories',this)">Accessories <span class="admin-cat-count" id="cnt-acc"></span></button>
+    </div>
+    <!-- Main area -->
+    <div class="admin-main" id="adminMain">
+      <div class="admin-search-bar">
+        <input class="admin-search-input" id="adminSearch" placeholder="🔍 Search products by name or Cat.No..." oninput="adminRender()"/>
+        <span class="admin-count-badge" id="adminCountBadge">95 products</span>
+      </div>
+      <div class="admin-grid" id="adminGrid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════
+   NEXLAB ADMIN PANEL — Full Logic
+════════════════════════════════════════════════ */
+
+const ADMIN_PW = 'nexlab2025'; // Change this password!
+let adminCurCat = 'All';
+let adminLogoClicks = 0;
+let adminLogoTimer = null;
+
+/* Secret entry: click logo 5 times fast */
+document.querySelector('.nav-logo').addEventListener('click', function(e){
+  e.preventDefault();
+  adminLogoClicks++;
+  clearTimeout(adminLogoTimer);
+  if(adminLogoClicks >= 5){
+    adminLogoClicks = 0;
+    openAdminLogin();
+  } else {
+    adminLogoTimer = setTimeout(()=>{ adminLogoClicks=0; }, 2000);
+  }
+});
+
+function openAdminLogin(){
+  document.getElementById('adminLoginBg').classList.add('open');
+  document.getElementById('adminPwInput').value='';
+  document.getElementById('adminPwErr').style.display='none';
+  setTimeout(()=>document.getElementById('adminPwInput').focus(), 100);
+}
+
+function checkAdminPw(){
+  const pw = document.getElementById('adminPwInput').value;
+  if(pw === ADMIN_PW){
+    document.getElementById('adminLoginBg').classList.remove('open');
+    openAdminPanel();
+  } else {
+    document.getElementById('adminPwErr').style.display='block';
+    document.getElementById('adminPwInput').value='';
+    document.getElementById('adminPwInput').focus();
+  }
+}
+
+function openAdminPanel(){
+  document.getElementById('adminPanel').classList.add('open');
+  document.body.style.overflow='hidden';
+  updateCategoryCounts();
+  adminRender();
+}
+
+function closeAdmin(){
+  document.getElementById('adminPanel').classList.remove('open');
+  document.body.style.overflow='';
+  // Refresh the main store
+  buildFilters();
+  renderProducts();
+}
+
+/* ── CATEGORY FILTER ── */
+function adminFilterCat(cat, btn){
+  adminCurCat = cat;
+  document.querySelectorAll('.admin-cat-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  adminRender();
+}
+
+function updateCategoryCounts(){
+  const catMap = {
+    'GLP-1 / Weight Loss':'cnt-glp1',
+    'Growth Hormone / GHRP':'cnt-gh',
+    'Repair & Recovery':'cnt-rr',
+    'Anti-Aging / Longevity':'cnt-aa',
+    'Neuro & Cognitive':'cnt-nc',
+    'Sexual Health':'cnt-sh',
+    'Beauty & Aesthetic':'cnt-ba',
+    'Accessories':'cnt-acc',
+  };
+  Object.entries(catMap).forEach(([cat, id])=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = P.filter(p=>p.cat===cat).length;
+  });
+  const allEl = document.getElementById('cnt-All');
+  if(allEl) allEl.textContent = P.length;
+}
+
+/* ── RENDER ADMIN GRID ── */
+function adminRender(){
+  const search = (document.getElementById('adminSearch')?.value||'').toLowerCase();
+  let list = adminCurCat==='All' ? P : P.filter(p=>p.cat===adminCurCat);
+  if(search) list = list.filter(p=>
+    p.name.toLowerCase().includes(search) ||
+    p.catNo.toLowerCase().includes(search) ||
+    p.sub.toLowerCase().includes(search)
+  );
+  document.getElementById('adminCountBadge').textContent = `${list.length} product${list.length!==1?'s':''}`;
+  const grid = document.getElementById('adminGrid');
+  grid.innerHTML = '';
+  list.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'admin-prod-card';
+    card.id = `acard-${p.id}`;
+    card.innerHTML = `
+      <div class="admin-img-area" onclick="triggerImgUpload(${p.id})">
+        ${p.imgUrl
+          ? `<img src="${p.imgUrl}" alt="${p.name}" id="aimg-${p.id}" onerror="this.style.display='none';document.getElementById('aph-${p.id}').style.display='flex'">`
+          : ''}
+        <div class="admin-img-placeholder" id="aph-${p.id}" style="display:${p.imgUrl?'none':'flex'}">
+          <div class="admin-img-placeholder-icon">📷</div>
+          <div class="admin-img-placeholder-txt">Click to upload image</div>
+          <div style="font-size:.6rem;color:#d1d5db;margin-top:.2rem">${p.catNo}</div>
+        </div>
+        <div class="admin-img-overlay">
+          <div class="admin-img-overlay-icon">📷</div>
+          <div class="admin-img-overlay-txt">${p.imgUrl?'Change Image':'Upload Image'}</div>
+        </div>
+        <input class="admin-img-input" type="file" accept="image/*" id="afile-${p.id}" onchange="handleImgUpload(event,${p.id})" onclick="event.stopPropagation()"/>
+      </div>
+      <div class="admin-prod-info">
+        <div class="admin-prod-catno">${p.catNo} · ${p.cat}</div>
+        <div class="admin-prod-name">${p.name}</div>
+        <div class="admin-field-row">
+          <div class="admin-field-label">Product Name</div>
+          <input class="admin-field-input" value="${p.name}" onchange="updateField(${p.id},'name',this.value)" oninput="markUnsaved()"/>
+        </div>
+        <div class="admin-field-row">
+          <div class="admin-field-label">Subtitle</div>
+          <input class="admin-field-input" value="${p.sub}" onchange="updateField(${p.id},'sub',this.value)" oninput="markUnsaved()"/>
+        </div>
+        <div class="admin-field-row">
+          <div class="admin-field-label">Specification</div>
+          <input class="admin-field-input" value="${p.spec}" onchange="updateField(${p.id},'spec',this.value)" oninput="markUnsaved()"/>
+        </div>
+        <div class="admin-field-row">
+          <div class="admin-field-label">Description</div>
+          <textarea class="admin-field-textarea" onchange="updateField(${p.id},'desc',this.value)" oninput="markUnsaved()">${p.desc}</textarea>
+        </div>
+        <div class="admin-field-row">
+          <div class="admin-field-label">Image URL (optional — or upload above)</div>
+          <input class="admin-field-input" value="${p.imgUrl||''}" placeholder="https://..." onchange="updateImgUrl(${p.id},this.value)" oninput="markUnsaved()" id="aurlfield-${p.id}"/>
+        </div>
+        <div class="admin-price-row">
+          <div class="admin-price-cell">
+            <div class="admin-price-lbl">1 Kit ($)</div>
+            <input class="admin-price-input" type="number" step="0.01" value="${p.price}" onchange="updateField(${p.id},'price',parseFloat(this.value))" oninput="markUnsaved()"/>
+          </div>
+          <div class="admin-price-cell">
+            <div class="admin-price-lbl">3 Kits ($)</div>
+            <input class="admin-price-input" type="number" step="0.01" value="${p.price3}" onchange="updateField(${p.id},'price3',parseFloat(this.value))" oninput="markUnsaved()"/>
+          </div>
+          <div class="admin-price-cell">
+            <div class="admin-price-lbl">5 Kits ($)</div>
+            <input class="admin-price-input" type="number" step="0.01" value="${p.price5}" onchange="updateField(${p.id},'price5',parseFloat(this.value))" oninput="markUnsaved()"/>
+          </div>
+        </div>
+        <div class="admin-instock-row">
+          <label class="admin-toggle">
+            <input type="checkbox" ${p.inStock?'checked':''} onchange="updateField(${p.id},'inStock',this.checked);markUnsaved()"/>
+            <span class="admin-toggle-slider"></span>
+          </label>
+          <span class="admin-instock-lbl">${p.inStock?'In Stock':'Out of Stock'}</span>
+        </div>
+        <button class="admin-card-save" id="abtn-${p.id}" onclick="saveCard(${p.id})">Save This Product</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ── IMAGE UPLOAD ── */
+function triggerImgUpload(id){
+  document.getElementById(`afile-${id}`).click();
+}
+
+function handleImgUpload(event, id){
+  const file = event.target.files[0];
+  if(!file) return;
+  // Validate size (max 5MB)
+  if(file.size > 5*1024*1024){
+    showToast('Image too large. Please use an image under 5MB.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const dataUrl = e.target.result;
+    // Update product data
+    const p = P.find(x=>x.id===id);
+    if(p){
+      p.imgUrl = dataUrl;
+      // Update preview
+      const imgEl = document.getElementById(`aimg-${id}`);
+      const phEl  = document.getElementById(`aph-${id}`);
+      const urlField = document.getElementById(`aurlfield-${id}`);
+      if(imgEl){
+        imgEl.src = dataUrl;
+        imgEl.style.display='block';
+      } else {
+        // Create img element
+        const area = document.querySelector(`#acard-${id} .admin-img-area`);
+        const newImg = document.createElement('img');
+        newImg.src = dataUrl;
+        newImg.id = `aimg-${id}`;
+        newImg.style.cssText='width:100%;height:100%;object-fit:cover;display:block;';
+        area.insertBefore(newImg, area.firstChild);
+      }
+      if(phEl) phEl.style.display='none';
+      if(urlField) urlField.value='[Uploaded image — base64]';
+      markUnsaved();
+      // Flash save button green
+      const btn = document.getElementById(`abtn-${id}`);
+      if(btn){ btn.textContent='✓ Image uploaded! Click to save'; btn.style.background='#dcfce7'; }
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateImgUrl(id, url){
+  const p = P.find(x=>x.id===id);
+  if(!p) return;
+  p.imgUrl = url.trim();
+  // Update preview
+  const imgEl = document.getElementById(`aimg-${id}`);
+  const phEl  = document.getElementById(`aph-${id}`);
+  if(url.trim()){
+    if(imgEl){ imgEl.src=url.trim(); imgEl.style.display='block'; }
+    if(phEl) phEl.style.display='none';
+  } else {
+    if(imgEl) imgEl.style.display='none';
+    if(phEl) phEl.style.display='flex';
+  }
+}
+
+/* ── UPDATE PRODUCT FIELD ── */
+function updateField(id, key, value){
+  const p = P.find(x=>x.id===id);
+  if(p) p[key] = value;
+}
+
+/* ── SAVE CARD ── */
+function saveCard(id){
+  const btn = document.getElementById(`abtn-${id}`);
+  btn.textContent='✓ Saved!';
+  btn.classList.add('admin-card-saved');
+  setTimeout(()=>{
+    btn.textContent='Save This Product';
+    btn.classList.remove('admin-card-saved');
+  }, 2000);
+  saveToStorage();
+}
+
+/* ── SAVE ALL ── */
+function saveAllProducts(){
+  saveToStorage();
+  const msg = document.getElementById('adminSavedMsg');
+  const dot = document.getElementById('unsavedDot');
+  msg.style.display='inline';
+  dot.classList.remove('show');
+  setTimeout(()=>msg.style.display='none', 3000);
+  // Also re-render main store in background
+  renderProducts();
+}
+
+function markUnsaved(){
+  document.getElementById('unsavedDot').classList.add('show');
+}
+
+/* ── LOCALSTORAGE PERSISTENCE ── */
+function saveToStorage(){
+  // Save only the fields that can change (not the full P array with functions)
+  const data = P.map(p=>({
+    id:p.id, name:p.name, sub:p.sub, spec:p.spec, desc:p.desc,
+    price:p.price, price3:p.price3, price5:p.price5,
+    inStock:p.inStock, badge:p.badge, imgUrl:p.imgUrl||''
+  }));
+  try {
+    localStorage.setItem('nexlab_products', JSON.stringify(data));
+  } catch(e){
+    // localStorage might be full (especially with base64 images)
+    // Save without images
+    const dataNoImg = data.map(p=>({...p, imgUrl: p.imgUrl && p.imgUrl.startsWith('data:') ? '' : p.imgUrl}));
+    localStorage.setItem('nexlab_products', JSON.stringify(dataNoImg));
+    showToast('Note: Uploaded images are not saved locally. Use image URLs for permanent storage.');
+  }
+}
+
+function loadFromStorage(){
+  try {
+    const saved = localStorage.getItem('nexlab_products');
+    if(!saved) return;
+    const data = JSON.parse(saved);
+    data.forEach(saved => {
+      const p = P.find(x=>x.id===saved.id);
+      if(!p) return;
+      if(saved.name)    p.name    = saved.name;
+      if(saved.sub)     p.sub     = saved.sub;
+      if(saved.spec)    p.spec    = saved.spec;
+      if(saved.desc)    p.desc    = saved.desc;
+      if(saved.price)   p.price   = saved.price;
+      if(saved.price3)  p.price3  = saved.price3;
+      if(saved.price5)  p.price5  = saved.price5;
+      p.inStock = saved.inStock !== undefined ? saved.inStock : p.inStock;
+      if(saved.imgUrl)  p.imgUrl  = saved.imgUrl;
+    });
+    console.log('✅ Product data loaded from storage');
+  } catch(e){
+    console.warn('Could not load saved products:', e);
+  }
+}
+
+// Load saved data on page start
+loadFromStorage();
+</script>
