@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXLAB RESEARCH — Premium Research Peptides</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:       #060810;
+  --bg2:      #090c18;
+  --bg3:      #0d1220;
+  --panel:    #111828;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.13);
+  --white:    #e8eeff;
+  --muted:    #6878a0;
+  --dim:      #2a3450;
+  --green:    #00e5a0;
+  --green2:   #00c88a;
+  --green-dim:rgba(0,229,160,0.1);
+  --blue:     #3d8bff;
+  --blue-dim: rgba(61,139,255,0.1);
+  --gold:     #f0c040;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+
+/* ── CUSTOM CURSOR ── */
+#cur { position:fixed; width:8px; height:8px; background:var(--green); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .2s,height .2s; }
+#cur-r { position:fixed; width:36px; height:36px; border:1px solid rgba(0,229,160,.35); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:transform .1s ease-out, width .25s, height .25s; }
+body:has(button:hover) #cur, body:has(a:hover) #cur { background:var(--white); width:12px; height:12px; }
+body:has(button:hover) #cur-r, body:has(a:hover) #cur-r { width:56px; height:56px; opacity:.2; }
+
+/* ── NOISE TEXTURE ── */
+body::after {
+  content:''; position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:1; opacity:.6;
+}
+
+/* ══════ NAV ══════ */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:500;
+  display: flex; align-items: center; gap: 3rem;
+  padding: 1.2rem 3rem;
+  background: rgba(6,8,16,.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display:flex; align-items:center; gap:.6rem; text-decoration:none; }
+.nav-logo-mark {
+  width:30px; height:30px;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display:flex; align-items:center; justify-content:center;
+}
+.nav-logo-text {
+  font-family: 'Space Mono', monospace;
+  font-size: .9rem; letter-spacing: .12em;
+  color: var(--white); font-weight: 700;
+}
+.nav-logo-text span { color: var(--green); }
+.nav-links { display:flex; gap:2rem; list-style:none; flex:1; }
+.nav-links a { font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+.nav-links a:hover { color:var(--white); }
+.nav-right { display:flex; align-items:center; gap:1rem; margin-left:auto; }
+.nav-tag {
+  font-family:'Space Mono',monospace; font-size:.6rem;
+  padding:.3rem .9rem; border:1px solid rgba(0,229,160,.25);
+  border-radius:4px; color:var(--green); letter-spacing:.1em;
+}
+.nav-btn {
+  font-family:'Space Grotesk',sans-serif; font-size:.7rem; font-weight:600;
+  letter-spacing:.08em; padding:.6rem 1.6rem;
+  background:var(--green); color:#000; border:none;
+  border-radius:6px; cursor:none; transition:all .2s;
+}
+.nav-btn:hover { background:var(--green2); transform:translateY(-1px); }
+
+/* ══════ HERO ══════ */
+#hero {
+  position:relative; height:100vh;
+  display:flex; align-items:center;
+  overflow:hidden;
+}
+#hero-canvas { position:absolute; inset:0; width:100%; height:100%; }
+.hero-atmo {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 50% 60% at 70% 50%, rgba(0,60,30,.4) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 50% at 0% 100%, rgba(0,10,30,.7) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 30% 0%, rgba(0,20,60,.3) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-scan {
+  position:absolute; inset:0; overflow:hidden; pointer-events:none;
+}
+.hero-scan::after {
+  content:'';
+  position:absolute; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,229,160,.4), transparent);
+  animation: scanLine 4s ease-in-out infinite;
+}
+@keyframes scanLine {
+  0% { top:-2%; opacity:0; }
+  10% { opacity:1; }
+  90% { opacity:1; }
+  100% { top:102%; opacity:0; }
+}
+.hero-grid-bg {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(0,229,160,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,160,.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events:none;
+}
+.hero-content {
+  position:relative; z-index:10;
+  padding:0 3rem; max-width:55%;
+  animation: heroFadeUp 1.2s ease both;
+}
+@keyframes heroFadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:.8rem;
+  font-family:'Space Mono',monospace; font-size:.6rem;
+  letter-spacing:.3em; text-transform:uppercase;
+  color:var(--green); margin-bottom:2rem;
+}
+.hero-eyebrow-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.6)} }
+h1.hero-title {
+  font-size: clamp(3rem,7vw,7.5rem);
+  font-weight: 700; line-height: .92;
+  letter-spacing: -.03em; margin-bottom: 1.5rem;
+}
+h1.hero-title .serif {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic; font-weight: 400;
+  color: var(--green);
+}
+h1.hero-title .outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,.2);
+  color: transparent;
+}
+.hero-sub {
+  font-size:.95rem; line-height:1.9; color:var(--muted);
+  max-width:460px; margin-bottom:2.5rem;
+}
+.hero-sub strong { color:var(--white); font-weight:500; }
+.hero-btns { display:flex; align-items:center; gap:1.2rem; }
+.btn-green {
+  display:inline-flex; align-items:center; gap:.6rem;
+  padding:.85rem 2rem; background:var(--green); color:#000;
+  border:none; border-radius:6px; font-size:.75rem; font-weight:700;
+  letter-spacing:.06em; cursor:none; transition:all .2s;
+  box-shadow: 0 0 30px rgba(0,229,160,.25);
+}
+.btn-green:hover { background:var(--green2); transform:translateY(-2px); box-shadow:0 0 50px rgba(0,229,160,.4); }
+.btn-outline-white {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.85rem 2rem; background:transparent;
+  border:1px solid var(--border2); border-radius:6px;
+  color:var(--muted); font-size:.75rem; cursor:none; transition:all .2s;
+}
+.btn-outline-white:hover { border-color:var(--green); color:var(--white); }
+.hero-trust {
+  position:absolute; bottom:3rem; left:3rem; z-index:10;
+  display:flex; gap:2.5rem;
+}
+.trust-item { display:flex; flex-direction:column; gap:.3rem; }
+.trust-num {
+  font-family:'Space Mono',monospace; font-size:1.4rem;
+  font-weight:700; color:var(--white); line-height:1;
+}
+.trust-num .accent { color:var(--green); }
+.trust-lbl { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+.hero-coa-badge {
+  position:absolute; right:3rem; bottom:3rem; z-index:10;
+  display:flex; align-items:center; gap:.8rem;
+  padding:.8rem 1.2rem;
+  background:rgba(0,229,160,.08); border:1px solid rgba(0,229,160,.2);
+  border-radius:8px;
+}
+.coa-icon { font-size:1.2rem; }
+.coa-text { font-size:.65rem; color:var(--green); letter-spacing:.08em; }
+.coa-text strong { display:block; font-size:.7rem; color:var(--white); }
+
+/* ══════ MARQUEE ══════ */
+.marquee-wrap {
+  background: var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:.65rem 0; overflow:hidden;
+}
+.marquee-inner { display:flex; gap:3rem; animation:mq 25s linear infinite; white-space:nowrap; }
+.marquee-inner span { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.25em; text-transform:uppercase; color:var(--dim); }
+.marquee-inner .accent-dot { color:var(--green); letter-spacing:0; opacity:.7; }
+@keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ══════ SHOP SECTION ══════ */
+#shop { padding:6rem 3rem; background:var(--bg2); }
+.shop-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem; }
+.section-label { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.4em; text-transform:uppercase; color:var(--green); display:flex; align-items:center; gap:.6rem; margin-bottom:.8rem; }
+.section-label::before { content:''; width:20px; height:1px; background:var(--green); }
+.section-title { font-size:clamp(2rem,4vw,3.5rem); font-weight:700; letter-spacing:-.03em; line-height:1; }
+.section-title .serif { font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--green); }
+/* Filter Tabs */
+.filter-tabs { display:flex; gap:.5rem; margin-bottom:2.5rem; flex-wrap:wrap; align-items:center; }
+.f-tab {
+  font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase;
+  padding:.45rem 1.1rem; border:1px solid var(--border); background:none;
+  border-radius:4px; cursor:none; color:var(--muted); transition:all .2s;
+}
+.f-tab:hover { border-color:var(--border2); color:var(--white); }
+.f-tab.active { background:var(--green); border-color:var(--green); color:#000; font-weight:700; }
+.f-sep { width:1px; height:20px; background:var(--border); margin:0 .3rem; }
+/* Product Grid */
+.product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+.prod-card {
+  background:var(--bg); padding:0;
+  display:flex; flex-direction:column;
+  position:relative; transition:background .25s;
+  cursor:none;
+}
+.prod-card:hover { background:var(--bg3); }
+.prod-img-area {
+  height:260px; background:var(--panel);
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+/* Molecule animation bg */
+.prod-img-area::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 50%, rgba(0,229,160,.06), transparent 70%);
+}
+.prod-img-area canvas { width:100%; height:100%; }
+.prod-vial {
+  position:relative; z-index:1;
+  display:flex; flex-direction:column; align-items:center; gap:.5rem;
+}
+.vial-body {
+  width:48px; height:100px;
+  background:linear-gradient(180deg, rgba(200,220,255,.15) 0%, rgba(100,150,255,.08) 100%);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:4px 4px 20px 20px;
+  position:relative; overflow:hidden;
+  box-shadow: 0 0 30px rgba(0,229,160,.1), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.vial-fill {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(0deg, rgba(0,229,160,.4), rgba(0,150,100,.2));
+  border-radius:0 0 18px 18px;
+}
+.vial-cap {
+  width:56px; height:14px;
+  border-radius:3px; position:relative;
+}
+.vial-label {
+  position:absolute; inset:8px 4px;
+  background:rgba(255,255,255,.06);
+  border-radius:2px; display:flex;
+  align-items:center; justify-content:center;
+  font-family:'Space Mono',monospace; font-size:5px;
+  color:rgba(255,255,255,.5); letter-spacing:.05em;
+}
+.prod-purity-badge {
+  position:absolute; top:12px; right:12px;
+  font-family:'Space Mono',monospace; font-size:.55rem;
+  color:var(--green); background:rgba(0,229,160,.1);
+  border:1px solid rgba(0,229,160,.25); border-radius:4px;
+  padding:.3rem .7rem; letter-spacing:.1em;
+}
+.prod-new-badge {
+  position:absolute; top:12px; left:12px;
+  font-size:.5rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:#000; background:var(--green); border-radius:4px; padding:.25rem .7rem;
+}
+.prod-info { padding:1.5rem 1.5rem 1.8rem; flex:1; display:flex; flex-direction:column; }
+.prod-cat { font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:.5rem; }
+.prod-name { font-size:1.1rem; font-weight:600; color:var(--white); margin-bottom:.2rem; letter-spacing:-.01em; }
+.prod-desc { font-size:.75rem; color:var(--muted); line-height:1.8; margin-bottom:1rem; flex:1; }
+.prod-specs { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+.prod-spec {
+  font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:.08em;
+  padding:.25rem .65rem; border-radius:4px;
+  background:var(--blue-dim); color:var(--blue); border:1px solid rgba(61,139,255,.2);
+}
+.prod-footer { display:flex; justify-content:space-between; align-items:center; padding-top:1rem; border-top:1px solid var(--border); }
+.prod-price { font-size:1.2rem; font-weight:700; color:var(--white); letter-spacing:-.02em; }
+.prod-price .per { font-size:.65rem; color:var(--muted); font-weight:400; margin-left:.2rem; }
+.prod-price .old { font-size:.75rem; color:var(--dim); text-decoration:line-through; margin-right:.4rem; }
+.btn-add {
+  display:flex; align-items:center; gap:.5rem;
+  padding:.6rem 1.2rem; background:var(--green); color:#000;
+  border:none; border-radius:5px; font-size:.65rem; font-weight:700;
+  letter-spacing:.06em; cursor:none; transition:all .2s;
+}
+.btn-add:hover { background:var(--green2); transform:scale(1.04); }
+
+/* ══════ TRUST SECTION ══════ */
+#trust { padding:5rem 3rem; background:var(--bg); position:relative; overflow:hidden; }
+#trust::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,229,160,.04), transparent 70%);
+}
+.trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-top:3rem; }
+.trust-card {
+  background:var(--bg2); padding:2.5rem 2rem;
+  position:relative; transition:background .25s;
+}
+.trust-card:hover { background:var(--bg3); }
+.trust-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,229,160,.3), transparent);
+  opacity:0; transition:opacity .3s;
+}
+.trust-card:hover::before { opacity:1; }
+.tc-icon { font-size:2rem; margin-bottom:1.2rem; }
+.tc-title { font-size:1rem; font-weight:600; color:var(--white); margin-bottom:.5rem; }
+.tc-desc { font-size:.75rem; color:var(--muted); line-height:1.8; }
+.tc-val {
+  font-family:'Space Mono',monospace; font-size:1.8rem;
+  font-weight:700; color:var(--green); margin-top:.8rem; line-height:1;
+}
+
+/* ══════ COA SECTION ══════ */
+#coa { padding:5rem 3rem; background:var(--bg2); }
+.coa-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+.coa-title { font-size:clamp(2rem,4vw,3.5rem); font-weight:700; letter-spacing:-.03em; margin:.8rem 0 1.2rem; line-height:1.05; }
+.coa-title .serif { font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--green); }
+.coa-desc { font-size:.85rem; color:var(--muted); line-height:2; margin-bottom:2rem; }
+.coa-steps { display:flex; flex-direction:column; gap:1rem; }
+.coa-step { display:flex; align-items:flex-start; gap:1rem; }
+.coa-step-num {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--green-dim); border:1px solid rgba(0,229,160,.3);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Space Mono',monospace; font-size:.62rem; color:var(--green);
+  flex-shrink:0;
+}
+.coa-step-text { font-size:.8rem; color:var(--muted); line-height:1.8; }
+.coa-step-text strong { color:var(--white); font-weight:500; }
+/* COA Card mock */
+.coa-card-mock {
+  background:var(--bg3); border:1px solid var(--border2);
+  border-radius:16px; overflow:hidden;
+}
+.coa-card-header {
+  background:linear-gradient(135deg, #0d2a1a, #0d1a2a);
+  padding:1.5rem 2rem; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.coa-card-logo {
+  font-family:'Space Mono',monospace; font-size:.85rem; font-weight:700; color:var(--white);
+}
+.coa-card-logo span { color:var(--green); }
+.coa-stamp { font-family:'Space Mono',monospace; font-size:.55rem; color:var(--green); letter-spacing:.1em; border:1px solid rgba(0,229,160,.3); padding:.3rem .7rem; border-radius:4px; }
+.coa-card-body { padding:1.5rem 2rem; }
+.coa-row { display:flex; justify-content:space-between; padding:.6rem 0; border-bottom:1px solid var(--border); }
+.coa-row:last-child { border-bottom:none; }
+.coa-key { font-size:.7rem; color:var(--muted); letter-spacing:.05em; }
+.coa-val { font-family:'Space Mono',monospace; font-size:.7rem; color:var(--white); }
+.coa-val.pass { color:var(--green); }
+.coa-chart { height:80px; background:var(--bg); border-radius:8px; margin-top:1rem; border:1px solid var(--border); display:flex; align-items:flex-end; gap:2px; padding:.5rem; overflow:hidden; }
+.chart-bar { flex:1; background:rgba(0,229,160,.5); border-radius:2px 2px 0 0; transition:height .3s; }
+
+/* ══════ PROCESS ══════ */
+#process { padding:6rem 3rem; background:var(--bg); }
+.process-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:3rem; }
+.process-step { padding:2rem 1.5rem; position:relative; }
+.process-step::after {
+  content:'→'; position:absolute; right:-12px; top:2rem;
+  color:var(--dim); font-size:1.2rem; z-index:1;
+}
+.process-step:last-child::after { display:none; }
+.ps-num { font-family:'Space Mono',monospace; font-size:.55rem; color:var(--green); letter-spacing:.2em; margin-bottom:.8rem; }
+.ps-icon { font-size:2rem; margin-bottom:.8rem; }
+.ps-title { font-size:.95rem; font-weight:600; color:var(--white); margin-bottom:.5rem; }
+.ps-desc { font-size:.7rem; color:var(--muted); line-height:1.8; }
+
+/* ══════ PEPTIDE 3D SECTION ══════ */
+#molecule { padding:4rem 3rem; background:var(--bg2); position:relative; overflow:hidden; }
+.mol-inner { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+#mol-canvas { width:100%; height:420px; border-radius:16px; border:1px solid var(--border); }
+.mol-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
+.mol-tag {
+  font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:.3rem .8rem; border-radius:20px;
+  background:var(--green-dim); color:var(--green); border:1px solid rgba(0,229,160,.25);
+}
+
+/* ══════ CTA BANNER ══════ */
+#cta { padding:6rem 3rem; background:var(--bg); position:relative; overflow:hidden; text-align:center; }
+#cta::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 90% at 50% 50%, rgba(0,229,160,.05), transparent 65%);
+}
+.cta-title { font-size:clamp(3rem,7vw,6.5rem); font-weight:700; letter-spacing:-.04em; line-height:.9; margin-bottom:1.5rem; position:relative; z-index:1; }
+.cta-title .outline { -webkit-text-stroke:1px rgba(255,255,255,.15); color:transparent; }
+.cta-title .green { color:var(--green); }
+.cta-sub { font-size:.9rem; color:var(--muted); max-width:480px; margin:0 auto 2.5rem; line-height:1.9; position:relative; z-index:1; }
+.cta-disclaimer {
+  font-family:'Space Mono',monospace; font-size:.55rem;
+  color:var(--dim); letter-spacing:.08em; margin-top:2rem;
+  max-width:600px; margin-left:auto; margin-right:auto;
+  position:relative; z-index:1; line-height:1.9;
+}
+
+/* ══════ FOOTER ══════ */
+footer {
+  background:var(--bg2); border-top:1px solid var(--border);
+  padding:4rem 3rem 2rem;
+}
+.footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; padding-bottom:3rem; border-bottom:1px solid var(--border); }
+.footer-brand { font-family:'Space Mono',monospace; font-size:1rem; font-weight:700; letter-spacing:.1em; margin-bottom:1rem; }
+.footer-brand span { color:var(--green); }
+.footer-desc { font-size:.72rem; color:var(--muted); line-height:2; max-width:240px; }
+.footer-col-title { font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:.3em; text-transform:uppercase; color:var(--green); margin-bottom:1.2rem; }
+.footer-links { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
+.footer-links a { font-size:.72rem; color:var(--muted); text-decoration:none; transition:color .2s; }
+.footer-links a:hover { color:var(--white); }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; font-family:'Space Mono',monospace; font-size:.58rem; color:var(--dim); letter-spacing:.08em; }
+.footer-legal { font-size:.58rem; color:var(--dim); line-height:2; max-width:700px; margin-top:.5rem; }
+
+/* ══════ CART DRAWER ══════ */
+.cart-back { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:800; display:none; backdrop-filter:blur(4px); }
+.cart-back.open { display:block; }
+.cart-drawer { position:fixed; top:0; right:0; width:420px; height:100vh; background:var(--bg2); z-index:900; transform:translateX(100%); transition:transform .4s cubic-bezier(.16,1,.3,1); display:flex; flex-direction:column; border-left:1px solid var(--border); }
+.cart-drawer.open { transform:translateX(0); }
+.cart-hd { display:flex; justify-content:space-between; align-items:center; padding:1.8rem 2rem; border-bottom:1px solid var(--border); }
+.cart-title { font-family:'Space Mono',monospace; font-size:1rem; font-weight:700; letter-spacing:.05em; }
+.cart-close { background:none; border:none; color:var(--muted); font-size:1rem; cursor:none; transition:color .2s; }
+.cart-close:hover { color:var(--white); }
+.cart-body { flex:1; overflow-y:auto; padding:1.5rem 2rem; }
+.cart-empty { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--muted); }
+.cart-empty-icon { font-size:3rem; opacity:.3; }
+.cart-item-row { display:flex; gap:1rem; padding:1.2rem 0; border-bottom:1px solid var(--border); align-items:center; }
+.ci-vial { width:40px; height:70px; background:var(--panel); border:1px solid var(--border2); border-radius:2px 2px 14px 14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.5rem; color:var(--green); }
+.ci-info { flex:1; }
+.ci-name { font-size:.85rem; font-weight:600; color:var(--white); }
+.ci-spec { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--muted); margin:.2rem 0 .5rem; }
+.ci-price { font-size:.9rem; font-weight:700; color:var(--white); }
+.ci-rm { background:none; border:none; color:var(--dim); cursor:none; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; padding:0; transition:color .2s; }
+.ci-rm:hover { color:var(--white); }
+.cart-ft { padding:1.5rem 2rem; border-top:1px solid var(--border); }
+.cart-tot-row { display:flex; justify-content:space-between; font-size:.72rem; color:var(--muted); margin-bottom:.4rem; letter-spacing:.05em; text-transform:uppercase; }
+.cart-tot-row.big { font-size:1.1rem; font-weight:700; color:var(--white); margin-top:.8rem; margin-bottom:1.2rem; text-transform:none; letter-spacing:0; }
+.btn-checkout { width:100%; padding:.9rem; background:var(--green); color:#000; border:none; border-radius:6px; font-size:.75rem; font-weight:700; letter-spacing:.08em; cursor:none; transition:background .2s; margin-bottom:.7rem; }
+.btn-checkout:hover { background:var(--green2); }
+.cart-note { font-family:'Space Mono',monospace; font-size:.55rem; color:var(--dim); text-align:center; letter-spacing:.08em; }
+
+/* ══════ MODAL ══════ */
+.modal-back { position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:700; display:none; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+.modal-back.open { display:flex; }
+.modal-box { background:var(--bg2); border:1px solid var(--border2); border-radius:16px; max-width:860px; width:92%; max-height:90vh; overflow:auto; display:grid; grid-template-columns:1.1fr 1fr; position:relative; }
+.modal-close { position:absolute; top:1.2rem; right:1.2rem; background:var(--panel); border:1px solid var(--border); border-radius:6px; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:none; color:var(--muted); font-size:.8rem; z-index:10; transition:all .2s; }
+.modal-close:hover { border-color:var(--border2); color:var(--white); }
+.modal-img { background:var(--panel); display:flex; align-items:center; justify-content:center; min-height:400px; position:relative; overflow:hidden; border-radius:16px 0 0 16px; }
+.modal-img::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 40%, rgba(0,229,160,.08), transparent 65%); }
+.modal-info { padding:2.5rem 2rem; overflow-y:auto; }
+.modal-cat { font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:.3em; text-transform:uppercase; color:var(--green); margin-bottom:.6rem; }
+.modal-name { font-size:1.8rem; font-weight:700; letter-spacing:-.02em; color:var(--white); margin-bottom:.4rem; }
+.modal-purity { font-family:'Space Mono',monospace; font-size:.7rem; color:var(--green); background:var(--green-dim); border:1px solid rgba(0,229,160,.2); border-radius:4px; padding:.3rem .8rem; display:inline-block; margin-bottom:1rem; }
+.modal-desc { font-size:.8rem; color:var(--muted); line-height:2; margin-bottom:1.5rem; }
+.modal-specs-grid { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-bottom:1.5rem; }
+.ms-item { background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:.7rem .9rem; }
+.ms-key { font-family:'Space Mono',monospace; font-size:.55rem; color:var(--muted); letter-spacing:.08em; margin-bottom:.2rem; }
+.ms-val { font-size:.82rem; font-weight:600; color:var(--white); }
+.modal-size-label { font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:.7rem; }
+.modal-sizes { display:flex; gap:.5rem; margin-bottom:1.5rem; }
+.size-btn { font-family:'Space Mono',monospace; font-size:.62rem; padding:.45rem .9rem; background:none; border:1px solid var(--border); border-radius:4px; color:var(--muted); cursor:none; transition:all .2s; }
+.size-btn:hover, .size-btn.sel { border-color:var(--green); color:var(--green); background:var(--green-dim); }
+.modal-price-row { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+.modal-price { font-size:2rem; font-weight:700; color:var(--white); letter-spacing:-.03em; }
+.modal-actions { display:flex; gap:.7rem; }
+.btn-modal-add { flex:1; padding:.85rem; background:var(--green); color:#000; border:none; border-radius:6px; font-size:.72rem; font-weight:700; letter-spacing:.06em; cursor:none; transition:all .2s; }
+.btn-modal-add:hover { background:var(--green2); }
+.btn-modal-coa { padding:.85rem 1.2rem; background:none; border:1px solid var(--border2); border-radius:6px; color:var(--muted); font-size:.72rem; cursor:none; transition:all .2s; }
+.btn-modal-coa:hover { border-color:var(--green); color:var(--green); }
+
+/* ══════ TOAST ══════ */
+.toast { position:fixed; bottom:2.5rem; left:50%; transform:translateX(-50%) translateY(120%); background:var(--bg3); border:1px solid rgba(0,229,160,.3); color:var(--white); padding:.75rem 1.8rem; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; border-radius:6px; z-index:1000; transition:transform .4s cubic-bezier(.16,1,.3,1); display:flex; align-items:center; gap:.6rem; }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast-dot { width:6px; height:6px; border-radius:50%; background:var(--green); }
+
+/* ══════ SCROLL REVEAL ══════ */
+.reveal { opacity:0; transform:translateY(30px); transition:opacity .9s ease, transform .9s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-l { opacity:0; transform:translateX(-40px); transition:opacity .9s ease, transform .9s ease; }
+.reveal-l.in { opacity:1; transform:translateX(0); }
+
+body{padding-top:92px!important;}</style>
+</head>
+<body>
+<div style="position:fixed;top:0;left:0;right:0;z-index:9999;height:26px;background:#040c04;border-bottom:1px solid rgba(0,229,160,.14);display:flex;align-items:center;padding:0 1.2rem;gap:.6rem;overflow:hidden">
+  <div style="width:5px;height:5px;border-radius:50%;background:#00e5a0;flex-shrink:0;animation:cbp 2s infinite"></div>
+  <span style="font-family:'Space Mono',monospace;font-size:.42rem;color:rgba(0,229,160,.6);letter-spacing:.06em;white-space:nowrap">FOR RESEARCH USE ONLY · NOT FOR HUMAN CONSUMPTION · 99%+ PURITY · HPLC + MASS SPEC VERIFIED · FREE COA EVERY ORDER</span>
+  <span style="margin-left:auto;font-family:'Space Mono',monospace;font-size:.38rem;color:rgba(255,255,255,.18);flex-shrink:0">🇺🇸 USA ONLY</span>
+</div>
+<style>@keyframes cbp{0%,100%{opacity:1}50%{opacity:.2}}
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .nav-links,.nav-tag{display:none!important;}
+}
+@media(max-width:768px){
+  body{padding-top:80px!important;}
+  #hero{height:auto;min-height:100svh;padding-bottom:3rem;}
+  #hero-canvas{opacity:.3;}
+  .hero-content{max-width:100%;padding:0 1.2rem;}
+  h1.hero-title{font-size:clamp(2.5rem,11vw,4.2rem);}
+  .hero-sub{font-size:.78rem;max-width:100%;}
+  .hero-btns{flex-direction:column;gap:.65rem;}
+  .btn-green,.btn-outline-white{width:100%;justify-content:center;}
+  .hero-trust{bottom:1rem;left:1rem;gap:1.2rem;}
+  .trust-num{font-size:1rem;}
+  .hero-coa-badge{display:none!important;}
+  .drag-hint{display:none!important;}
+  #shop{padding:2.5rem 1.2rem;}
+  .shop-header{flex-direction:column;gap:.7rem;align-items:flex-start;}
+  .section-title{font-size:clamp(1.7rem,7vw,2.6rem);}
+  .filter-tabs{overflow-x:auto;flex-wrap:nowrap;gap:.3rem;padding-bottom:.3rem;}
+  .f-tab{flex-shrink:0;font-size:.5rem;padding:.38rem .75rem;}
+  .product-grid{grid-template-columns:1fr 1fr;}
+  .prod-img-area{height:185px;}
+  .prod-info{padding:.9rem;}
+  .prod-name{font-size:.9rem;}
+  .prod-desc{-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;}
+  #trust{padding:2.5rem 1.2rem;}
+  .trust-grid{grid-template-columns:1fr 1fr;}
+  .trust-card{padding:1.3rem .9rem;}
+  #coa{padding:2.5rem 1.2rem;}
+  .coa-inner{grid-template-columns:1fr;gap:2rem;}
+  #molecule{padding:2.5rem 1.2rem;}
+  .mol-inner{grid-template-columns:1fr;gap:1.5rem;}
+  #mol-canvas{height:240px;order:-1;}
+  #process{padding:2.5rem 1.2rem;}
+  .process-grid{grid-template-columns:1fr 1fr;}
+  .process-step::after{display:none;}
+  #cta{padding:3.5rem 1.2rem;}
+  .cta-title{font-size:clamp(2.2rem,9vw,3.8rem);}
+  .cta-btns{flex-direction:column;align-items:stretch;gap:.65rem;}
+  .cta-btns button{width:100%;}
+  footer{padding:2.5rem 1.2rem 1.5rem;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .modal-box{grid-template-columns:1fr;}
+  .modal-img{display:none;}
+  .modal-info{padding:1.8rem 1.2rem;}
+  .cart-drawer{width:100vw!important;}
+}
+@media(max-width:420px){
+  .product-grid{grid-template-columns:1fr;}
+  .trust-grid{grid-template-columns:1fr;}
+  .process-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+}
+@media(hover:none) and (pointer:coarse){
+  #cur,#cur-r{display:none!important;}
+  body{cursor:auto!important;}
+  button,a,[onclick]{cursor:pointer!important;}
+}
+
+.lang-wrap-nav{position:relative;}
+.lang-trigger-btn{display:flex;align-items:center;gap:.35rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:.32rem .65rem;cursor:none;color:var(--white);font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;transition:all .2s;}
+.lang-trigger-btn:hover,.lang-wrap-nav.open .lang-trigger-btn{border-color:rgba(0,229,160,.4);background:rgba(0,229,160,.08);}
+.lang-chevron{font-size:.42rem;color:var(--muted);transition:transform .2s;}
+.lang-wrap-nav.open .lang-chevron{transform:rotate(180deg);}
+.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;min-width:165px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;z-index:600;opacity:0;transform:translateY(-6px);pointer-events:none;transition:all .22s cubic-bezier(.16,1,.3,1);}
+.lang-wrap-nav.open .lang-dropdown{opacity:1;transform:translateY(0);pointer-events:all;}
+.lang-dd-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1rem;cursor:none;transition:background .15s;}
+.lang-dd-item:hover{background:rgba(255,255,255,.04);}
+.lang-dd-item.active{background:rgba(0,229,160,.07);}
+.ldi-name{flex:1;font-size:.7rem;color:var(--white);}
+.ldi-code{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--green);letter-spacing:.08em;}
+.lang-dd-item.active .ldi-name{color:var(--green);}
+</style>
+
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark"></div>
+    <span class="nav-logo-text">NEX<span>LAB</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#trust">Testing</a></li>
+    <li><a href="#coa">COA</a></li>
+    <li><a href="#process">Process</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-tag">99%+ PURITY</span>
+    <div class="lang-wrap-nav" id="langWrapNav">
+      <button class="lang-trigger-btn" onclick="toggleLangDropdown()">
+        <span id="lnFlag">🇺🇸</span><span id="lnCode">EN</span><span class="lang-chevron">▾</span>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <div class="lang-dd-item active" data-l="en" onclick="pickLang('en','🇺🇸','EN')"><span>🇺🇸</span><span class="ldi-name">English</span><span class="ldi-code">EN</span></div>
+        <div class="lang-dd-item" data-l="es" onclick="pickLang('es','🇲🇽','ES')"><span>🇲🇽</span><span class="ldi-name">Español</span><span class="ldi-code">ES</span></div>
+        <div class="lang-dd-item" data-l="zh" onclick="pickLang('zh','🇨🇳','中文')"><span>🇨🇳</span><span class="ldi-name">简体中文</span><span class="ldi-code">中文</span></div>
+        <div class="lang-dd-item" data-l="ko" onclick="pickLang('ko','🇰🇷','KO')"><span>🇰🇷</span><span class="ldi-name">한국어</span><span class="ldi-code">KO</span></div>
+        <div class="lang-dd-item" data-l="vi" onclick="pickLang('vi','🇻🇳','VI')"><span>🇻🇳</span><span class="ldi-name">Tiếng Việt</span><span class="ldi-code">VI</span></div>
+        <div class="lang-dd-item" data-l="ru" onclick="pickLang('ru','🇷🇺','RU')"><span>🇷🇺</span><span class="ldi-name">Русский</span><span class="ldi-code">RU</span></div>
+        <div class="lang-dd-item" data-l="pt" onclick="pickLang('pt','🇧🇷','PT')"><span>🇧🇷</span><span class="ldi-name">Português</span><span class="ldi-code">PT</span></div>
+      </div>
+    </div>
+    <button class="nav-btn" id="cartToggle">Cart <span id="cartCount" style="background:rgba(0,0,0,.3);padding:.1rem .5rem;border-radius:3px;">0</span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-atmo"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-scan"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div> Research-Grade Peptides</div>
+    <h1 class="hero-title">
+      <span class="outline">PURE</span><br>
+      SCIENCE.<br>
+      <span class="serif">Verified.</span>
+    </h1>
+    <p class="hero-sub">
+      <strong>99%+ purity. Guaranteed.</strong> Every batch independently tested by accredited U.S. laboratories using HPLC and Mass Spectrometry. Batch-specific CoA included free with every order.
+    </p>
+    <div class="hero-btns">
+      <button class="btn-green" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop Peptides →</button>
+      <button class="btn-outline-white" onclick="document.getElementById('coa').scrollIntoView({behavior:'smooth'})">View COA Process</button>
+    </div>
+  </div>
+
+  <div class="hero-trust">
+    <div class="trust-item"><div class="trust-num">99<span class="accent">%+</span></div><div class="trust-lbl">Purity Guaranteed</div></div>
+    <div class="trust-item"><div class="trust-num"><span class="accent">US</span> Lab</div><div class="trust-lbl">Accredited Testing</div></div>
+    <div class="trust-item"><div class="trust-num">48<span class="accent">h</span></div><div class="trust-lbl">Fast Shipping</div></div>
+  </div>
+
+  <div class="hero-coa-badge">
+    <div class="coa-icon">📋</div>
+    <div class="coa-text"><strong>Free COA Included</strong>Batch-specific · HPLC + Mass Spec</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner" id="mq"></div>
+</div>
+
+<!-- ══ SHOP ══ -->
+<section id="shop">
+  <div class="shop-header">
+    <div>
+      <div class="section-label">Research Compounds</div>
+      <h2 class="section-title">Our <span class="serif">Peptides</span></h2>
+    </div>
+    <div style="font-size:.72rem;color:var(--muted);text-align:right;max-width:220px;line-height:1.8">For research use only.<br>Not for human consumption.</div>
+  </div>
+  <div class="filter-tabs" id="filterTabs"></div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- ══ TRUST ══ -->
+<section id="trust">
+  <div class="reveal">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">Lab <span class="serif">Verified</span></h2>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-card reveal">
+      <div class="tc-icon">🧪</div>
+      <div class="tc-title">HPLC Tested</div>
+      <div class="tc-desc">High-Performance Liquid Chromatography verifies purity to ≥99% for every single batch.</div>
+      <div class="tc-val">99%+</div>
+    </div>
+    <div class="trust-card reveal" style="transition-delay:.1s">
+      <div class="tc-icon">⚗️</div>
+      <div class="tc-title">Mass Spectrometry</div>
+      <div class="tc-desc">MS analysis confirms molecular weight and identity. No guesswork, no compromises.</div>
+      <div class="tc-val">100%</div>
+    </div>
+    <div class="trust-card reveal" style="transition-delay:.2s">
+      <div class="tc-icon">🏛️</div>
+      <div class="tc-title">US Accredited Labs</div>
+      <div class="tc-desc">All testing performed by certified third-party US laboratories. Completely independent.</div>
+      <div class="tc-val">3rd Party</div>
+    </div>
+    <div class="trust-card reveal" style="transition-delay:.3s">
+      <div class="tc-icon">📄</div>
+      <div class="tc-title">Free COA Every Order</div>
+      <div class="tc-desc">Batch-specific Certificate of Analysis shipped with every order. Not generic — your exact vials.</div>
+      <div class="tc-val">Every Batch</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MOLECULE 3D ══ -->
+<section id="molecule">
+  <div class="mol-inner">
+    <div>
+      <div class="section-label">Molecular Science</div>
+      <h2 class="section-title" style="margin:.8rem 0 1.2rem">The <span class="serif">Peptide</span><br>Structure</h2>
+      <p style="font-size:.85rem;color:var(--muted);line-height:2;margin-bottom:1.5rem">Peptides are short chains of amino acids linked by peptide bonds. Our synthesis process ensures precise sequence integrity and maximum bioactivity for research applications.</p>
+      <div class="mol-tags" id="molTags"></div>
+    </div>
+    <canvas id="mol-canvas"></canvas>
+  </div>
+</section>
+
+<!-- ══ COA ══ -->
+<section id="coa">
+  <div class="coa-inner">
+    <div class="reveal-l">
+      <div class="section-label">Certificate of Analysis</div>
+      <h2 class="coa-title">Real <span class="serif">Proof</span>,<br>Every Order</h2>
+      <p class="coa-desc">We don't just claim purity — we prove it. Every batch receives a unique Certificate of Analysis from an accredited third-party laboratory before it ships.</p>
+      <div class="coa-steps">
+        <div class="coa-step"><div class="coa-step-num">01</div><div class="coa-step-text"><strong>Batch synthesized</strong> in cGMP-compliant facility with pharmaceutical-grade reagents.</div></div>
+        <div class="coa-step"><div class="coa-step-num">02</div><div class="coa-step-text"><strong>Sample sent to accredited US lab</strong> for independent HPLC and Mass Spec analysis.</div></div>
+        <div class="coa-step"><div class="coa-step-num">03</div><div class="coa-step-text"><strong>CoA generated</strong> with your batch number, test date, purity result, and method details.</div></div>
+        <div class="coa-step"><div class="coa-step-num">04</div><div class="coa-step-text"><strong>Shipped with your order</strong> — free, always. No upsells, no subscriptions.</div></div>
+      </div>
+    </div>
+    <div class="coa-card-mock reveal">
+      <div class="coa-card-header">
+        <div class="coa-card-logo">NEX<span>LAB</span> RESEARCH</div>
+        <div class="coa-stamp">✓ CERTIFIED</div>
+      </div>
+      <div class="coa-card-body">
+        <div class="coa-row"><span class="coa-key">Product</span><span class="coa-val">BPC-157 (5mg)</span></div>
+        <div class="coa-row"><span class="coa-key">Batch #</span><span class="coa-val">NXL-2025-0528</span></div>
+        <div class="coa-row"><span class="coa-key">Test Method</span><span class="coa-val">HPLC + MS</span></div>
+        <div class="coa-row"><span class="coa-key">Purity Result</span><span class="coa-val pass">99.4% ✓ PASS</span></div>
+        <div class="coa-row"><span class="coa-key">MW Confirmed</span><span class="coa-val pass">1419.5 Da ✓</span></div>
+        <div class="coa-row"><span class="coa-key">Lab</span><span class="coa-val">Accredited US Lab</span></div>
+        <div class="coa-chart" id="coaChart"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section id="process">
+  <div class="section-label reveal">From Synthesis to Your Lab</div>
+  <h2 class="section-title reveal" style="margin:.8rem 0">Our <span class="serif">Process</span></h2>
+  <div class="process-grid" id="processGrid"></div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="cta">
+  <h2 class="cta-title">
+    <span class="outline">START</span><br>
+    YOUR<br>
+    <span class="green">RESEARCH</span>
+  </h2>
+  <p class="cta-sub">Premium peptides, independently verified purity, shipped fast. Join thousands of researchers who trust NexLab.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;position:relative;z-index:1">
+    <button class="btn-green" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop Now →</button>
+    <button class="btn-outline-white">Contact Us</button>
+  </div>
+  <p class="cta-disclaimer">⚠ All products sold strictly for research, laboratory, and educational purposes only. Not approved for human consumption or therapeutic use. Must be 18+ and a qualified researcher to purchase. By ordering you confirm compliance with all applicable laws.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">NEX<span>LAB</span> RESEARCH</div>
+      <p class="footer-desc">Research-grade peptides with independently verified purity. Free CoA with every order.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Products</div>
+      <ul class="footer-links">
+        <li><a href="#">BPC-157</a></li>
+        <li><a href="#">TB-500</a></li>
+        <li><a href="#">Semaglutide</a></li>
+        <li><a href="#">Tirzepatide</a></li>
+        <li><a href="#">All Peptides</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Science</div>
+      <ul class="footer-links">
+        <li><a href="#">COA Verification</a></li>
+        <li><a href="#">HPLC Testing</a></li>
+        <li><a href="#">Research Library</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NexLab Research. All rights reserved.</span>
+    <span>For research use only · Not for human consumption</span>
+  </div>
+  <p class="footer-legal">⚠ These products are intended for research and laboratory use only. Not for human or animal consumption. Not approved by the FDA. By purchasing, you confirm you are a qualified researcher and will use these products in accordance with all applicable local, state, and federal laws.</p>
+</footer>
+
+<!-- CART -->
+<div class="cart-back" id="cartBack"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-hd"><div class="cart-title">CART</div><button class="cart-close" id="cartClose">✕</button></div>
+  <div class="cart-body" id="cartBody"></div>
+  <div id="cartFt" style="display:none">
+    <div class="cart-ft">
+      <div class="cart-tot-row"><span>Subtotal</span><span id="cSub">$0</span></div>
+      <div class="cart-tot-row"><span>Shipping</span><span>Free over $150</span></div>
+      <div class="cart-tot-row big"><span>Total</span><span id="cTotal">$0</span></div>
+      <button class="btn-checkout" onclick="showToast('Checkout requires Stripe integration')">Secure Checkout →</button>
+      <p class="cart-note">🔒 SSL ENCRYPTED · COA INCLUDED FREE</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-back" id="modalBack">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-info" id="modalInfo"></div>
+  </div>
+</div>
+
+<div class="toast" id="toastEl"><div class="toast-dot"></div><span id="toastMsg"></span></div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'), curR=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function tick(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(tick);})();
+
+/* ── MARQUEE ── */
+const mqItems=['99%+ Purity Guaranteed','HPLC Tested','Mass Spectrometry Verified','Free COA Every Order','US Accredited Labs','Fast Shipping','Research Grade','Third Party Tested'];
+const mq=document.getElementById('mq');
+[...mqItems,...mqItems,...mqItems].forEach(t=>{mq.innerHTML+=`<span>${t}</span><span class="accent-dot">◆</span>`;});
+
+/* ── PRODUCTS DATA ── */
+const PRODUCTS = [
+  {id:1,catNo:'SM2',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'2mg / vial  ·  Kit of 10 vials',desc:'The active compound in Ozempic® & Wegovy®. Research-grade, HPLC-verified ≥99% purity. Studies document significant effects on appetite regulation and metabolic function.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:49},
+  {id:2,catNo:'SM5',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Same compound, higher concentration per vial for extended research cycles. Each kit includes 10 vials. Third-party COA available on request.',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'BEST VALUE',capsColor:'#f0c040',accent:'#ffd060',fillPct:49},
+  {id:3,catNo:'SM10',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'High-concentration research kit. Ideal for longer study protocols. HPLC-certified ≥99% purity, full COA downloadable by batch number.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'MOST POPULAR',capsColor:'#f0c040',accent:'#ffd060',fillPct:51},
+  {id:4,catNo:'SM15',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'15mg / vial  ·  Kit of 10 vials',desc:'Extended supply kit for ongoing research programs. Same pharmaceutical-grade standard.',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:55},
+  {id:5,catNo:'SM20',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Large supply kit. Purity ≥99% HPLC verified. Discreet plain packaging, batch-traceable COA.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:57},
+  {id:6,catNo:'SM30',name:'Semaglutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 Receptor Agonist',spec:'30mg / vial  ·  Kit of 10 vials',desc:'Bulk research kit for extended study protocols.',price:254.95,price3:229.95,price5:219.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:63},
+  {id:7,catNo:'TR5',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The active compound in Mounjaro® & Zepbound®. Dual-action GLP-1 + GIP agonist — clinical studies show superior weight management outcomes vs single-target GLP-1 agents. HPLC ≥99%.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'NEW',capsColor:'#f0c040',accent:'#ffd060',fillPct:49},
+  {id:8,catNo:'TR10',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Most researched tirzepatide concentration. Dual-target mechanism studied extensively in metabolic research. Full COA per batch.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'MOST POPULAR',capsColor:'#f0c040',accent:'#ffd060',fillPct:51},
+  {id:9,catNo:'TR15',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'15mg / vial  ·  Kit of 10 vials',desc:'Higher dose research kit. Same dual-mechanism compound, purity ≥99% HPLC verified.',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:55},
+  {id:10,catNo:'TR20',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Extended supply for longer protocols.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:57},
+  {id:11,catNo:'TR30',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'30mg / vial  ·  Kit of 10 vials',desc:'Large kit, significant savings vs buying individual vials.',price:254.95,price3:229.95,price5:219.95,inStock:true,badge:'SAVE 15%',capsColor:'#f0c040',accent:'#ffd060',fillPct:63},
+  {id:12,catNo:'TR40',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'40mg / vial  ·  Kit of 10 vials',desc:'High-volume research supply.',price:334.95,price3:304.95,price5:284.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:69},
+  {id:13,catNo:'TR60',name:'Tirzepatide',cat:'GLP-1 / Weight Loss',sub:'Dual GLP-1 / GIP Receptor Agonist',spec:'60mg / vial  ·  Kit of 10 vials',desc:'Bulk research supply kit.',price:499.95,price3:449.95,price5:424.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:83},
+  {id:14,catNo:'RT5',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Next-generation triple-target agonist. Phase III clinical data documents up to 24% body weight reduction — the strongest published data of any injectable metabolic peptide to date.',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'CUTTING EDGE',capsColor:'#f0c040',accent:'#ffd060',fillPct:50},
+  {id:15,catNo:'RT10',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Triple-target mechanism: GLP-1 suppresses appetite, GIP improves insulin sensitivity, Glucagon increases energy expenditure.',price:124.95,price3:114.95,price5:109.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:52},
+  {id:16,catNo:'RT20',name:'Retatrutide',cat:'GLP-1 / Weight Loss',sub:'Triple GLP-1 / GIP / Glucagon Agonist',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Higher concentration research vials.',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:67},
+  {id:17,catNo:'CGL5',name:'Cagrilintide',cat:'GLP-1 / Weight Loss',sub:'Long-Acting Amylin Analogue',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Weekly amylin analogue with ~7-day half-life. Frequently studied in combination with Semaglutide (CagriSema protocol), with published research showing synergistic metabolic outcome',price:314.95,price3:284.95,price5:269.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:68},
+  {id:18,catNo:'CS5',name:'CagriSema Combo',cat:'GLP-1 / Weight Loss',sub:'Cagrilintide 2.5mg + Semaglutide 2.5mg — Pre-Combined',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Pre-combined dual-compound research kit. CagriSema protocol in a single vial — convenience of one reconstitution for researchers studying amylin + GLP-1 combination pathways.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'COMBO',capsColor:'#f0c040',accent:'#ffd060',fillPct:58},
+  {id:19,catNo:'CS10',name:'CagriSema Combo',cat:'GLP-1 / Weight Loss',sub:'Cagrilintide 5mg + Semaglutide 5mg — Pre-Combined',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Higher-dose pre-combined CagriSema kit. Streamlined for extended research protocols.',price:379.95,price3:344.95,price5:324.95,inStock:true,badge:'COMBO',capsColor:'#f0c040',accent:'#ffd060',fillPct:73},
+  {id:20,catNo:'MDT5',name:'Mazdutide',cat:'GLP-1 / Weight Loss',sub:'GLP-1 / Glucagon Dual Agonist',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Chinese-developed dual-target GLP-1 + Glucagon receptor agonist (IBI362). Clinical data demonstrates strong metabolic and body composition effects. Research-grade, HPLC verified.',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:67},
+  {id:21,catNo:'2AD',name:'AOD9604',cat:'GLP-1 / Weight Loss',sub:'HGH Fragment 176-191 — Lipolytic Peptide',spec:'2mg / vial  ·  Kit of 10 vials',desc:'The fat-metabolizing fragment of Human Growth Hormone. Retains HGHs lipolytic activity without affecting blood glucose or IGF-1 levels. Originally developed at Monash University.',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:51},
+  {id:22,catNo:'5AD',name:'AOD9604',cat:'GLP-1 / Weight Loss',sub:'HGH Fragment 176-191 — Lipolytic Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Standard research dose. Studied for selective adipose tissue metabolism effects.',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'BEST VALUE',capsColor:'#f0c040',accent:'#ffd060',fillPct:61},
+  {id:23,catNo:'LC600',name:'L-Carnitine 600mg',cat:'GLP-1 / Weight Loss',sub:'Mitochondrial Fat Transport Cofactor',spec:'600mg / vial  ·  Kit of 10 vials',desc:'Essential cofactor transporting long-chain fatty acids into mitochondria for beta-oxidation. Injectable grade. Widely studied for metabolic and exercise performance applications.',price:124.95,price3:114.95,price5:109.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:52},
+  {id:24,catNo:'LC1200',name:'L-Carnitine 1200mg',cat:'GLP-1 / Weight Loss',sub:'Mitochondrial Fat Transport Cofactor — High Dose',spec:'1200mg / 10ml vial  ·  Kit of 10 vials',desc:'High-concentration injectable L-Carnitine. Clinical dose range studied in cardiovascular and metabolic research.',price:139.95,price3:129.95,price5:119.95,inStock:true,badge:'',capsColor:'#f0c040',accent:'#ffd060',fillPct:53},
+  {id:25,catNo:'H10',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — 191 Amino Acids',spec:'10 IU / vial  ·  Kit of 10 vials',desc:'Pharmaceutical-grade recombinant HGH. Identical sequence to endogenous GH. Used in research studying growth, metabolism, body composition, and cellular repair. HPLC verified.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:51},
+  {id:26,catNo:'H15',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — High Potency',spec:'15 IU / vial  ·  Kit of 10 vials',desc:'Higher potency research kit. Full COA, cold-chain shipped.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:58},
+  {id:27,catNo:'H24',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — Research Grade',spec:'24 IU / vial  ·  Kit of 10 vials',desc:'Extended supply research kit.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'BEST VALUE',capsColor:'#3d8bff',accent:'#60aaff',fillPct:73},
+  {id:28,catNo:'H36',name:'Human Growth Hormone (HGH)',cat:'Growth Hormone / GHRP',sub:'Recombinant Human GH — Bulk Kit',spec:'36 IU / vial  ·  Kit of 10 vials',desc:'High-volume research kit.',price:499.95,price3:449.95,price5:424.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:83},
+  {id:29,catNo:'IP5',name:'Ipamorelin',cat:'Growth Hormone / GHRP',sub:'Selective GHSR Agonist — Cleanest GHRP',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most selective GHRP available. Unlike GHRP-2 or GHRP-6, Ipamorelin produces a clean GH pulse with negligible effects on cortisol or prolactin. Ideal for GH axis research.',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'TOP SELLER',capsColor:'#3d8bff',accent:'#60aaff',fillPct:49},
+  {id:30,catNo:'IP10',name:'Ipamorelin',cat:'Growth Hormone / GHRP',sub:'Selective GHSR Agonist — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Higher concentration supply for longer research cycles. Combine with CJC-1295 for the gold-standard GH optimization protocol.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:53},
+  {id:31,catNo:'CND5',name:'CJC-1295 without DAC',cat:'Growth Hormone / GHRP',sub:'Modified GHRH(1-29) — Physiological GH Pulsing',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Modified GHRH analogue with ~30-min half-life, mimicking physiological GH pulse release. The gold-standard pairing with Ipamorelin for GH research. Preserves natural GH rhythm.',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'TOP SELLER',capsColor:'#3d8bff',accent:'#60aaff',fillPct:55},
+  {id:32,catNo:'CND10',name:'CJC-1295 without DAC',cat:'Growth Hormone / GHRP',sub:'Modified GHRH(1-29) — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. Pair 1:1 with Ipamorelin for the most documented GH optimization protocol.',price:314.95,price3:284.95,price5:269.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:68},
+  {id:33,catNo:'CP10',name:'CJC-1295 + Ipamorelin Pre-Mix',cat:'Growth Hormone / GHRP',sub:'5mg CJC w/o DAC + 5mg Ipamorelin — Ready to Use',spec:'10mg / vial  ·  Kit of 10 vials',desc:'The gold-standard GH protocol pre-combined in one vial. One reconstitution, one injection — maximum convenience for researchers. Exact 1:1 ratio, pharmaceutical purity.',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'BEST COMBO',capsColor:'#3d8bff',accent:'#60aaff',fillPct:61},
+  {id:34,catNo:'CP20',name:'CJC-1295 + Ipamorelin Pre-Mix',cat:'Growth Hormone / GHRP',sub:'10mg CJC w/o DAC + 10mg Ipamorelin — High Dose',spec:'20mg / vial  ·  Kit of 10 vials',desc:'High-dose pre-combined GH research kit. Extended protocol supply.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'COMBO',capsColor:'#3d8bff',accent:'#60aaff',fillPct:73},
+  {id:35,catNo:'CD5',name:'CJC-1295 with DAC',cat:'Growth Hormone / GHRP',sub:'Long-Acting GHRH Analogue — Weekly Dosing',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Drug Affinity Complex (DAC) modification extends half-life to 6–8 days. Once-weekly injection protocol for sustained GH baseline elevation research.',price:469.95,price3:424.95,price5:399.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:81},
+  {id:36,catNo:'G25',name:'GHRP-2',cat:'Growth Hormone / GHRP',sub:'GH Releasing Peptide — High Potency',spec:'5mg / vial  ·  Kit of 10 vials',desc:'First-generation GH secretagogue. Stronger GH pulse than Ipamorelin with mild cortisol elevation. Cost-effective option for GH pulse research.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:49},
+  {id:37,catNo:'G65',name:'GHRP-6',cat:'Growth Hormone / GHRP',sub:'GH Releasing Peptide — Appetite Stimulating',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Classic GH secretagogue with notable appetite-stimulating effect via Ghrelin receptor activation. Frequently studied for appetite regulation and GH secretion research.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:49},
+  {id:38,catNo:'HX5',name:'Hexarelin',cat:'Growth Hormone / GHRP',sub:'Most Potent GHRP — Cardiac Research Applications',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most potent GHRP analog. Studied not only for GH release but also for direct cardiac protective effects via GHS-R1b receptors in the heart.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:58},
+  {id:39,catNo:'TSM5',name:'Tesamorelin',cat:'Growth Hormone / GHRP',sub:'FDA-Studied GHRH Analogue — Visceral Fat Research',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The only GHRH analogue with FDA approval history (Egrifta® for HIV-associated lipodystrophy). Stimulates endogenous GH pulses via pituitary GHRH receptors. Research-grade.',price:264.95,price3:239.95,price5:229.95,inStock:true,badge:'FDA STUDIED',capsColor:'#3d8bff',accent:'#60aaff',fillPct:64},
+  {id:40,catNo:'SMO5',name:'Sermorelin',cat:'Growth Hormone / GHRP',sub:'GHRH(1-29) — The Original GH Optimization Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The original GHRH analogue. 29 amino acids, short 12-min half-life preserves physiological GH rhythm. Historically used in anti-aging clinics for decades.',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:56},
+  {id:41,catNo:'IG01',name:'IGF-1 LR3',cat:'Growth Hormone / GHRP',sub:'Long R3 IGF-1 — Extended Half-Life Growth Factor',spec:'0.1mg / vial  ·  Kit of 10 vials',desc:'Modified IGF-1 with ~20–30 hour half-life vs 10–20 min for native IGF-1. Activates PI3K/AKT and MAPK pathways promoting protein synthesis and satellite cell activation. HPLC ≥99%.',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:49},
+  {id:42,catNo:'IG1',name:'IGF-1 LR3',cat:'Growth Hormone / GHRP',sub:'Long R3 IGF-1 — 1mg High Concentration',spec:'1mg / vial  ·  Kit of 10 vials',desc:'High-concentration IGF-1 LR3 for research requiring precise dosing. Full COA with mass spectrometry confirmation available.',price:519.95,price3:469.95,price5:444.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:85},
+  {id:43,catNo:'CP10_GHK',name:'IGF-DES',cat:'Growth Hormone / GHRP',sub:'des(1-3) IGF-1 — Ultra-Potent Truncated IGF-1',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Naturally occurring truncated IGF-1 variant. ~5–10x higher receptor affinity than standard IGF-1 due to minimal IGFBP binding. Studied for local tissue effects.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:53},
+  {id:44,catNo:'FM2',name:'MGF',cat:'Growth Hormone / GHRP',sub:'Mechano Growth Factor — Satellite Cell Activator',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Splice variant of IGF-1 expressed under mechanical stress. The E-peptide domain uniquely activates muscle satellite cell proliferation — complementary to IGF-1 LR3 differentiation ',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:50},
+  {id:45,catNo:'FMP2',name:'PEG MGF',cat:'Growth Hormone / GHRP',sub:'PEGylated MGF — Extended Half-Life (Days)',spec:'2mg / vial  ·  Kit of 10 vials',desc:'PEGylation extends MGF half-life from minutes to several days. Enables less frequent dosing while maintaining satellite cell activation research protocols.',price:229.95,price3:209.95,price5:199.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:61},
+  {id:46,catNo:'GND2',name:'Gonadorelin',cat:'Growth Hormone / GHRP',sub:'Native GnRH — HPG Axis Research',spec:'2mg / vial  ·  Kit of 10 vials',desc:'Synthetic native GnRH (10 amino acids). Pulsatile administration activates LH/FSH release. Used in TRT-adjunct research to maintain testicular function.',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:50},
+  {id:47,catNo:'G5K',name:'HCG',cat:'Growth Hormone / GHRP',sub:'Human Chorionic Gonadotropin — 5,000 IU',spec:'5,000 IU / vial  ·  Kit of 10 vials',desc:'Glycoprotein hormone structurally similar to LH. Stimulates testicular testosterone production. Studied for TRT adjunct, PCT, and fertility applications.',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:57},
+  {id:48,catNo:'G10k',name:'HCG',cat:'Growth Hormone / GHRP',sub:'Human Chorionic Gonadotropin — 10,000 IU',spec:'10,000 IU / vial  ·  Kit of 10 vials',desc:'High-potency HCG. Standard fertility research concentration.',price:304.95,price3:274.95,price5:259.95,inStock:true,badge:'',capsColor:'#3d8bff',accent:'#60aaff',fillPct:67},
+  {id:49,catNo:'BC5',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — 15 Amino Acids',spec:'5mg / vial  ·  Kit of 10 vials',desc:'One of the most researched repair peptides — over 70 peer-reviewed publications. Studied for vascular remodeling, tendon healing, anti-inflammatory pathways, and GI tract protectio',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'TOP SELLER',capsColor:'#00e5a0',accent:'#00ff88',fillPct:49},
+  {id:50,catNo:'BC10',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. VEGF upregulation, collagen synthesis promotion, and FAK-paxillin pathway activation are primary mechanisms studied.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'BEST VALUE',capsColor:'#00e5a0',accent:'#00ff88',fillPct:51},
+  {id:51,catNo:'BC20',name:'BPC-157',cat:'Repair & Recovery',sub:'Body Protective Compound — Bulk Kit',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Large supply for extended research protocols.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'',capsColor:'#00e5a0',accent:'#00ff88',fillPct:58},
+  {id:52,catNo:'BT5',name:'TB-500 (Thymosin Beta-4)',cat:'Repair & Recovery',sub:'43 Amino Acid — Systemic Repair Peptide',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Actin-binding peptide present in virtually all mammalian cells. Studies document roles in systemic tissue repair, angiogenesis, anti-inflammation, and cardiac regeneration. Complem',price:209.95,price3:189.95,price5:179.95,inStock:true,badge:'TOP SELLER',capsColor:'#00e5a0',accent:'#00ff88',fillPct:59},
+  {id:53,catNo:'BT10',name:'TB-500 (Thymosin Beta-4)',cat:'Repair & Recovery',sub:'43 Amino Acid — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. The BPC-157 + TB-500 combination is the most documented repair peptide protocol in sports medicine literature.',price:374.95,price3:339.95,price5:319.95,inStock:true,badge:'BEST VALUE',capsColor:'#00e5a0',accent:'#00ff88',fillPct:73},
+  {id:54,catNo:'BB10',name:'BPC-157 + TB-500 Stack',cat:'Repair & Recovery',sub:'5mg BPC-157 + 5mg TB-500 — Pre-Combined Repair Kit',spec:'10mg / vial  ·  Kit of 10 vials',desc:'The most popular combination in recovery research — pre-mixed in one vial. BPC-157 targets localized repair; TB-500 works systemically. One reconstitution, comprehensive coverage.',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'BEST COMBO',capsColor:'#00e5a0',accent:'#00ff88',fillPct:58},
+  {id:55,catNo:'BB20',name:'BPC-157 + TB-500 Stack',cat:'Repair & Recovery',sub:'10mg BPC-157 + 10mg TB-500 — High Dose Pre-Mix',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Double-strength pre-combined repair kit. Full 10-week research cycle in one order.',price:464.95,price3:419.95,price5:399.95,inStock:true,badge:'COMBO',capsColor:'#00e5a0',accent:'#00ff88',fillPct:80},
+  {id:56,catNo:'BBG70',name:'Glow Stack — Triple Repair Complex',cat:'Repair & Recovery',sub:'BPC-157 10mg + GHK-Cu 50mg + TB-500 10mg — Pre-Combined',spec:'70mg / vial  ·  Kit of 10 vials',desc:'Our signature triple-peptide repair complex. BPC-157 for localized repair, TB-500 for systemic regeneration, GHK-Cu for collagen/elastin synthesis and skin renewal. One vial, three',price:489.95,price3:444.95,price5:419.95,inStock:true,badge:'SIGNATURE',capsColor:'#00e5a0',accent:'#00ff88',fillPct:82},
+  {id:57,catNo:'Klow80',name:'Klow80 — Ultimate Repair Complex',cat:'Repair & Recovery',sub:'BPC-157 + GHK-Cu + TB-500 + KPV — Quad Pre-Mix',spec:'80mg / vial  ·  Kit of 10 vials',desc:'Adds KPV (anti-inflammatory α-MSH tripeptide) to the Glow Stack. Comprehensive four-peptide repair protocol in a single vial. For researchers studying multi-pathway tissue recovery',price:514.95,price3:464.95,price5:439.95,inStock:true,badge:'PREMIUM',capsColor:'#00e5a0',accent:'#00ff88',fillPct:84},
+  {id:58,catNo:'KPV5',name:'KPV',cat:'Repair & Recovery',sub:'α-MSH C-Terminal Tripeptide — Anti-Inflammatory',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Lys-Pro-Val: the bioactive C-terminal fragment of α-MSH. Inhibits NF-κB pathway, reduces IL-6 and TNF-α. Studied for IBD, Crohns disease, and skin inflammation research.',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'',capsColor:'#00e5a0',accent:'#00ff88',fillPct:49},
+  {id:59,catNo:'KPV10',name:'KPV',cat:'Repair & Recovery',sub:'α-MSH C-Terminal Tripeptide — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended supply for ongoing inflammation research.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',capsColor:'#00e5a0',accent:'#00ff88',fillPct:51},
+  {id:60,catNo:'375',name:'LL-37 (Cathelicidin)',cat:'Repair & Recovery',sub:'Human Antimicrobial Peptide — Innate Immunity',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The only human cathelicidin. Disrupts bacterial membranes, neutralizes viruses, recruits immune cells, and promotes wound epithelialization. Studied in antimicrobial resistance and',price:249.95,price3:224.95,price5:214.95,inStock:true,badge:'',capsColor:'#00e5a0',accent:'#00ff88',fillPct:62},
+  {id:61,catNo:'AR50',name:'AICAR',cat:'Repair & Recovery',sub:'AMPK Activator — Metabolic & Endurance Research',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Activates AMPK (the metabolic master switch) by accumulating as ZMP intracellularly. Studied for mitochondrial biogenesis, fatty acid oxidation, and exercise adaptation mimicry. WA',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',capsColor:'#00e5a0',accent:'#00ff88',fillPct:50},
+  {id:62,catNo:'ET10',name:'Epithalon (Epitalon)',cat:'Anti-Aging / Longevity',sub:'Telomerase-Activating Tetrapeptide — Longevity Research',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Four-amino acid peptide (Ala-Glu-Asp-Gly) derived from pineal gland research by Prof. Khavinson. Multiple Russian clinical studies document telomerase activation, melatonin regulat',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'LONGEVITY #1',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:50},
+  {id:63,catNo:'ET50',name:'Epithalon (Epitalon)',cat:'Anti-Aging / Longevity',sub:'Telomerase-Activating Tetrapeptide — Bulk Supply',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Extended supply for full Khavinson Protocol (10-day cycles). Significant savings vs smaller kits.',price:364.95,price3:329.95,price5:314.95,inStock:true,badge:'BEST VALUE',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:72},
+  {id:64,catNo:'MS10',name:'MOTS-c',cat:'Anti-Aging / Longevity',sub:'Mitochondria-Derived Peptide — Exercise Mimetic',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Encoded by the mitochondrial genome — a landmark discovery by USC researchers. Activates AMPK, upregulates oxidative metabolism genes, improves insulin sensitivity. Studied as an e',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'RESEARCH STAR',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:56},
+  {id:65,catNo:'MS20',name:'MOTS-c',cat:'Anti-Aging / Longevity',sub:'Mitochondria-Derived Peptide — Extended Supply',spec:'20mg / vial  ·  Kit of 10 vials',desc:'Extended protocol supply. Combine with Epithalon for a comprehensive longevity research stack.',price:324.95,price3:294.95,price5:279.95,inStock:true,badge:'',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:69},
+  {id:66,catNo:'2S10',name:'SS-31 (Elamipretide)',cat:'Anti-Aging / Longevity',sub:'Mitochondrial Inner Membrane Protectant',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Selectively concentrates on the mitochondrial inner membrane, binding cardiolipin to stabilize the electron transport chain. Reduces ROS production. Advanced in Phase II/III clinic',price:199.95,price3:179.95,price5:169.95,inStock:true,badge:'CLINICAL STAGE',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:58},
+  {id:67,catNo:'2S50',name:'SS-31 (Elamipretide)',cat:'Anti-Aging / Longevity',sub:'Mitochondrial Protectant — Bulk Research Kit',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Extended supply for longer mitochondrial health research protocols.',price:734.95,price3:664.95,price5:624.95,inStock:true,badge:'',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:88},
+  {id:68,catNo:'NJ500',name:'NAD+',cat:'Anti-Aging / Longevity',sub:'Nicotinamide Adenine Dinucleotide — IV-Grade',spec:'500mg / vial  ·  Kit of 10 vials',desc:'The cellular energy and DNA repair master coenzyme. NAD+ declines ~50% from age 20 to 60. IV-grade purity. Activates Sirtuins (longevity proteins) and PARP (DNA repair). Standard l',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'LONGEVITY STAPLE',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:49},
+  {id:69,catNo:'NJ1000',name:'NAD+',cat:'Anti-Aging / Longevity',sub:'Nicotinamide Adenine Dinucleotide — High Dose',spec:'1000mg / vial  ·  Kit of 10 vials',desc:'High-dose NAD+ for intensive protocols. Clinical longevity programs typically use 500–1000mg sessions.',price:149.95,price3:134.95,price5:129.95,inStock:true,badge:'',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:54},
+  {id:70,catNo:'TY10',name:'Thymalin',cat:'Anti-Aging / Longevity',sub:'Thymus Peptide Complex — Immune Rejuvenation',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Thymus-derived peptide complex. Russian clinical data spanning 30+ years documents immune function restoration in aging populations. Studied for T-cell rejuvenation and longevity a',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:56},
+  {id:71,catNo:'PIN10',name:'Pinealon',cat:'Anti-Aging / Longevity',sub:'Pineal Tripeptide — Neuroprotective & Cognitive',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Glu-Asp-Arg tripeptide from Khavinsons pineal gland research. Studied for neuroprotective, epigenetic regulatory, and neurotransmitter synthesis effects. Complement to Epithalon.',price:219.95,price3:199.95,price5:189.95,inStock:true,badge:'',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:60},
+  {id:72,catNo:'RA10',name:'ARA-290 (Cibinetide)',cat:'Anti-Aging / Longevity',sub:'EPO-Derived Neuroprotective Peptide',spec:'10mg / vial  ·  Kit of 10 vials',desc:'11-amino acid EPO derivative that selectively binds tissue-protective EPO receptors (βCR complex) without erythropoietic effects. In Phase II clinical trials for painful neuropathy',price:209.95,price3:189.95,price5:179.95,inStock:true,badge:'CLINICAL STAGE',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:59},
+  {id:73,catNo:'F410',name:'FOXO4-DRI',cat:'Anti-Aging / Longevity',sub:'Senolytic Peptide — Targeted Senescent Cell Clearance',spec:'10mg / vial  ·  Kit of 10 vials',desc:'D-retro-inverso peptide disrupting FOXO4-p53 interaction in senescent cells, triggering selective apoptosis. Normal cells unaffected. The most sophisticated peptide senolytic in cu',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'FRONTIER',capsColor:'#8b5cf6',accent:'#cc88ff',fillPct:51},
+  {id:74,catNo:'XA5',name:'Semax',cat:'Neuro & Cognitive',sub:'ACTH(4-7) Analogue — Cognitive Enhancement',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Russian-developed ACTH analogue (legal prescription drug in Russia). Upregulates BDNF and NGF, modulates dopamine and serotonin systems. Extensively studied for cognitive enhanceme',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'NOOTROPIC #1',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:49},
+  {id:75,catNo:'XA10',name:'Semax',cat:'Neuro & Cognitive',sub:'ACTH(4-7) Analogue — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended nasal spray / injection supply. Standard 10-day Russian research protocol covered.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:53},
+  {id:76,catNo:'SK5',name:'Selank',cat:'Neuro & Cognitive',sub:'Tuftsin Analogue — Anxiolytic & Cognitive',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Synthetic Tuftsin analogue. Russian prescription drug for generalized anxiety disorder. GABA-A modulation without addiction or tolerance. Studied for anxiety, cognitive enhancement',price:89.95,price3:84.95,price5:79.95,inStock:true,badge:'NOOTROPIC #2',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:49},
+  {id:77,catNo:'SK10',name:'Selank',cat:'Neuro & Cognitive',sub:'Tuftsin Analogue — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research supply. Non-habit-forming alternative to benzodiazepines in anxiety research.',price:134.95,price3:124.95,price5:114.95,inStock:true,badge:'',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:53},
+  {id:78,catNo:'DS5',name:'DSIP',cat:'Neuro & Cognitive',sub:'Delta Sleep-Inducing Peptide — Sleep Architecture',spec:'5mg / vial  ·  Kit of 10 vials',desc:'Nine-amino acid neuropeptide inducing slow-wave (delta) sleep. Studied for insomnia research, HPA axis regulation, pain modulation, and opiate withdrawal symptom reduction.',price:119.95,price3:109.95,price5:104.95,inStock:true,badge:'',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:51},
+  {id:79,catNo:'VIP5',name:'VIP',cat:'Neuro & Cognitive',sub:'Vasoactive Intestinal Peptide — Neuro-Immune Modulator',spec:'5mg / vial  ·  Kit of 10 vials',desc:'28-amino acid neuropeptide with potent vasodilation and immunomodulatory effects. Studied in MCAS, post-Lyme syndrome (Shoemaker protocol), pulmonary arterial hypertension, and aut',price:189.95,price3:174.95,price5:164.95,inStock:true,badge:'',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:57},
+  {id:80,catNo:'CBL60',name:'Cerebrolysin',cat:'Neuro & Cognitive',sub:'Porcine Brain-Derived Neuropeptide Complex',spec:'60mg / 6 vials',desc:'Low-molecular-weight neuropeptide mixture crossing the blood-brain barrier. Mimics BDNF, NGF, and CNTF. Approved in China, Russia, and Austria. Studied for Alzheimers disease, str',price:169.95,price3:154.95,price5:144.95,inStock:true,badge:'',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:56},
+  {id:81,catNo:'TA5',name:'Thymosin Alpha-1',cat:'Neuro & Cognitive',sub:'28 Amino Acid Immune Modulator — Zadaxin®',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The most clinically validated immune-modulating peptide. Approved in China and Italy (Zadaxin®) for chronic hepatitis B and cancer immunotherapy support. Extensively used during CO',price:249.95,price3:224.95,price5:214.95,inStock:true,badge:'CLINICALLY APPROVED',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:62},
+  {id:82,catNo:'TA10',name:'Thymosin Alpha-1',cat:'Neuro & Cognitive',sub:'Zadaxin® Equivalent — Extended Supply',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Extended research/clinic supply. Standard Hepatitis B protocol: 1.6mg twice weekly × 26 weeks.',price:389.95,price3:354.95,price5:334.95,inStock:true,badge:'',capsColor:'#06b6d4',accent:'#40d0ee',fillPct:74},
+  {id:83,catNo:'P41',name:'PT-141 (Bremelanotide)',cat:'Sexual Health',sub:'FDA-Approved Melanocortin Agonist — Sexual Function',spec:'10mg / vial  ·  Kit of 10 vials',desc:'FDA-approved as Vyleesi® for female HSDD (hypoactive sexual desire disorder). Activates MC3R/MC4R in the CNS — the first sexual dysfunction drug acting centrally, not vasculogenica',price:159.95,price3:144.95,price5:139.95,inStock:true,badge:'FDA APPROVED',capsColor:'#f43f5e',accent:'#ff7090',fillPct:55},
+  {id:84,catNo:'KS5',name:'Kisspeptin-10',cat:'Sexual Health',sub:'GPR54 Agonist — HPG Axis & Libido Research',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The minimal bioactive Kisspeptin fragment. Triggers GnRH pulse release, stimulating LH/FSH. Studied for female hypogonadism, male fertility, and libido research by Imperial College',price:109.95,price3:99.95,price5:94.95,inStock:true,badge:'',capsColor:'#f43f5e',accent:'#ff7090',fillPct:51},
+  {id:85,catNo:'OT5',name:'Oxytocin',cat:'Sexual Health',sub:'The Love Hormone — Social Bonding & Sexual Function',spec:'5mg / vial  ·  Kit of 10 vials',desc:'The neuropeptide of trust, bonding, and intimacy. Nasal spray studies document effects on social anxiety, trust, relationship quality, and orgasm intensity. Standard obstetric use ',price:99.95,price3:89.95,price5:84.95,inStock:true,badge:'',capsColor:'#f43f5e',accent:'#ff7090',fillPct:50},
+  {id:86,catNo:'MT1',name:'Melanotan I',cat:'Sexual Health',sub:'α-MSH Analogue — Skin Pigmentation Research',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Selective MC1R agonist. Studied for skin tanning response without UV damage, and potential melanoma protection applications. Higher MC1R selectivity than MT-II with fewer systemic ',price:129.95,price3:119.95,price5:114.95,inStock:true,badge:'',capsColor:'#f43f5e',accent:'#ff7090',fillPct:52},
+  {id:87,catNo:'CU50',name:'GHK-Cu (Copper Peptide)',cat:'Beauty & Aesthetic',sub:'Anti-Aging Tripeptide — Collagen & Skin Regeneration',spec:'50mg / vial  ·  Kit of 10 vials',desc:'Gly-His-Lys copper complex naturally occurring in blood and saliva. Stimulates collagen and elastin synthesis via TGF-β and VEGF pathways. Antioxidant, wound healing, and hair foll',price:64.95,price3:59.95,price5:59.95,inStock:true,badge:'BEAUTY STAPLE',capsColor:'#f59e0b',accent:'#ffc040',fillPct:47},
+  {id:88,catNo:'CU100',name:'GHK-Cu (Copper Peptide)',cat:'Beauty & Aesthetic',sub:'Anti-Aging Tripeptide — High Concentration',spec:'100mg / vial  ·  Kit of 10 vials',desc:'High-concentration GHK-Cu for research or cosmetic formulation development.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',capsColor:'#f59e0b',accent:'#ffc040',fillPct:49},
+  {id:89,catNo:'GTT600',name:'Glutathione',cat:'Beauty & Aesthetic',sub:'Master Antioxidant — IV Grade 600mg',spec:'600mg / vial  ·  Kit of 10 vials',desc:'The bodys most abundant endogenous antioxidant. IV administration studied for liver protection, immune enhancement, skin brightening (tyrosinase inhibition), and chemotherapy side',price:64.95,price3:59.95,price5:59.95,inStock:true,badge:'WELLNESS STAPLE',capsColor:'#f59e0b',accent:'#ffc040',fillPct:47},
+  {id:90,catNo:'GTT1500',name:'Glutathione',cat:'Beauty & Aesthetic',sub:'Master Antioxidant — High Dose 1500mg',spec:'1500mg / vial  ·  Kit of 10 vials',desc:'High-dose glutathione for intensive IV protocols.',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'',capsColor:'#f59e0b',accent:'#ffc040',fillPct:49},
+  {id:91,catNo:'NP810',name:'Snap-8',cat:'Beauty & Aesthetic',sub:'Acetyl Octapeptide — Topical Botox Alternative',spec:'10mg / vial  ·  Kit of 10 vials',desc:'8-amino acid peptide modulating SNARE complex (SNAP-25 competitor), reducing acetylcholine vesicle fusion. Clinical data shows 63% reduction in wrinkle depth at 10% concentration. ',price:84.95,price3:79.95,price5:74.95,inStock:true,badge:'COSMETIC GRADE',capsColor:'#f59e0b',accent:'#ffc040',fillPct:49},
+  {id:92,catNo:'LB10',name:'Lemon Bottle',cat:'Beauty & Aesthetic',sub:'Injectable Fat-Dissolving Solution',spec:'10mg / vial  ·  Kit of 10 vials',desc:'Korean-developed phosphatidylcholine/deoxycholic acid injectable solution for localized fat dissolution. Used in aesthetic clinics for submental fat (double chin), jowls, and small',price:139.95,price3:129.95,price5:119.95,inStock:true,badge:'CLINIC USE',capsColor:'#f59e0b',accent:'#ffc040',fillPct:53},
+  {id:93,catNo:'WA3',name:'Bacteriostatic Water (BAC Water)',cat:'Accessories',sub:'Peptide Reconstitution Solvent — 3ml',spec:'3ml / vial  ·  Kit of 10 vials',desc:'0.9% benzyl alcohol sterile water for multi-dose vial reconstitution. Inhibits bacterial growth for up to 4 weeks after opening. Required for reconstituting all lyophilized peptide',price:15.5,price3:13.95,price5:13.17,inStock:true,badge:'ESSENTIAL',capsColor:'#94a3b8',accent:'#c0cce0',fillPct:43},
+  {id:94,catNo:'WA10',name:'Bacteriostatic Water (BAC Water)',cat:'Accessories',sub:'Peptide Reconstitution Solvent — 10ml',spec:'10ml / vial  ·  Kit of 10 vials',desc:'Large volume BAC water for protocols requiring higher dilution volumes.',price:20.0,price3:18.0,price5:17.0,inStock:true,badge:'ESSENTIAL',capsColor:'#94a3b8',accent:'#c0cce0',fillPct:43},
+  {id:95,catNo:'AA10',name:'Acetic Acid Water',cat:'Accessories',sub:'Acidic Reconstitution Solvent — For IGF Peptides',spec:'10ml / vial  ·  Kit of 10 vials',desc:'0.6% acetic acid sterile water. Required for reconstituting IGF-1 DES and other acid-soluble peptides that aggregate in neutral pH solutions.',price:26.9,price3:24.21,price5:22.86,inStock:true,badge:'IGF REQUIRED',capsColor:'#94a3b8',accent:'#c0cce0',fillPct:44},
+];
+const CATS = ["All", "GLP-1 / Weight Loss", "Growth Hormone / GHRP", "Repair & Recovery", "Anti-Aging / Longevity", "Neuro & Cognitive", "Sexual Health", "Beauty & Aesthetic", "Accessories"];
+
+
+/* ── RENDER PRODUCTS ── */
+const cats=['All','GLP-1 / Weight Loss','Growth Hormone / GHRP','Repair & Recovery','Anti-Aging / Longevity','Neuro & Cognitive','Sexual Health','Beauty & Aesthetic','Accessories'];
+let activeCat='All';
+const filterTabsEl=document.getElementById('filterTabs');
+cats.forEach(c=>{
+  const b=document.createElement('button');
+  b.className='f-tab'+(c==='All'?' active':'');
+  b.textContent=c;
+  b.addEventListener('click',()=>{activeCat=c;document.querySelectorAll('.f-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderProducts();});
+  filterTabsEl.appendChild(b);
+  if(c==='All'){const sep=document.createElement('div');sep.className='f-sep';filterTabsEl.appendChild(sep);}
+});
+
+function makeVialHTML(p){
+  return `<div class="prod-vial">
+    <div class="vial-cap" style="background:${p.capsColor}20;border:1px solid ${p.capsColor}40;"></div>
+    <div class="vial-body">
+      <div class="vial-fill" style="height:${p.fillPct}%;background:linear-gradient(0deg,${p.capsColor}60,${p.capsColor}20)"></div>
+      <div class="vial-label">NEXLAB</div>
+    </div>
+  </div>`;
+}
+
+function renderProducts(){
+  const grid=document.getElementById('productGrid');
+  const list=activeCat==='All'?PRODUCTS:PRODUCTS.filter(p=>p.cat===activeCat);
+  grid.innerHTML='';
+  if(!list.length){
+    grid.innerHTML='<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--muted)">No products in this category</div>';
+    return;
+  }
+  list.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='prod-card';
+    card.innerHTML=`
+      <div class="prod-img-area">
+        ${p.badge?`<div class="prod-new-badge">${p.badge}</div>`:''}
+        <div class="prod-purity-badge">99%+</div>
+        <div class="prod-vial">
+          <div class="vial-cap" style="background:${p.capsColor}20;border:1px solid ${p.capsColor}40"></div>
+          <div class="vial-body">
+            <div class="vial-fill" style="height:${p.fillPct}%;background:linear-gradient(0deg,${p.capsColor}60,${p.capsColor}20)"></div>
+            <div class="vial-label">
+              <span style="font-size:5px;color:rgba(255,255,255,.5);font-family:Space Mono,monospace">NEXLAB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-cat" style="font-family:'Space Mono',monospace;font-size:.5rem;color:var(--green);letter-spacing:.12em;margin-bottom:.2rem">${p.catNo}</div>
+        <div class="prod-name">${p.name}</div>
+        <div style="font-size:.65rem;color:var(--muted);margin-bottom:.3rem;line-height:1.5">${p.sub}</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;color:#2a3450;margin-bottom:.7rem">${p.spec}</div>
+        <div class="prod-desc" style="-webkit-line-clamp:3;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden">${p.desc}</div>
+        <div class="prod-specs" style="margin:0.6rem 0"></div>
+        <div class="prod-footer">
+          <div class="prod-price">$${p.price}<span class="per">/ kit</span></div>
+          <button class="btn-add" onclick="event.stopPropagation();addCart(${p.id})">+ Add</button>
+        </div>
+      </div>`;
+    card.addEventListener('click',()=>openModal(p));
+    grid.appendChild(card);
+  });
+}
+renderProducts();
+
+/* ── HERO THREE.JS — molecule + particles ── */
+(function(){
+  const canvas=document.getElementById('hero-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,100);
+  camera.position.set(0,0,8);
+
+  function resize(){renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);camera.aspect=canvas.clientWidth/canvas.clientHeight;camera.updateProjectionMatrix();}
+  window.addEventListener('resize',resize);resize();
+
+  // Amino acid chain (peptide backbone)
+  const atomGeo=new THREE.SphereGeometry(.18,16,16);
+  const bondGeo=new THREE.CylinderGeometry(.04,.04,1,8);
+  const atomColors=[0x00e5a0,0x3d8bff,0xf0c040,0xff6b6b,0xa855f7];
+  const chainGroup=new THREE.Group();
+
+  const positions=[];
+  for(let i=0;i<12;i++){
+    const angle=i*(Math.PI/4);
+    const r=1.8+(i%3)*.4;
+    const x=Math.cos(angle)*r, y=Math.sin(angle*.7)*.8+(i-6)*.25, z=Math.sin(angle)*r*.5;
+    positions.push(new THREE.Vector3(x,y,z));
+    const mat=new THREE.MeshStandardMaterial({color:atomColors[i%5],metalness:.3,roughness:.4,emissive:atomColors[i%5],emissiveIntensity:.15});
+    const atom=new THREE.Mesh(atomGeo,mat);
+    atom.position.set(x,y,z);
+    chainGroup.add(atom);
+    if(i>0){
+      const prev=positions[i-1];
+      const dir=new THREE.Vector3().subVectors(atom.position,prev).normalize();
+      const len=atom.position.distanceTo(prev);
+      const bMat=new THREE.MeshStandardMaterial({color:0x2a3450,metalness:.2,roughness:.6,transparent:true,opacity:.6});
+      const bond=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,len,8),bMat);
+      bond.position.copy(prev.clone().lerp(atom.position,.5));
+      bond.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);
+      chainGroup.add(bond);
+    }
+  }
+  scene.add(chainGroup);
+  chainGroup.position.set(2.5,0,0);
+
+  // Floating particles
+  const pGeo=new THREE.BufferGeometry();
+  const pN=500,pPos=new Float32Array(pN*3),pCol=new Float32Array(pN*3);
+  for(let i=0;i<pN;i++){
+    pPos[i*3]=(Math.random()-.5)*18; pPos[i*3+1]=(Math.random()-.5)*12; pPos[i*3+2]=(Math.random()-.5)*8-2;
+    pCol[i*3]=0; pCol[i*3+1]=.9; pCol[i*3+2]=.63;
+  }
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  pGeo.setAttribute('color',new THREE.BufferAttribute(pCol,3));
+  scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({size:.04,vertexColors:true,transparent:true,opacity:.5})));
+
+  scene.add(new THREE.AmbientLight(0x102040,.8));
+  const l1=new THREE.PointLight(0x00e5a0,3,20);l1.position.set(-3,3,5);scene.add(l1);
+  const l2=new THREE.PointLight(0x3d8bff,2,15);l2.position.set(5,-2,3);scene.add(l2);
+  const l3=new THREE.PointLight(0xf0c040,1,10);l3.position.set(0,5,-3);scene.add(l3);
+
+  let t=0;
+  (function loop(){requestAnimationFrame(loop);t+=.008;
+    chainGroup.rotation.y=t*.4;chainGroup.rotation.x=Math.sin(t*.3)*.15;
+    chainGroup.position.y=Math.sin(t*.6)*.2;
+    l1.position.set(Math.sin(t*.5)*5,3,Math.cos(t*.5)*3+5);
+    renderer.render(scene,camera);
+  })();
+})();
+
+/* ── MOLECULE 3D CANVAS ── */
+(function(){
+  const canvas=document.getElementById('mol-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(50,1,.1,50);
+  camera.position.set(0,0,7);
+  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight||420;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  window.addEventListener('resize',resize);resize();
+
+  const grp=new THREE.Group();
+  const cols=[0x00e5a0,0x3d8bff,0xf0c040,0xff6b6b,0xa855f7,0x06b6d4];
+  for(let i=0;i<18;i++){
+    const a=i*(Math.PI*2/18),r=2+(i%2)*.6;
+    const geo=new THREE.SphereGeometry(.2+(i%3)*.08,16,16);
+    const mat=new THREE.MeshStandardMaterial({color:cols[i%6],metalness:.3,roughness:.3,emissive:cols[i%6],emissiveIntensity:.2});
+    const m=new THREE.Mesh(geo,mat);
+    m.position.set(Math.cos(a)*r,Math.sin(a)*.8,Math.sin(a)*r*.4);
+    grp.add(m);
+    if(i>0){
+      const prev=grp.children[i-1];
+      const dir=new THREE.Vector3().subVectors(m.position,prev.position).normalize();
+      const len=m.position.distanceTo(prev.position);
+      const bond=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,len,8),new THREE.MeshStandardMaterial({color:0x1a2540,transparent:true,opacity:.5}));
+      bond.position.copy(prev.position.clone().lerp(m.position,.5));
+      bond.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);
+      grp.add(bond);
+    }
+  }
+  scene.add(grp);
+  scene.add(new THREE.AmbientLight(0x102040,.7));
+  const p1=new THREE.PointLight(0x00e5a0,3,15);p1.position.set(3,3,4);scene.add(p1);
+  const p2=new THREE.PointLight(0x3d8bff,2,12);p2.position.set(-4,-2,3);scene.add(p2);
+
+  let t=0;
+  (function loop(){requestAnimationFrame(loop);t+=.007;
+    grp.rotation.y=t*.5;grp.rotation.x=Math.sin(t*.3)*.2;
+    p1.position.set(Math.sin(t)*4,3,Math.cos(t)*3+3);
+    renderer.render(scene,camera);
+  })();
+})();
+
+/* ── MOLECULE TAGS ── */
+const molTagsData=['Amino Acid Chain','Peptide Bond','Disulfide Bridge','α-Helix Structure','β-Sheet','N-terminus','C-terminus','Molecular Weight'];
+const molTagsEl=document.getElementById('molTags');
+molTagsData.forEach(t=>{molTagsEl.innerHTML+=`<span class="mol-tag">${t}</span>`;});
+
+/* ── COA CHART ── */
+const chartEl=document.getElementById('coaChart');
+const barHeights=[20,35,60,85,99,97,88,72,55,40,28,18];
+barHeights.forEach(h=>{
+  const bar=document.createElement('div');
+  bar.className='chart-bar';
+  bar.style.cssText=`height:${h}%;background:linear-gradient(0deg,rgba(0,229,160,.7),rgba(0,229,160,.3))`;
+  chartEl.appendChild(bar);
+});
+
+/* ── PROCESS ── */
+const processData=[
+  {num:'01',icon:'🔬',title:'Synthesis',desc:'Solid-phase peptide synthesis using Fmoc chemistry with pharmaceutical-grade reagents.'},
+  {num:'02',icon:'🧫',title:'Purification',desc:'HPLC purification to remove synthesis byproducts and achieve target purity.'},
+  {num:'03',icon:'⚗️',title:'Analysis',desc:'HPLC and Mass Spectrometry analysis by accredited third-party US laboratory.'},
+  {num:'04',icon:'📋',title:'COA Issued',desc:'Batch-specific Certificate of Analysis generated with complete test data.'},
+  {num:'05',icon:'📦',title:'Shipped',desc:'Cold-packed with free COA included. Fast, discrete shipping with tracking.'},
+];
+const pg=document.getElementById('processGrid');
+processData.forEach((p,i)=>{
+  pg.innerHTML+=`<div class="process-step reveal" style="transition-delay:${i*.1}s">
+    <div class="ps-num">// ${p.num}</div>
+    <div class="ps-icon">${p.icon}</div>
+    <div class="ps-title">${p.title}</div>
+    <div class="ps-desc">${p.desc}</div>
+  </div>`;
+});
+
+/* ── CART ── */
+let cart=[];
+function addCart(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({...p,qty:1,selectedSize:p.sizes[1]||p.sizes[0]});
+  updateCart();showToast(`${p.name} added to cart`);
+}
+function removeCart(id){cart=cart.filter(x=>x.id!==id);updateCart();}
+function updateCart(){
+  document.getElementById('cartCount').textContent=cart.reduce((s,x)=>s+x.qty,0);
+  const body=document.getElementById('cartBody'),ft=document.getElementById('cartFt');
+  if(!cart.length){
+    body.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🧪</div><div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase">Cart is empty</div></div>';
+    ft.style.display='none';
+  }else{
+    body.innerHTML=cart.map(item=>`<div class="cart-item-row">
+      <div class="ci-vial" style="border-color:${item.capsColor}40">⚗</div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-spec">${item.selectedSize} · ${item.purity} purity</div>
+        <div class="ci-price">$${item.price} × ${item.qty}</div>
+      </div>
+      <button class="ci-rm" onclick="removeCart(${item.id})">Remove</button>
+    </div>`).join('');
+    const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+    document.getElementById('cSub').textContent='$'+total;
+    document.getElementById('cTotal').textContent='$'+total;
+    ft.style.display='block';
+  }
+}
+updateCart();
+const drawer=document.getElementById('cartDrawer'),back=document.getElementById('cartBack');
+document.getElementById('cartToggle').addEventListener('click',()=>{drawer.classList.add('open');back.classList.add('open');});
+document.getElementById('cartClose').addEventListener('click',()=>{drawer.classList.remove('open');back.classList.remove('open');});
+back.addEventListener('click',()=>{drawer.classList.remove('open');back.classList.remove('open');});
+
+/* ── MODAL ── */
+function openModal(p){
+  document.getElementById('modalImg').innerHTML=`
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,${p.capsColor}15,transparent 65%)"></div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem">
+      ${makeVialHTML(p)}
+      <div style="font-family:Space Mono,monospace;font-size:.55rem;color:var(--green);letter-spacing:.1em;background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.2);border-radius:4px;padding:.3rem .8rem">${p.purity} Purity</div>
+    </div>`;
+  document.getElementById('modalInfo').innerHTML=`
+    <div class="modal-cat">${p.cat} · <span style="font-family:'Space Mono',monospace;font-size:.52rem">${p.catNo}</span></div>
+    <div class="modal-name">${p.name}</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:.6rem">${p.sub}</div>
+    <div class="modal-purity">✓ 99%+ HPLC Verified</div>
+    <p class="modal-desc">${p.desc}</p>
+    <div style="font-family:'Space Mono',monospace;font-size:.56rem;color:#2a3450;margin-bottom:1.1rem">📐 ${p.spec}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-bottom:1.2rem">
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:.62rem;text-align:center">
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);margin-bottom:.2rem">1 KIT</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--white)">${p.price}</div>
+      </div>
+      <div style="background:rgba(0,229,160,.06);border:1px solid rgba(0,229,160,.2);border-radius:7px;padding:.62rem;text-align:center">
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;color:var(--green);margin-bottom:.2rem">3 KITS −10%</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--green)">${p.price3||p.price}</div>
+      </div>
+      <div style="background:rgba(0,229,160,.06);border:1px solid rgba(0,229,160,.2);border-radius:7px;padding:.62rem;text-align:center">
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;color:var(--green);margin-bottom:.2rem">5 KITS −15%</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--green)">${p.price5||p.price}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.2rem">
+      <span style="font-size:.55rem;padding:.22rem .65rem;background:rgba(0,229,160,.1);color:var(--green);border:1px solid rgba(0,229,160,.2);border-radius:4px">✓ HPLC Tested</span>
+      <span style="font-size:.55rem;padding:.22rem .65rem;background:rgba(0,229,160,.1);color:var(--green);border:1px solid rgba(0,229,160,.2);border-radius:4px">✓ Mass Spec</span>
+      <span style="font-size:.55rem;padding:.22rem .65rem;background:rgba(0,229,160,.1);color:var(--green);border:1px solid rgba(0,229,160,.2);border-radius:4px">✓ Free COA</span>
+      ${p.inStock?'<span style="font-size:.55rem;padding:.22rem .65rem;background:rgba(0,229,160,.1);color:var(--green);border:1px solid rgba(0,229,160,.2);border-radius:4px">✓ In Stock</span>':''}
+    </div>
+    <div class="modal-price-row"><div class="modal-price">${p.price}<span class="per">/ kit</span></div><div style="font-size:.62rem;color:var(--muted)">Free COA · Cold-pack shipping included</div></div>
+    <div class="modal-actions">
+      <button class="btn-modal-add" onclick="addCart(${p.id});closeModal()">Add to Cart</button>
+      <button class="btn-modal-coa" onclick="showToast('COA available per batch on request')">View COA</button>
+    </div>`;
+  document.getElementById('modalBack').classList.add('open');
+}
+function closeModal(){document.getElementById('modalBack').classList.remove('open');}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+document.getElementById('modalBack').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+function selectSize(btn){document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+
+/* ── TOAST ── */
+function showToast(msg){const el=document.getElementById('toastEl');document.getElementById('toastMsg').textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3000);}
+
+/* ── GSAP SCROLL REVEALS ── */
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal,.reveal-l').forEach(el=>io.observe(el));
+</script>
+
+<script>
+function toggleLangDropdown(){
+  document.getElementById('langWrapNav').classList.toggle('open');
+}
+function pickLang(lang, flag, code){
+  document.getElementById('lnFlag').textContent=flag;
+  document.getElementById('lnCode').textContent=code;
+  document.querySelectorAll('.lang-dd-item').forEach(el=>el.classList.toggle('active',el.dataset.l===lang));
+  document.getElementById('langWrapNav').classList.remove('open');
+  // Font switch for CJK
+  document.body.style.fontFamily = ['zh','ko'].includes(lang) 
+    ? "'Noto Sans SC','Space Grotesk',sans-serif"
+    : "'Space Grotesk',sans-serif";
+  showToast('Language: '+code);
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#langWrapNav')) document.getElementById('langWrapNav')?.classList.remove('open');
+});
+// Add Noto Sans SC for CJK
+const ns = document.createElement('link');
+ns.rel='stylesheet'; ns.href='https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap';
+document.head.appendChild(ns);
+</script>
+
+</body>
+</html>
