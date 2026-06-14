@@ -241,10 +241,12 @@ h1.hero-title .outline {
 }
 .prod-card:hover { background:var(--bg3); }
 .prod-img-area {
-  height:260px; background:var(--panel);
+  width:100%; aspect-ratio:1/1;
+  background:var(--panel);
   display:flex; align-items:center; justify-content:center;
   position:relative; overflow:hidden;
   border-bottom:1px solid var(--border);
+  flex-shrink:0;
 }
 /* Molecule animation bg */
 .prod-img-area::before {
@@ -508,6 +510,196 @@ footer {
 .reveal-l.in { opacity:1; transform:translateX(0); }
 
 body{padding-top:92px!important;}</style>
+
+<style>
+/* ════════════ NEXLAB LAYOUT OVERRIDE ════════════ */
+
+/* --- NAV --- */
+nav {
+  position: fixed; top: 26px; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 0 2rem; height: 62px;
+  background: rgba(6,8,16,.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.nav-logo { display: flex; align-items: center; gap: .5rem; text-decoration: none; flex-shrink: 0; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; flex: 1; }
+.nav-links a { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: #6878a0; text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: #e8eeff; }
+.nav-right { display: flex; align-items: center; gap: .6rem; margin-left: auto; }
+.nav-tag { font-family: 'Space Mono',monospace; font-size: .52rem; padding: .25rem .75rem; border: 1px solid rgba(0,229,160,.25); border-radius: 4px; color: #00e5a0; letter-spacing: .08em; white-space: nowrap; }
+body { padding-top: 90px !important; }
+
+/* --- HERO --- */
+#hero { position: relative; height: 100svh; display: flex; align-items: center; overflow: hidden; }
+#hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-content { position: relative; z-index: 10; padding: 0 3rem; max-width: 52%; }
+h1.hero-title { font-size: clamp(3rem,7vw,7.5rem); font-weight: 700; line-height: .92; letter-spacing: -.03em; margin-bottom: 1.4rem; }
+h1.hero-title .serif { font-family: 'Instrument Serif',serif; font-style: italic; font-weight: 400; color: #00e5a0; }
+h1.hero-title .outline { -webkit-text-stroke: 1.5px rgba(255,255,255,.2); color: transparent; }
+.hero-sub { font-size: .88rem; line-height: 1.9; color: #6878a0; max-width: 440px; margin-bottom: 2rem; }
+.hero-sub strong { color: #e8eeff; font-weight: 500; }
+.hero-btns { display: flex; align-items: center; gap: 1rem; }
+.btn-green { display: inline-flex; align-items: center; gap: .5rem; padding: .82rem 2rem; background: #00e5a0; color: #000; border: none; border-radius: 6px; font-size: .75rem; font-weight: 700; letter-spacing: .05em; cursor: pointer; transition: all .2s; }
+.btn-green:hover { background: #00c88a; transform: translateY(-2px); }
+.btn-outline-white,.btn-ghost { display: inline-flex; align-items: center; gap: .5rem; padding: .82rem 2rem; background: transparent; border: 1px solid rgba(255,255,255,.13); border-radius: 6px; color: #6878a0; font-size: .75rem; cursor: pointer; transition: all .2s; }
+.btn-outline-white:hover,.btn-ghost:hover { border-color: #00e5a0; color: #e8eeff; }
+
+/* --- PRODUCT GRID: 3 columns desktop, SQUARE images --- */
+.product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1px !important;
+  background: rgba(255,255,255,.07) !important;
+  border: 1px solid rgba(255,255,255,.07) !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+.prod-card { background: #060810; display: flex; flex-direction: column; cursor: pointer; transition: background .2s; }
+.prod-card:hover { background: #0d1220; }
+
+/* SQUARE product image — key fix */
+.prod-img-area {
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  background: #111828;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  flex-shrink: 0;
+}
+.prod-img-area::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,229,160,.06), transparent 70%);
+}
+.prod-info { padding: 1.1rem 1.1rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+.prod-name { font-size: .95rem; font-weight: 600; color: #e8eeff; margin-bottom: .2rem; line-height: 1.2; }
+.prod-sub { font-size: .62rem; color: #6878a0; margin-bottom: .4rem; line-height: 1.5; }
+.prod-spec { font-family: 'Space Mono',monospace; font-size: .5rem; color: #2a3450; margin-bottom: .7rem; }
+.prod-desc { font-size: .68rem; color: #6878a0; line-height: 1.75; flex: 1; margin-bottom: .9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.prod-footer,.prod-foot { display: flex; justify-content: space-between; align-items: center; padding-top: .8rem; border-top: 1px solid rgba(255,255,255,.07); }
+.prod-price { font-size: 1.1rem; font-weight: 700; color: #e8eeff; }
+.prod-price .per { font-size: .58rem; color: #6878a0; font-weight: 300; margin-left: .2rem; }
+.btn-add { display: flex; align-items: center; gap: .4rem; padding: .52rem 1rem; background: #00e5a0; color: #000; border: none; border-radius: 5px; font-size: .62rem; font-weight: 700; cursor: pointer; transition: all .2s; white-space: nowrap; }
+.btn-add:hover { background: #00c88a; transform: scale(1.04); }
+
+/* --- VIAL in square box --- */
+.prod-vial, .prod-vial-wrap { display: flex; flex-direction: column; align-items: center; gap: .4rem; position: relative; z-index: 1; }
+.vial-cap { width: 50px; height: 12px; border-radius: 3px; }
+.vial-body { width: 44px; height: 90px; border: 1px solid rgba(255,255,255,.16); border-radius: 4px 4px 18px 18px; position: relative; overflow: hidden; box-shadow: 0 0 24px rgba(0,229,160,.1); }
+.vial-fill { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 0 0 16px 16px; }
+.vial-lbl,.vial-label { position: absolute; inset: 8px 3px; background: rgba(0,0,0,.45); border-radius: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.vial-lbl span,.vial-label span { font-family: 'Space Mono',monospace; font-size: 5px; color: rgba(255,255,255,.5); }
+.vial-lbl strong,.vial-label strong { font-family: 'Space Mono',monospace; font-size: 6px; color: rgba(255,255,255,.7); }
+.prod-purity-badge { position: absolute; top: 8px; right: 8px; font-family: 'Space Mono',monospace; font-size: .5rem; color: #00e5a0; background: rgba(0,229,160,.09); border: 1px solid rgba(0,229,160,.22); border-radius: 4px; padding: .22rem .6rem; letter-spacing: .08em; }
+.prod-new-badge,.prod-badge { position: absolute; top: 8px; left: 8px; font-size: .48rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #000; background: #00e5a0; border-radius: 4px; padding: .2rem .6rem; z-index: 2; }
+
+/* --- SECTION TITLES --- */
+.section-title { font-size: clamp(2rem,4vw,3.2rem); font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+.section-title .serif { font-family: 'Instrument Serif',serif; font-style: italic; font-weight: 400; color: #00e5a0; }
+.section-wrap,.section-wrap { padding: 5rem 3rem; }
+#shop.section-wrap { padding: 5rem 3rem; background: #090c18; }
+#trust.section-wrap { background: #060810; }
+#coa.section-wrap { background: #090c18; }
+#process.section-wrap { background: #060810; }
+#molecule.section-wrap { background: #090c18; }
+#cta.section-wrap { background: #060810; text-align: center; }
+
+/* --- SHOP HEADER --- */
+.shop-head,.shop-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 1rem; }
+.shop-disc { font-size: .68rem; color: #6878a0; text-align: right; line-height: 1.8; max-width: 200px; }
+
+/* --- FILTER TABS --- */
+.filter-wrap { overflow-x: auto; margin-bottom: 1.8rem; padding-bottom: .3rem; }
+.filter-tabs { display: flex; gap: .35rem; min-width: max-content; }
+.f-tab { font-family: 'Space Mono',monospace; font-size: .55rem; letter-spacing: .08em; text-transform: uppercase; padding: .4rem 1rem; border: 1px solid rgba(255,255,255,.07); background: none; border-radius: 4px; cursor: pointer; color: #6878a0; transition: all .2s; white-space: nowrap; }
+.f-tab:hover { border-color: rgba(255,255,255,.13); color: #e8eeff; }
+.f-tab.on,.f-tab.active { background: #00e5a0; border-color: #00e5a0; color: #000; font-weight: 700; }
+
+/* --- CTA section --- */
+.cta-title { font-size: clamp(3rem,7vw,6rem); font-weight: 700; letter-spacing: -.04em; line-height: .92; margin-bottom: 1.3rem; position: relative; z-index: 1; }
+.cta-title .outline { -webkit-text-stroke: 1px rgba(255,255,255,.15); color: transparent; }
+.cta-title .g,.cta-title .green { color: #00e5a0; }
+.cta-sub { font-size: .88rem; color: #6878a0; max-width: 460px; margin: 0 auto 2rem; line-height: 1.9; position: relative; z-index: 1; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; position: relative; z-index: 1; }
+
+/* --- TRUST GRID --- */
+.trust-grid { display: grid !important; grid-template-columns: repeat(4,1fr) !important; gap: 1px !important; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; overflow: hidden; margin-top: 2.5rem; }
+.trust-card { background: #090c18; padding: 2rem 1.5rem; transition: background .2s; }
+.trust-card:hover { background: #0d1220; }
+.tc-icon { font-size: 2rem; margin-bottom: 1rem; }
+.tc-title { font-size: .92rem; font-weight: 600; color: #e8eeff; margin-bottom: .4rem; }
+.tc-desc { font-size: .7rem; color: #6878a0; line-height: 1.8; }
+.tc-val { font-family: 'Space Mono',monospace; font-size: 1.6rem; font-weight: 700; color: #00e5a0; margin-top: .7rem; }
+
+/* --- FOOTER --- */
+footer { background: #090c18; border-top: 1px solid rgba(255,255,255,.07); padding: 3.5rem 3rem 2rem; }
+.footer-grid,.footer-top { display: grid !important; grid-template-columns: 2fr 1fr 1fr 1fr !important; gap: 2.5rem !important; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,.07); }
+.footer-brand { font-family: 'Space Mono',monospace; font-size: .95rem; font-weight: 700; letter-spacing: .1em; margin-bottom: .9rem; color: #e8eeff; }
+.footer-brand span { color: #00e5a0; }
+.footer-desc { font-size: .7rem; color: #6878a0; line-height: 1.9; max-width: 230px; }
+.footer-col-title { font-family: 'Space Mono',monospace; font-size: .52rem; letter-spacing: .3em; text-transform: uppercase; color: #00e5a0; margin-bottom: 1rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+.footer-links a,.footer-links li a { font-size: .7rem; color: #6878a0; text-decoration: none; transition: color .2s; cursor: pointer; }
+.footer-links a:hover { color: #e8eeff; }
+.footer-bottom { display: flex; justify-content: space-between; font-family: 'Space Mono',monospace; font-size: .55rem; color: #2a3450; flex-wrap: wrap; gap: .5rem; }
+
+/* ════════════ RESPONSIVE — MOBILE ════════════ */
+@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  .nav-tag { display: none !important; }
+  .nav-right { display: none !important; }
+  .mob-icons { display: flex !important; }
+}
+@media (max-width: 768px) {
+  body { padding-top: 80px !important; }
+  nav { top: 22px; padding: 0 1rem; height: 56px; }
+  #hero { height: auto; min-height: 100svh; padding-bottom: 3rem; }
+  #hero-canvas { opacity: .3; }
+  .hero-content { max-width: 100%; padding: 0 1.2rem; }
+  h1.hero-title { font-size: clamp(2.5rem,11vw,4.2rem); }
+  .hero-sub { font-size: .78rem; max-width: 100%; }
+  .hero-btns { flex-direction: column; gap: .65rem; }
+  .btn-green, .btn-outline-white, .btn-ghost { width: 100%; justify-content: center; }
+  .hero-trust { bottom: 1rem; left: 1rem; gap: 1.2rem; }
+  .ht-num,.trust-num { font-size: 1rem; }
+  .hero-coa-badge,.hero-coa { display: none !important; }
+  #shop.section-wrap,#trust.section-wrap,#coa.section-wrap,
+  #process.section-wrap,#molecule.section-wrap,#cta.section-wrap,
+  .section-wrap { padding: 2.5rem 1.2rem; }
+  .shop-head,.shop-header { flex-direction: column; align-items: flex-start; }
+  .section-title { font-size: clamp(1.7rem,7vw,2.6rem); }
+  .product-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .trust-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .coa-inner,.coa-grid { grid-template-columns: 1fr !important; gap: 2rem; }
+  .mol-inner,.mol-grid { grid-template-columns: 1fr !important; gap: 1.5rem; }
+  #mol-canvas { height: 240px; order: -1; }
+  .process-steps,.process-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .ps::after,.process-step::after { display: none; }
+  .cta-title { font-size: clamp(2.2rem,9vw,3.8rem); }
+  .cta-btns { flex-direction: column; align-items: stretch; gap: .65rem; }
+  .cta-btns button { width: 100%; }
+  .footer-grid,.footer-top { grid-template-columns: 1fr 1fr !important; gap: 1.5rem !important; }
+  .modal-box { grid-template-columns: 1fr !important; }
+  .modal-img { display: none !important; }
+  .modal-info { padding: 1.8rem 1.2rem; }
+  .cart-drawer { width: 100vw !important; }
+}
+@media (max-width: 420px) {
+  .product-grid { grid-template-columns: 1fr !important; }
+  .trust-grid { grid-template-columns: 1fr !important; }
+  .process-steps,.process-grid { grid-template-columns: 1fr !important; }
+  .footer-grid,.footer-top { grid-template-columns: 1fr !important; }
+  .prod-desc { -webkit-line-clamp: 2; }
+}
+@media (hover: none) and (pointer: coarse) {
+  #cur, #cur-r { display: none !important; }
+  body { cursor: auto !important; }
+  button, a, [onclick] { cursor: pointer !important; }
+}
+</style>
+
 </head>
 <body>
 <div style="position:fixed;top:0;left:0;right:0;z-index:9999;height:26px;background:#040c04;border-bottom:1px solid rgba(0,229,160,.14);display:flex;align-items:center;padding:0 1.2rem;gap:.6rem;overflow:hidden">
@@ -539,7 +731,7 @@ body{padding-top:92px!important;}</style>
   .filter-tabs{overflow-x:auto;flex-wrap:nowrap;gap:.3rem;padding-bottom:.3rem;}
   .f-tab{flex-shrink:0;font-size:.5rem;padding:.38rem .75rem;}
   .product-grid{grid-template-columns:1fr 1fr;}
-  .prod-img-area{height:185px;}
+  .prod-img-area{aspect-ratio:1/1;height:auto;}
   .prod-info{padding:.9rem;}
   .prod-name{font-size:.9rem;}
   .prod-desc{-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;}
@@ -1268,29 +1460,335 @@ const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersect
 document.querySelectorAll('.reveal,.reveal-l').forEach(el=>io.observe(el));
 </script>
 
-<script>
-function toggleLangDropdown(){
-  document.getElementById('langWrapNav').classList.toggle('open');
-}
-function pickLang(lang, flag, code){
-  document.getElementById('lnFlag').textContent=flag;
-  document.getElementById('lnCode').textContent=code;
-  document.querySelectorAll('.lang-dd-item').forEach(el=>el.classList.toggle('active',el.dataset.l===lang));
-  document.getElementById('langWrapNav').classList.remove('open');
-  // Font switch for CJK
-  document.body.style.fontFamily = ['zh','ko'].includes(lang) 
-    ? "'Noto Sans SC','Space Grotesk',sans-serif"
-    : "'Space Grotesk',sans-serif";
-  showToast('Language: '+code);
-}
-document.addEventListener('click',e=>{
-  if(!e.target.closest('#langWrapNav')) document.getElementById('langWrapNav')?.classList.remove('open');
-});
-// Add Noto Sans SC for CJK
-const ns = document.createElement('link');
-ns.rel='stylesheet'; ns.href='https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap';
-document.head.appendChild(ns);
-</script>
+
 
 </body>
 </html>
+
+<script>
+/* ════════════════════════════════════════════════════
+   NEXLAB MULTILINGUAL SYSTEM — 7 Languages
+   Fixes: EN/ES/ZH/KO/VI/RU/PT all correctly applied
+════════════════════════════════════════════════════ */
+
+const TRANSLATIONS = {
+  en: {
+    navShop:'Shop', navTest:'Testing', navCoa:'COA', navProc:'Process', navTag:'99%+ PURITY', navSign:'Sign In',
+    heroEye:'Research-Grade Peptides',
+    heroH1:'<span class="outline">PURE</span><br>SCIENCE.<br><span class="serif">Verified.</span>',
+    heroSub:'<strong>99%+ purity. Guaranteed.</strong> Every batch independently tested by accredited U.S. laboratories using HPLC and Mass Spectrometry. Free CoA every order.',
+    heroB1:'Shop Peptides →', heroB2:'View COA Process',
+    shopLabel:'Research Compounds', shopTitle:'Our <span class="serif">Peptides</span>',
+    shopDisc:'For research use only. Not for human consumption.',
+    trustTitle:'Lab <span class="serif">Verified</span>',
+    coaTitle:'Real <span class="serif">Proof</span>,<br>Every Order',
+    ctaH:'<span class="outline">START</span><br>YOUR<br><span class="green">RESEARCH</span>',
+    ctaSub:'Premium peptides, independently verified purity. Join thousands of researchers who trust NexLab.',
+    ctaBtn:'Shop Now →',
+    footerCopy:'© 2025 NexLab Research. All rights reserved.',
+    footerRes:'For research use only · Not for human consumption',
+    addBtn:'+ Add', removeBtn:'Remove', addedMsg:' added to cart', cartEmpty:'Cart is empty',
+    checkout:'Secure Checkout →', cartNote:'🔒 SSL Encrypted · Free COA Included',
+  },
+  es: {
+    navShop:'Tienda', navTest:'Análisis', navCoa:'COA', navProc:'Proceso', navTag:'PUREZA 99%+', navSign:'Iniciar sesión',
+    heroEye:'Péptidos de Grado Investigación',
+    heroH1:'<span class="outline">CIENCIA</span><br>PURA.<br><span class="serif">Verificada.</span>',
+    heroSub:'<strong>Pureza 99%+. Garantizada.</strong> Cada lote analizado por laboratorios acreditados en EE.UU. mediante HPLC y espectrometría de masa. CoA gratis con cada pedido.',
+    heroB1:'Ver Péptidos →', heroB2:'Ver Proceso CoA',
+    shopLabel:'Compuestos de Investigación', shopTitle:'Nuestros <span class="serif">Péptidos</span>',
+    shopDisc:'Solo para uso en investigación. No apto para consumo humano.',
+    trustTitle:'Verificado <span class="serif">en Laboratorio</span>',
+    coaTitle:'Prueba <span class="serif">Real</span>,<br>en Cada Pedido',
+    ctaH:'<span class="outline">INICIA</span><br>TU<br><span class="green">INVESTIGACIÓN</span>',
+    ctaSub:'Péptidos premium, pureza verificada. Miles de investigadores confían en NexLab.',
+    ctaBtn:'Comprar Ahora →',
+    footerCopy:'© 2025 NexLab Research. Todos los derechos reservados.',
+    footerRes:'Solo para investigación · No para consumo humano',
+    addBtn:'+ Añadir', removeBtn:'Eliminar', addedMsg:' añadido al carrito', cartEmpty:'Carrito vacío',
+    checkout:'Pagar →', cartNote:'🔒 SSL · CoA Gratis',
+  },
+  zh: {
+    navShop:'商城', navTest:'检测', navCoa:'分析证书', navProc:'流程', navTag:'纯度99%以上', navSign:'登录',
+    heroEye:'研究级多肽原料',
+    heroH1:'<span class="outline">纯粹</span><br>科学。<br><span class="serif">已验证。</span>',
+    heroSub:'<strong>纯度99%以上，品质保证。</strong> 每批次由美国认证实验室HPLC及质谱独立检测。每单附赠批次专属CoA，完全免费。',
+    heroB1:'探索产品 →', heroB2:'了解品质认证',
+    shopLabel:'研究用化合物', shopTitle:'精选 <span class="serif">多肽系列</span>',
+    shopDisc:'仅供研究、实验室及教育用途。不得用于人体消费。',
+    trustTitle:'实验室 <span class="serif">品质验证</span>',
+    coaTitle:'真实 <span class="serif">证明</span>，<br>每单附赠',
+    ctaH:'<span class="outline">开启</span><br>您的<br><span class="green">研究之旅</span>',
+    ctaSub:'顶级多肽原料，独立验证纯度，快速发货。全美数千名研究人员信赖NexLab。',
+    ctaBtn:'立即选购 →',
+    footerCopy:'© 2025 NexLab Research 版权所有。',
+    footerRes:'仅供研究用途 · 不得用于人体消费',
+    addBtn:'+ 加入', removeBtn:'移除', addedMsg:' 已加入购物车', cartEmpty:'购物车是空的',
+    checkout:'安全结账 →', cartNote:'🔒 SSL加密 · 免费附赠CoA',
+  },
+  ko: {
+    navShop:'쇼핑', navTest:'검증', navCoa:'분석증명서', navProc:'프로세스', navTag:'순도 99%+', navSign:'로그인',
+    heroEye:'연구용 펩타이드',
+    heroH1:'<span class="outline">순수한</span><br>과학.<br><span class="serif">검증됨.</span>',
+    heroSub:'<strong>순도 99% 이상. 보장됩니다.</strong> 모든 배치는 미국 인증 실험실에서 HPLC 및 질량분석법으로 독립 검사. CoA 무료 포함.',
+    heroB1:'펩타이드 보기 →', heroB2:'CoA 프로세스',
+    shopLabel:'연구용 화합물', shopTitle:'저희 <span class="serif">펩타이드</span>',
+    shopDisc:'연구용으로만 판매. 인체 섭취용이 아닙니다.',
+    trustTitle:'실험실 <span class="serif">검증</span>',
+    coaTitle:'실제 <span class="serif">증거</span>,<br>모든 주문마다',
+    ctaH:'<span class="outline">연구를</span><br>시작<br><span class="green">하세요</span>',
+    ctaSub:'프리미엄 펩타이드, 독립적으로 검증된 순도. 수천 명의 연구자가 NexLab을 신뢰합니다.',
+    ctaBtn:'지금 구매 →',
+    footerCopy:'© 2025 NexLab Research. 모든 권리 보유.',
+    footerRes:'연구용만 · 인체 섭취 불가',
+    addBtn:'+ 추가', removeBtn:'삭제', addedMsg:' 장바구니에 추가됨', cartEmpty:'장바구니가 비어 있습니다',
+    checkout:'안전하게 결제 →', cartNote:'🔒 SSL 암호화 · CoA 무료',
+  },
+  vi: {
+    navShop:'Cửa hàng', navTest:'Kiểm định', navCoa:'Chứng chỉ', navProc:'Quy trình', navTag:'ĐỘ TINH KHIẾT 99%+', navSign:'Đăng nhập',
+    heroEye:'Peptide Cấp Nghiên Cứu',
+    heroH1:'<span class="outline">KHOA HỌC</span><br>THUẦN KHIẾT.<br><span class="serif">Đã xác minh.</span>',
+    heroSub:'<strong>Độ tinh khiết 99%+. Được đảm bảo.</strong> Mỗi lô được kiểm tra bởi phòng thí nghiệm Hoa Kỳ qua HPLC và khối phổ. CoA miễn phí kèm theo.',
+    heroB1:'Xem Peptide →', heroB2:'Xem Quy Trình CoA',
+    shopLabel:'Hợp Chất Nghiên Cứu', shopTitle:'Peptide <span class="serif">Của Chúng Tôi</span>',
+    shopDisc:'Chỉ dùng cho nghiên cứu. Không dùng cho người.',
+    trustTitle:'Được Xác Minh <span class="serif">Tại Lab</span>',
+    coaTitle:'Bằng Chứng <span class="serif">Thực Tế</span>,<br>Mỗi Đơn Hàng',
+    ctaH:'<span class="outline">BẮT ĐẦU</span><br>NGHIÊN CỨU<br><span class="green">CỦA BẠN</span>',
+    ctaSub:'Peptide cao cấp, độ tinh khiết được xác minh. Hàng nghìn nhà nghiên cứu tin dùng NexLab.',
+    ctaBtn:'Mua Ngay →',
+    footerCopy:'© 2025 NexLab Research. Bảo lưu mọi quyền.',
+    footerRes:'Chỉ dùng nghiên cứu · Không dùng cho người',
+    addBtn:'+ Thêm', removeBtn:'Xóa', addedMsg:' đã thêm vào giỏ', cartEmpty:'Giỏ hàng trống',
+    checkout:'Thanh Toán →', cartNote:'🔒 SSL · CoA Miễn Phí',
+  },
+  ru: {
+    navShop:'Магазин', navTest:'Анализы', navCoa:'Сертификат', navProc:'Процесс', navTag:'ЧИСТОТА 99%+', navSign:'Войти',
+    heroEye:'Пептиды исследовательского класса',
+    heroH1:'<span class="outline">ЧИСТАЯ</span><br>НАУКА.<br><span class="serif">Подтверждено.</span>',
+    heroSub:'<strong>Чистота 99%+. Гарантировано.</strong> Каждая партия тестируется аккредитованными лабораториями США. CoA бесплатно с каждым заказом.',
+    heroB1:'Смотреть пептиды →', heroB2:'Процесс CoA',
+    shopLabel:'Исследовательские соединения', shopTitle:'Наши <span class="serif">Пептиды</span>',
+    shopDisc:'Только для исследовательских целей. Не для употребления людьми.',
+    trustTitle:'Лабораторная <span class="serif">Верификация</span>',
+    coaTitle:'Реальные <span class="serif">Доказательства</span>,<br>с каждым заказом',
+    ctaH:'<span class="outline">НАЧНИТЕ</span><br>ВАШЕ<br><span class="green">ИССЛЕДОВАНИЕ</span>',
+    ctaSub:'Премиальные пептиды, верифицированная чистота. Тысячи исследователей доверяют NexLab.',
+    ctaBtn:'Купить сейчас →',
+    footerCopy:'© 2025 NexLab Research. Все права защищены.',
+    footerRes:'Только для исследований · Не для употребления',
+    addBtn:'+ В корзину', removeBtn:'Удалить', addedMsg:' добавлено в корзину', cartEmpty:'Корзина пуста',
+    checkout:'Оплатить →', cartNote:'🔒 SSL · CoA Бесплатно',
+  },
+  pt: {
+    navShop:'Loja', navTest:'Análises', navCoa:'Certificado', navProc:'Processo', navTag:'PUREZA 99%+', navSign:'Entrar',
+    heroEye:'Peptídeos de Grau Pesquisa',
+    heroH1:'<span class="outline">CIÊNCIA</span><br>PURA.<br><span class="serif">Verificada.</span>',
+    heroSub:'<strong>Pureza 99%+. Garantida.</strong> Cada lote testado por laboratórios credenciados dos EUA via HPLC e espectrometria de massa. CoA grátis com cada pedido.',
+    heroB1:'Ver Peptídeos →', heroB2:'Ver Processo CoA',
+    shopLabel:'Compostos de Pesquisa', shopTitle:'Nossos <span class="serif">Peptídeos</span>',
+    shopDisc:'Apenas para uso em pesquisa. Não para consumo humano.',
+    trustTitle:'Verificado <span class="serif">em Laboratório</span>',
+    coaTitle:'Prova <span class="serif">Real</span>,<br>em Cada Pedido',
+    ctaH:'<span class="outline">INICIE</span><br>SUA<br><span class="green">PESQUISA</span>',
+    ctaSub:'Peptídeos premium, pureza verificada. Milhares de pesquisadores confiam na NexLab.',
+    ctaBtn:'Comprar Agora →',
+    footerCopy:'© 2025 NexLab Research. Todos os direitos reservados.',
+    footerRes:'Apenas para pesquisa · Não para consumo humano',
+    addBtn:'+ Adicionar', removeBtn:'Remover', addedMsg:' adicionado ao carrinho', cartEmpty:'Carrinho vazio',
+    checkout:'Pagar →', cartNote:'🔒 SSL · CoA Grátis',
+  },
+};
+
+let currentLang = 'en';
+
+/* Apply all translations to DOM */
+function applyTranslation(lang) {
+  const T = TRANSLATIONS[lang] || TRANSLATIONS.en;
+  currentLang = lang;
+
+  // Font: CJK languages
+  document.body.style.fontFamily = ['zh','ko'].includes(lang)
+    ? "'Noto Sans SC','Space Grotesk',sans-serif"
+    : "'Space Grotesk',sans-serif";
+
+  // Nav links
+  const ids = {
+    nlShop:'navShop', nlTesting:'navTest', nlCoa:'navCoa', nlProcess:'navProc',
+    navTag:'navTag', navSignIn:'navSign',
+  };
+  Object.entries(ids).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = T[key];
+  });
+  // Mobile drawer links
+  ['mdShop','mdTesting','mdCoa','mdProcess'].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    const map = {mdShop:'navShop',mdTesting:'navTest',mdCoa:'navCoa',mdProcess:'navProc'};
+    el.innerHTML = T[map[id]] + ' <em>→</em>';
+  });
+  const mobSign = document.getElementById('mobSignBtn');
+  if(mobSign) mobSign.textContent = T.navSign + ' / Register';
+  const mobShop = document.getElementById('mobShopBtn');
+  if(mobShop) mobShop.textContent = T.navShop + ' →';
+
+  // Hero
+  ['heroEyebrow','heroEye'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = T.heroEye;
+  });
+  const heroTitle = document.getElementById('heroTitle');
+  if(heroTitle) heroTitle.innerHTML = T.heroH1;
+  const heroSub = document.getElementById('heroSub');
+  if(heroSub) heroSub.innerHTML = T.heroSub;
+  const heroB1 = document.getElementById('heroBtn1');
+  if(heroB1) heroB1.textContent = T.heroB1;
+  const heroB2 = document.getElementById('heroBtn2');
+  if(heroB2) heroB2.textContent = T.heroB2;
+
+  // Shop section
+  const shopLabel = document.getElementById('shopLabel');
+  if(shopLabel) shopLabel.textContent = T.shopLabel;
+  const shopTitle = document.getElementById('shopTitle');
+  if(shopTitle) shopTitle.innerHTML = T.shopTitle;
+  const shopDisc = document.getElementById('shopDisc');
+  if(shopDisc) shopDisc.textContent = T.shopDisc;
+
+  // Trust
+  const trustTitle = document.getElementById('trustTitle');
+  if(trustTitle) trustTitle.innerHTML = T.trustTitle;
+
+  // COA
+  const coaTitle = document.getElementById('coaTitle');
+  if(coaTitle) coaTitle.innerHTML = T.coaTitle;
+
+  // CTA
+  const ctaTitle = document.getElementById('ctaTitle');
+  if(ctaTitle) ctaTitle.innerHTML = T.ctaH;
+  const ctaSub = document.getElementById('ctaSub');
+  if(ctaSub) ctaSub.textContent = T.ctaSub;
+  const ctaBtn = document.getElementById('ctaBtn');
+  if(ctaBtn) ctaBtn.textContent = T.ctaBtn;
+
+  // Footer
+  const footerCopy = document.getElementById('footerCopy');
+  if(footerCopy) footerCopy.textContent = T.footerCopy;
+  const footerRes = document.getElementById('footerResearch');
+  if(footerRes) footerRes.textContent = T.footerRes;
+
+  // Cart texts
+  const cartTitle = document.getElementById('cartTitleTxt');
+  if(cartTitle) cartTitle.textContent = lang === 'zh' ? '购物车' : lang === 'ko' ? '장바구니' : lang === 'ru' ? 'КОРЗИНА' : 'CART';
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  if(checkoutBtn) checkoutBtn.textContent = T.checkout;
+  const cartNote = document.getElementById('cartNote');
+  if(cartNote) cartNote.textContent = T.cartNote;
+
+  // Re-render products with correct add button text
+  if(typeof renderProducts === 'function') renderProducts();
+  if(typeof updateCart === 'function') updateCart();
+}
+
+/* Language switcher toggle */
+function toggleLangDropdown() {
+  document.getElementById('langWrapNav').classList.toggle('open');
+}
+
+/* Main language switch function — called from both desktop dropdown and mobile grid */
+function pickLang(lang, flag, code) {
+  // Update desktop button
+  const lnFlag = document.getElementById('lnFlag');
+  const lnCode = document.getElementById('lnCode');
+  if(lnFlag) lnFlag.textContent = flag;
+  if(lnCode) lnCode.textContent = code;
+
+  // Update active state desktop
+  document.querySelectorAll('.lang-dd-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.l === lang);
+  });
+  // Close dropdown
+  const wrap = document.getElementById('langWrapNav');
+  if(wrap) wrap.classList.remove('open');
+
+  // Update active state mobile
+  document.querySelectorAll('.mob-lo').forEach(el => {
+    el.classList.toggle('on', el.id === 'mlo-' + lang);
+  });
+
+  // Apply all translations
+  applyTranslation(lang);
+}
+
+/* Close dropdown on outside click */
+document.addEventListener('click', e => {
+  if(!e.target.closest('#langWrapNav')) {
+    const wrap = document.getElementById('langWrapNav');
+    if(wrap) wrap.classList.remove('open');
+  }
+});
+
+/* Mobile menu */
+function toggleMobMenu() {
+  const d = document.getElementById('mobDrawer');
+  const bg = document.getElementById('mobBg');
+  const btn = document.getElementById('mobMenuBtn');
+  if(!d) return;
+  const open = d.classList.contains('open');
+  if(open) { closeMobMenu(); return; }
+  d.classList.add('open');
+  if(bg) bg.classList.add('open');
+  if(btn) btn.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobMenu() {
+  const d = document.getElementById('mobDrawer');
+  const bg = document.getElementById('mobBg');
+  const btn = document.getElementById('mobMenuBtn');
+  if(d) d.classList.remove('open');
+  if(bg) bg.classList.remove('open');
+  if(btn) btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+window.addEventListener('resize', () => { if(window.innerWidth > 900) closeMobMenu(); });
+
+/* Override the add button in renderProducts to use current lang */
+const _origRenderProducts = window.renderProducts;
+if(typeof renderProducts === 'function') {
+  window.renderProducts = function() {
+    _origRenderProducts();
+    // Update all "Add" buttons to use current language text
+    const T = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      // Keep the onclick, just update visible text
+      const onclick = btn.getAttribute('onclick');
+      btn.textContent = T.addBtn;
+      btn.setAttribute('onclick', onclick);
+    });
+  };
+}
+
+/* Override updateCart to use current language */
+const _origUpdateCart = window.updateCart;
+if(typeof updateCart === 'function') {
+  window.updateCart = function() {
+    _origUpdateCart();
+    const T = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+    const empty = document.querySelector('.cart-empty-state .et');
+    if(empty) empty.textContent = T.cartEmpty;
+    document.querySelectorAll('.ci-rm').forEach(btn => {
+      btn.textContent = T.removeBtn;
+    });
+  };
+}
+
+/* Noto Sans SC for CJK */
+(function() {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap';
+  document.head.appendChild(link);
+})();
+
+console.log('✅ NexLab multilingual system loaded — 7 languages ready');
+</script>
